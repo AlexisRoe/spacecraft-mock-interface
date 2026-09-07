@@ -1,11 +1,17 @@
-import { type JSX, type PointerEvent as ReactPointerEvent, useState } from "react";
+import {
+  type JSX,
+  type PointerEvent as ReactPointerEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import "./manual-steering-wheel.component.css";
 
 const SIZE = 200;
 const CENTER = SIZE / 2;
 const HALF = SIZE / 2;
-const DISC_RADIUS = SIZE * 0.3;
+const DISC_RADIUS = SIZE * 0.3 * 0.65;
 const RING_RADIUS = DISC_RADIUS + 10;
 const TICK_INNER_RADIUS = DISC_RADIUS + 18;
 const TICK_OUTER_RADIUS = HALF - 8;
@@ -60,6 +66,19 @@ export function ManualSteeringWheel(): JSX.Element {
   const [activeWedge, setActiveWedge] = useState<number | null>(null);
   const [stick, setStick] = useState({ x: 0, y: 0 });
   const [isDraggingStick, setDraggingStick] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [discAspectCorrection, setDiscAspectCorrection] = useState(1);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      if (width > 0 && height > 0) setDiscAspectCorrection(width / height);
+    });
+    observer.observe(svg);
+    return () => observer.disconnect();
+  }, []);
 
   function applyStickPosition(event: ReactPointerEvent<SVGCircleElement>): void {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -93,6 +112,7 @@ export function ManualSteeringWheel(): JSX.Element {
     <div className="manual-steering-wheel__wrapper">
       {/* biome-ignore lint/a11y/useSemanticElements: SVG shapes can't be native <fieldset>/<button> elements. */}
       <svg
+        ref={svgRef}
         className="manual-steering-wheel"
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         preserveAspectRatio="none"
@@ -124,52 +144,57 @@ export function ManualSteeringWheel(): JSX.Element {
           />
         ))}
 
-        <circle className="manual-steering-wheel__disc" cx={CENTER} cy={CENTER} r={DISC_RADIUS} />
-        <circle
-          className="manual-steering-wheel__stick-pad"
-          cx={CENTER}
-          cy={CENTER}
-          r={DISC_RADIUS}
-          role="slider"
-          tabIndex={0}
-          aria-label="Yaw and pitch stick"
-          aria-valuenow={0}
-          onPointerDown={handleStickPointerDown}
-          onPointerMove={handleStickPointerMove}
-          onPointerUp={handleStickPointerUp}
-          onPointerCancel={handleStickPointerUp}
-        />
+        <g
+          className="manual-steering-wheel__disc-group"
+          transform={`translate(${CENTER} ${CENTER}) scale(1 ${discAspectCorrection}) translate(${-CENTER} ${-CENTER})`}
+        >
+          <circle className="manual-steering-wheel__disc" cx={CENTER} cy={CENTER} r={DISC_RADIUS} />
+          <circle
+            className="manual-steering-wheel__stick-pad"
+            cx={CENTER}
+            cy={CENTER}
+            r={DISC_RADIUS}
+            role="slider"
+            tabIndex={0}
+            aria-label="Yaw and pitch stick"
+            aria-valuenow={0}
+            onPointerDown={handleStickPointerDown}
+            onPointerMove={handleStickPointerMove}
+            onPointerUp={handleStickPointerUp}
+            onPointerCancel={handleStickPointerUp}
+          />
 
-        <g className="manual-steering-wheel__crosshair">
-          <line x1={CENTER - 16} y1={CENTER} x2={CENTER - 6} y2={CENTER} />
-          <line x1={CENTER + 6} y1={CENTER} x2={CENTER + 16} y2={CENTER} />
-          <line x1={CENTER} y1={CENTER - 16} x2={CENTER} y2={CENTER - 6} />
-          <line x1={CENTER} y1={CENTER + 6} x2={CENTER} y2={CENTER + 16} />
-        </g>
+          <g className="manual-steering-wheel__crosshair">
+            <line x1={CENTER - 16} y1={CENTER} x2={CENTER - 6} y2={CENTER} />
+            <line x1={CENTER + 6} y1={CENTER} x2={CENTER + 16} y2={CENTER} />
+            <line x1={CENTER} y1={CENTER - 16} x2={CENTER} y2={CENTER - 6} />
+            <line x1={CENTER} y1={CENTER + 6} x2={CENTER} y2={CENTER + 16} />
+          </g>
 
-        <line
-          className="manual-steering-wheel__stick-line"
-          x1={CENTER}
-          y1={CENTER}
-          x2={stickX}
-          y2={stickY}
-        />
-        <circle className="manual-steering-wheel__stick-dot" cx={stickX} cy={stickY} r={4} />
+          <line
+            className="manual-steering-wheel__stick-line"
+            x1={CENTER}
+            y1={CENTER}
+            x2={stickX}
+            y2={stickY}
+          />
+          <circle className="manual-steering-wheel__stick-dot" cx={stickX} cy={stickY} r={4} />
 
-        <circle
-          className="manual-steering-wheel__disc-outline"
-          cx={CENTER}
-          cy={CENTER}
-          r={DISC_RADIUS}
-        />
-        <circle className="manual-steering-wheel__ring" cx={CENTER} cy={CENTER} r={RING_RADIUS} />
-        <g className="manual-steering-wheel__wedge-ticks">
-          {WEDGE_FIELDS.map((field, index) => {
-            const angle = index * 45 + 22.5;
-            const [x1, y1] = pointOnRadius(angle, TICK_INNER_RADIUS);
-            const [x2, y2] = pointOnRadius(angle, TICK_OUTER_RADIUS);
-            return <line key={field.label} x1={x1} y1={y1} x2={x2} y2={y2} />;
-          })}
+          <circle
+            className="manual-steering-wheel__disc-outline"
+            cx={CENTER}
+            cy={CENTER}
+            r={DISC_RADIUS}
+          />
+          <circle className="manual-steering-wheel__ring" cx={CENTER} cy={CENTER} r={RING_RADIUS} />
+          <g className="manual-steering-wheel__wedge-ticks">
+            {WEDGE_FIELDS.map((field, index) => {
+              const angle = index * 45 + 22.5;
+              const [x1, y1] = pointOnRadius(angle, TICK_INNER_RADIUS);
+              const [x2, y2] = pointOnRadius(angle, TICK_OUTER_RADIUS);
+              return <line key={field.label} x1={x1} y1={y1} x2={x2} y2={y2} />;
+            })}
+          </g>
         </g>
         <rect
           className="manual-steering-wheel__frame"
