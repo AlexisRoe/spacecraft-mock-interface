@@ -13,9 +13,7 @@ describe("ApplicationFrame", () => {
     );
 
     expect(screen.getByText("Header").closest("header")).toHaveClass("application-frame__header");
-    expect(screen.getByText("Content").closest("section")).toHaveClass(
-      "application-frame__content",
-    );
+    expect(screen.getByText("Content").closest("main")).toHaveClass("application-frame__content");
     expect(screen.getByText("Footer").closest("footer")).toHaveClass("application-frame__footer");
   });
 });

@@ -1,0 +1,30 @@
+.dashboard-header__group {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.dashboard-header__identity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.dashboard-header__ship-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.dashboard-header__ship-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: #aaaaaa;
+}
+
+.dashboard-header__stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}

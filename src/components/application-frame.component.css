@@ -12,6 +12,9 @@
 .application-frame__header {
   grid-area: header;
   width: 100%;
+  align-items: stretch;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .application-frame__content {

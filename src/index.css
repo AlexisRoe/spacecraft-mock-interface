@@ -40,3 +40,7 @@ svg {
   align-items: flex-start;
   justify-content: space-between;
 }
+
+.inset-padding {
+  padding: 1rem 1.5rem;
+}

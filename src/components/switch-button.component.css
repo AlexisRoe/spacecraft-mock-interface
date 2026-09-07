@@ -1,0 +1,19 @@
+.switch-button {
+  border: none;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-width: 10rem;
+  height: 100%;
+  padding: 0 1.5rem;
+  cursor: pointer;
+}
+
+.switch-button[data-active="true"] {
+  background-color: #ffffff;
+  color: #000000;
+}
