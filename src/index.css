@@ -44,3 +44,8 @@ svg {
 .inset-padding {
   padding: 1rem 1.5rem;
 }
+
+.color-invert {
+  background-color: #ffffff;
+  color: #000000;
+}

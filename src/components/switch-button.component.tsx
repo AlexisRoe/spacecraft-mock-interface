@@ -27,7 +27,7 @@ export function SwitchButton({
   return (
     <button
       type="button"
-      className={["switch-button", className].filter(Boolean).join(" ")}
+      className={["switch-button", active && "color-invert", className].filter(Boolean).join(" ")}
       aria-pressed={active}
       data-active={active}
       onClick={onSelect}

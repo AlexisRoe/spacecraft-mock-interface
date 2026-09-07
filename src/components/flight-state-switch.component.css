@@ -26,8 +26,3 @@
   min-width: 0;
   padding: 1rem;
 }
-
-.flight-state-switch__button[data-active="true"] {
-  background-color: #f0f0ef;
-  color: #000000;
-}

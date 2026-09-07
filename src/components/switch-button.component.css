@@ -12,8 +12,3 @@
   padding: 0 1.5rem;
   cursor: pointer;
 }
-
-.switch-button[data-active="true"] {
-  background-color: #ffffff;
-  color: #000000;
-}
