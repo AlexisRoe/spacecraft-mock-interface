@@ -1,0 +1,85 @@
+.console-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "left right";
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.console-grid--manual {
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: auto 1fr auto;
+  gap: 1px; /* Creates the 1px line spacing */
+  background-color: var(--color-black);
+  grid-template-areas:
+    "header header header"
+    "primary secondary tertiary"
+    "footer footer footer";
+  width: 100%;
+  height: 100%;
+}
+
+.console-grid__header {
+  grid-area: header;
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.console-grid__left {
+  grid-area: left;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-height: 0;
+  overflow: hidden;
+  border-left: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
+}
+
+.console-grid__right {
+  grid-area: right;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.console-grid__primary,
+.console-grid__secondary,
+.console-grid__tertiary {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.console-grid__primary {
+  grid-area: primary;
+  border-left: 1px solid var(--color-black);
+}
+
+.console-grid__secondary {
+  grid-area: secondary;
+  border-left: 1px solid var(--color-black);
+}
+
+.console-grid__tertiary {
+  grid-area: tertiary;
+  border-left: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
+}
+
+.console-grid__footer {
+  grid-area: footer;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-height: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--color-black);
+  border-left: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
+}

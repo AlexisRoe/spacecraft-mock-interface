@@ -1,0 +1,98 @@
+.star-chart {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background-image:
+    repeating-linear-gradient(0deg, var(--color-grey-lightest) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, var(--color-grey-lightest) 0 1px, transparent 1px 48px);
+  background-color: var(--color-white);
+}
+
+.star-chart__caption {
+  position: absolute;
+  left: 1.25rem;
+  top: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.star-chart__dust {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background-color: var(--color-grey-mid);
+}
+
+.star-chart__marker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: -5px 0 0 0;
+}
+
+.star-chart__marker-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-black);
+  flex: 0 0 auto;
+}
+
+.star-chart__marker-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.star-chart__marker-label--active {
+  font-weight: bold;
+}
+
+.star-chart__ship {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.star-chart__ship-marker {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--color-black);
+  background-color: var(--color-white);
+  transform: rotate(45deg);
+  flex: 0 0 auto;
+}
+
+.star-chart__ship-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.star-chart__target-ring {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border: 2px solid var(--color-black);
+  border-radius: 50%;
+}
+
+.star-chart__course {
+  position: absolute;
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-black) 0 8px,
+    transparent 8px 16px
+  );
+  transform-origin: 0 50%;
+}

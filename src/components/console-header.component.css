@@ -1,0 +1,18 @@
+.console-header {
+  align-items: center;
+}
+
+.console-header__title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.console-header__status {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-grey-light);
+}

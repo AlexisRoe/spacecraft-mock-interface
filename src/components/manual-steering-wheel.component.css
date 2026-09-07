@@ -1,0 +1,85 @@
+.manual-steering-wheel__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.manual-steering-wheel {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: block;
+}
+
+.manual-steering-wheel__wedge {
+  fill: var(--color-white);
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  cursor: pointer;
+  outline: none;
+}
+
+.manual-steering-wheel__wedge--active {
+  fill: var(--color-black);
+}
+
+.manual-steering-wheel__disc {
+  fill: var(--color-white);
+  stroke: none;
+}
+
+.manual-steering-wheel__disc-outline {
+  fill: none;
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  pointer-events: none;
+}
+
+.manual-steering-wheel__stick-pad {
+  fill: transparent;
+  stroke: none;
+  cursor: crosshair;
+  touch-action: none;
+  outline: none;
+}
+
+.manual-steering-wheel__crosshair line {
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.75;
+  pointer-events: none;
+}
+
+.manual-steering-wheel__stick-line {
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 4;
+  pointer-events: none;
+}
+
+.manual-steering-wheel__stick-dot {
+  fill: var(--color-black);
+  pointer-events: none;
+}
+
+.manual-steering-wheel__ring {
+  fill: none;
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 3;
+  pointer-events: none;
+}
+
+.manual-steering-wheel__wedge-ticks line {
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 3;
+  pointer-events: none;
+}

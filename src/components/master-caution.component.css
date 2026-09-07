@@ -1,0 +1,29 @@
+.master-caution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  padding: 1rem 1.25rem;
+}
+
+.master-caution__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.master-caution__status {
+  font-size: 1.05rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.master-caution__summary {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--color-grey-dark);
+}

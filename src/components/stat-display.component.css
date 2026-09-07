@@ -1,0 +1,45 @@
+.stat-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: max-content;
+}
+
+.stat-display__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+}
+
+.stat-display__value {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.stat-display--highlight {
+  align-items: flex-end;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  text-align: right;
+  width: 13rem;
+  min-width: 13rem;
+}
+
+.stat-display--highlight .stat-display__label,
+.stat-display--highlight .stat-display__value {
+  text-align: right;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stat-display--highlight .stat-display__label {
+  color: var(--color-grey-mid);
+}
+
+.stat-display--highlight .stat-display__value {
+  font-size: 0.95rem;
+}

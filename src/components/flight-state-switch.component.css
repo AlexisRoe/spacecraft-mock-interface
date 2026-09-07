@@ -1,0 +1,28 @@
+.flight-state-switch {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  margin-left: 1rem;
+}
+
+.flight-state-switch__label {
+  align-self: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+  margin-right: 1rem;
+}
+
+.flight-state-switch__options {
+  display: flex;
+  align-items: stretch;
+}
+
+.flight-state-switch__button {
+  background-color: transparent;
+  border: 2px solid transparent;
+  min-width: 0;
+  padding: 1rem;
+}

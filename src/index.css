@@ -4,6 +4,16 @@
   font-display: swap;
 }
 
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey-lightest: #dddddd;
+  --color-grey-lighter: #bcbbbb;
+  --color-grey-light: #aaaaaa;
+  --color-grey-mid: #666666;
+  --color-grey-dark: #444444;
+}
+
 *,
 *::before,
 *::after {
@@ -23,12 +33,29 @@ body,
 }
 
 body {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   font-family: "SpacecraftMono", monospace;
 }
 
 img,
 svg {
   filter: grayscale(1) contrast(200%);
+}
+
+/* Utility classes */
+
+.flex-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.inset-padding {
+  padding: 1rem 1.5rem;
+}
+
+.color-invert {
+  background-color: var(--color-white);
+  color: var(--color-black);
 }

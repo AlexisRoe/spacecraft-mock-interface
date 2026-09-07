@@ -1,0 +1,62 @@
+.thrust-dialer {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  min-height: 0;
+}
+
+.thrust-dialer__scale {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  min-height: 0;
+}
+
+.thrust-dialer__bar {
+  position: relative;
+  width: 4.5rem;
+  border: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.thrust-dialer__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--color-black) 0 2px,
+    var(--color-white) 2px 4px
+  );
+}
+
+.thrust-dialer__ticks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--color-grey-mid);
+}
+
+.thrust-dialer__readout {
+  padding: 0.92rem 1.5rem;
+  border-top: 1px solid var(--color-black);
+  text-align: center;
+}
+
+.thrust-dialer__readout-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.thrust-dialer__readout-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
