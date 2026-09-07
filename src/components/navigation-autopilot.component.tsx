@@ -1,5 +1,6 @@
 import { type JSX, useState } from "react";
 import { GyroCompass } from "./gyro-compass.component";
+import { StarChart } from "./star-chart.component";
 import { StatDisplay } from "./stat-display.component";
 
 import "./navigation-autopilot.component.css";
@@ -120,27 +121,118 @@ export function NavigationAutopilotLeft(): JSX.Element {
   );
 }
 
-/** Right column content for the navigation view in autopilot mode. */
+/** A jump destination plotted on the star chart and selectable as the active target. */
+interface Waypoint {
+  /** Waypoint slot label, e.g. "WP 01". */
+  tag: string;
+  /** System/star name. */
+  name: string;
+  /** Distance to the waypoint in parsecs. */
+  dist: string;
+  /** Estimated time of arrival at current course. */
+  eta: string;
+  /** Course bearing to the waypoint. */
+  bearing: string;
+  /** Number of FTL jumps required to reach the waypoint. */
+  jumps: string;
+  /** Horizontal position on the star chart, percentage (0-100). */
+  xPct: number;
+  /** Vertical position on the star chart, percentage (0-100). */
+  yPct: number;
+}
+
+const WAYPOINTS: Waypoint[] = [
+  {
+    tag: "WP 01",
+    name: "TAU CETI e",
+    dist: "3.65 pc",
+    eta: "112 d",
+    bearing: "198.4°",
+    jumps: "2",
+    xPct: 46,
+    yPct: 38,
+  },
+  {
+    tag: "WP 02",
+    name: "KEID BRANCH",
+    dist: "4.90 pc",
+    eta: "151 d",
+    bearing: "214.6°",
+    jumps: "3",
+    xPct: 69,
+    yPct: 58,
+  },
+  {
+    tag: "WP 03",
+    name: "HELIX WELL",
+    dist: "6.20 pc",
+    eta: "187 d",
+    bearing: "176.2°",
+    jumps: "4",
+    xPct: 83,
+    yPct: 29,
+  },
+  {
+    tag: "WP 04",
+    name: "GLIESE 581",
+    dist: "2.40 pc",
+    eta: "74 d",
+    bearing: "241.0°",
+    jumps: "1",
+    xPct: 33,
+    yPct: 26,
+  },
+];
+
+/** Right column content for the navigation view in autopilot mode: star chart and course. */
 export function NavigationAutopilotRight(): JSX.Element {
-  const cells = ["Param 1", "Param 2", "Param 3", "Param 4"];
-  const cells2 = ["Param 5", "Param 6", "Param 7", "Param 8"];
+  const [activeIndex, setActiveIndex] = useState(3);
+  const target = WAYPOINTS[activeIndex];
 
   return (
     <div className="navigation-autopilot-right">
-      <div className="navigation-autopilot__row navigation-autopilot__row--primary" />
+      <div className="navigation-autopilot__row navigation-autopilot__row--primary">
+        <StarChart
+          caption="GAL. LONGITUDE → SECTOR 14 / ORION SPUR"
+          waypoints={WAYPOINTS}
+          activeIndex={activeIndex}
+        />
+      </div>
       <div className="navigation-autopilot__row navigation-autopilot__row--cols-4">
-        {cells.map((label) => (
-          <div className="navigation-autopilot__cell" key={label}>
-            <StatDisplay label={label} value="--" />
-          </div>
+        {WAYPOINTS.map((waypoint, index) => (
+          <button
+            key={waypoint.name}
+            type="button"
+            className={[
+              "navigation-autopilot__waypoint",
+              index === activeIndex && "navigation-autopilot__command--active",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-pressed={index === activeIndex}
+            onClick={() => setActiveIndex(index)}
+          >
+            <span className="navigation-autopilot__waypoint-tag">{waypoint.tag}</span>
+            <span className="navigation-autopilot__waypoint-name">{waypoint.name}</span>
+            <span className="navigation-autopilot__waypoint-meta">
+              {waypoint.dist} · {waypoint.eta}
+            </span>
+          </button>
         ))}
       </div>
       <div className="navigation-autopilot__row navigation-autopilot__row--cols-4">
-        {cells2.map((label) => (
-          <div className="navigation-autopilot__cell" key={label}>
-            <StatDisplay label={label} value="--" />
-          </div>
-        ))}
+        <div className="navigation-autopilot__cell">
+          <StatDisplay label="Course" value={target.bearing} />
+        </div>
+        <div className="navigation-autopilot__cell">
+          <StatDisplay label="Distance" value={target.dist} />
+        </div>
+        <div className="navigation-autopilot__cell">
+          <StatDisplay label="Jumps" value={target.jumps} />
+        </div>
+        <div className="navigation-autopilot__cell">
+          <StatDisplay label="Arrival" value={target.eta} />
+        </div>
       </div>
     </div>
   );

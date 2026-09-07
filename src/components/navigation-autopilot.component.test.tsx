@@ -28,8 +28,29 @@ describe("NavigationAutopilotLeft", () => {
 });
 
 describe("NavigationAutopilotRight", () => {
-  it("renders 4 + 4 parameter cells", () => {
+  it("renders the star chart, waypoint switches and course readouts", () => {
     render(<NavigationAutopilotRight />);
-    expect(screen.getAllByText(/^Param \d+$/)).toHaveLength(8);
+    expect(screen.getByText("◄ SHIP")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /GLIESE 581/ })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByText("241.0°")).toBeInTheDocument();
+  });
+
+  it("switches the active waypoint and updates the course readouts", () => {
+    render(<NavigationAutopilotRight />);
+
+    fireEvent.click(screen.getByRole("button", { name: /KEID BRANCH/ }));
+
+    expect(screen.getByRole("button", { name: /KEID BRANCH/ })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByRole("button", { name: /GLIESE 581/ })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
+    expect(screen.getByText("214.6°")).toBeInTheDocument();
   });
 });

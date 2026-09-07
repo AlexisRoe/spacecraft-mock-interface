@@ -15,6 +15,7 @@
   align-items: stretch;
   background-color: var(--color-black);
   color: var(--color-white);
+  border-bottom: 1px solid var(--color-black);
 }
 
 .application-frame__content {
@@ -50,4 +51,5 @@
   align-items: stretch;
   background-color: var(--color-black);
   color: var(--color-white);
+  border-top: 1px solid var(--color-black);
 }
