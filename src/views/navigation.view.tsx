@@ -6,6 +6,7 @@ import {
   NavigationAutopilotRight,
 } from "../components/navigation-autopilot.component";
 import { StatDisplay } from "../components/stat-display.component";
+import { ThrustDialer } from "../components/thrust-dialer.component";
 import { ThrustVectorPanel } from "../components/thrust-vector-panel.component";
 import { useSpacecraftStore } from "../stores/spacecraft.store";
 
@@ -50,10 +51,7 @@ export function NavigationView(): JSX.Element {
         </div>
       </ConsoleGrid.Primary>
       <ConsoleGrid.Secondary>
-        <div className="navigation-view__column">
-          <div />
-          <span className="navigation-view__column-label">Trajectory</span>
-        </div>
+        <ThrustDialer />
       </ConsoleGrid.Secondary>
       <ConsoleGrid.Tertiary>
         <ThrustVectorPanel />

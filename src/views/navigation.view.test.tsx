@@ -23,7 +23,7 @@ describe("NavigationView", () => {
 
     render(<NavigationView />);
     expect(screen.getByText("Flight Path")).toBeInTheDocument();
-    expect(screen.getByText("Trajectory")).toBeInTheDocument();
+    expect(screen.getByRole("slider", { name: "Thrust" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "STBD +Y" })).toBeInTheDocument();
     expect(screen.getByText("HELM 01")).toBeInTheDocument();
   });
