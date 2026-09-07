@@ -1,4 +1,5 @@
 import { ApplicationFrame } from "./components/application-frame.component";
+import { DashboardFooter } from "./components/dashboard-footer.component";
 import { DashboardHeader } from "./components/dashboard-header.component";
 import { RotateDeviceNotice } from "./components/rotate-device-notice.component";
 import { useOrientation } from "./hooks/use-orientation.hook";
@@ -20,7 +21,9 @@ export function App() {
         <DashboardHeader />
       </ApplicationFrame.Header>
       <ApplicationFrame.Content></ApplicationFrame.Content>
-      <ApplicationFrame.Footer></ApplicationFrame.Footer>
+      <ApplicationFrame.Footer>
+        <DashboardFooter />
+      </ApplicationFrame.Footer>
     </ApplicationFrame>
   );
 }

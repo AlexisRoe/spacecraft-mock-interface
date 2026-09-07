@@ -25,4 +25,7 @@
 .application-frame__footer {
   grid-area: footer;
   width: 100%;
+  align-items: stretch;
+  background-color: #000000;
+  color: #ffffff;
 }

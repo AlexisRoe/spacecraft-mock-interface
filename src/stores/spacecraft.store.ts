@@ -11,6 +11,11 @@ export type SpacecraftStatus = "nominal" | "warning" | "critical";
 export type ControlMode = "autopilot" | "manual";
 
 /**
+ * Active flight state.
+ */
+export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
+
+/**
  * Shape of the spacecraft state and the actions available to mutate it.
  */
 export interface SpacecraftState {
@@ -26,20 +31,28 @@ export interface SpacecraftState {
   referenceFrame: string;
   /** Active flight control mode. */
   controlMode: ControlMode;
-  /** Current flight state, e.g. "Cruise". */
-  flightState: string;
+  /** Current flight state. */
+  flightState: FlightState;
   /** Current velocity as a fraction of light speed. */
   velocityC: number;
   /** Current overall operational status. */
   status: SpacecraftStatus;
   /** Hull integrity percentage, from 0 to 100. */
   hullIntegrity: number;
+  /** Current reactor power output, in megawatts. */
+  reactorOutputMw: number;
+  /** Shield integrity percentage, from 0 to 100. */
+  shieldIntegrity: number;
   /** Sets the active flight control mode. */
   setControlMode: (mode: ControlMode) => void;
+  /** Sets the active flight state. */
+  setFlightState: (flightState: FlightState) => void;
   /** Updates the overall operational status. */
   setStatus: (status: SpacecraftStatus) => void;
   /** Sets hull integrity, clamped to the 0-100 range. */
   setHullIntegrity: (value: number) => void;
+  /** Sets shield integrity, clamped to the 0-100 range. */
+  setShieldIntegrity: (value: number) => void;
 }
 
 /**
@@ -56,7 +69,11 @@ export const useSpacecraftStore = create<SpacecraftState>((set) => ({
   velocityC: 0.041,
   status: "nominal",
   hullIntegrity: 100,
+  reactorOutputMw: 412,
+  shieldIntegrity: 94,
   setControlMode: (mode) => set({ controlMode: mode }),
+  setFlightState: (flightState) => set({ flightState }),
   setStatus: (status) => set({ status }),
   setHullIntegrity: (value) => set({ hullIntegrity: Math.min(100, Math.max(0, value)) }),
+  setShieldIntegrity: (value) => set({ shieldIntegrity: Math.min(100, Math.max(0, value)) }),
 }));

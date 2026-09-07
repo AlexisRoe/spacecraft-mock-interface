@@ -1,0 +1,16 @@
+.system-status-readout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #aaaaaa;
+  white-space: nowrap;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+.system-status-readout__separator {
+  color: #666666;
+}
