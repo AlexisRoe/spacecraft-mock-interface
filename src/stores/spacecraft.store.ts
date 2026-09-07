@@ -16,6 +16,27 @@ export type ControlMode = "autopilot" | "manual";
 export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
 
 /**
+ * The ten console views reachable from the nav bar.
+ */
+export const NavView = {
+  Navigation: "navigation",
+  ManualFlight: "manual-flight",
+  Propulsion: "propulsion",
+  FieldsFtl: "fields-ftl",
+  Communications: "communications",
+  Defence: "defence",
+  FireControl: "fire-control",
+  ShipStatus: "ship-status",
+  Science: "science",
+  Logs: "logs",
+} as const;
+
+/**
+ * Identifier for one of the ten console views reachable from the nav bar.
+ */
+export type NavView = (typeof NavView)[keyof typeof NavView];
+
+/**
  * Shape of the spacecraft state and the actions available to mutate it.
  */
 export interface SpacecraftState {
@@ -43,6 +64,10 @@ export interface SpacecraftState {
   reactorOutputMw: number;
   /** Shield integrity percentage, from 0 to 100. */
   shieldIntegrity: number;
+  /** Currently selected console view. */
+  activeView: NavView;
+  /** Sets the active console view. */
+  setActiveView: (view: NavView) => void;
   /** Sets the active flight control mode. */
   setControlMode: (mode: ControlMode) => void;
   /** Sets the active flight state. */
@@ -71,6 +96,8 @@ export const useSpacecraftStore = create<SpacecraftState>((set) => ({
   hullIntegrity: 100,
   reactorOutputMw: 412,
   shieldIntegrity: 94,
+  activeView: NavView.Navigation,
+  setActiveView: (view) => set({ activeView: view }),
   setControlMode: (mode) => set({ controlMode: mode }),
   setFlightState: (flightState) => set({ flightState }),
   setStatus: (status) => set({ status }),

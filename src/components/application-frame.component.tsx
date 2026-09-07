@@ -24,6 +24,28 @@ function Content({ children }: ApplicationFrameContentProps): JSX.Element {
   return <main className="application-frame__content">{children}</main>;
 }
 
+/** Props for {@link ApplicationFrame.Nav}. */
+export interface ApplicationFrameNavProps {
+  /** Content rendered inside the nav area. */
+  children?: ReactNode;
+}
+
+/** Navigation column of an {@link ApplicationFrame.Content} layout. */
+function Nav({ children }: ApplicationFrameNavProps): JSX.Element {
+  return <nav className="application-frame__nav">{children}</nav>;
+}
+
+/** Props for {@link ApplicationFrame.Article}. */
+export interface ApplicationFrameArticleProps {
+  /** Content rendered inside the article area. */
+  children?: ReactNode;
+}
+
+/** Main article column of an {@link ApplicationFrame.Content} layout. */
+function Article({ children }: ApplicationFrameArticleProps): JSX.Element {
+  return <article className="application-frame__article">{children}</article>;
+}
+
 /** Props for {@link ApplicationFrame.Footer}. */
 export interface ApplicationFrameFooterProps {
   /** Content rendered inside the footer area. */
@@ -50,4 +72,6 @@ export function ApplicationFrame({ children }: ApplicationFrameProps): JSX.Eleme
 
 ApplicationFrame.Header = Header;
 ApplicationFrame.Content = Content;
+ApplicationFrame.Nav = Nav;
+ApplicationFrame.Article = Article;
 ApplicationFrame.Footer = Footer;

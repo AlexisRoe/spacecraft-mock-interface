@@ -16,4 +16,18 @@ describe("ApplicationFrame", () => {
     expect(screen.getByText("Content").closest("main")).toHaveClass("application-frame__content");
     expect(screen.getByText("Footer").closest("footer")).toHaveClass("application-frame__footer");
   });
+
+  it("renders nav and article children in their respective areas", () => {
+    render(
+      <ApplicationFrame.Content>
+        <ApplicationFrame.Nav>Nav</ApplicationFrame.Nav>
+        <ApplicationFrame.Article>Article</ApplicationFrame.Article>
+      </ApplicationFrame.Content>,
+    );
+
+    expect(screen.getByText("Nav").closest("nav")).toHaveClass("application-frame__nav");
+    expect(screen.getByText("Article").closest("article")).toHaveClass(
+      "application-frame__article",
+    );
+  });
 });
