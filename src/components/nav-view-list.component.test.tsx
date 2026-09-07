@@ -4,9 +4,9 @@ import { useSpacecraftStore } from "../stores/spacecraft.store";
 import { NavViewList } from "./nav-view-list.component";
 
 describe("NavViewList", () => {
-  it("renders all ten console views", () => {
+  it("renders all nine console views", () => {
     render(<NavViewList />);
-    expect(screen.getAllByRole("button")).toHaveLength(10);
+    expect(screen.getAllByRole("button")).toHaveLength(9);
   });
 
   it("marks the active view and switches on click", () => {

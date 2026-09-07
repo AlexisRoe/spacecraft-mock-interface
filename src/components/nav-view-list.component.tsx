@@ -13,43 +13,37 @@ interface NavViewEntry {
 
 const NAV_VIEW_ENTRIES: NavViewEntry[] = [
   { view: NavView.Navigation, index: "01", title: "Navigation", subtitle: "attitude · star chart" },
-  {
-    view: NavView.ManualFlight,
-    index: "02",
-    title: "Manual Flight",
-    subtitle: "jog · throttle · RCS",
-  },
-  { view: NavView.Propulsion, index: "03", title: "Propulsion", subtitle: "engines · reactor" },
+  { view: NavView.Propulsion, index: "02", title: "Propulsion", subtitle: "engines · reactor" },
   {
     view: NavView.FieldsFtl,
-    index: "04",
+    index: "03",
     title: "Fields & FTL",
     subtitle: "warp · aperture · shields",
   },
   {
     view: NavView.Communications,
-    index: "05",
+    index: "04",
     title: "Communications",
     subtitle: "spectrum · channels · audio",
   },
-  { view: NavView.Defence, index: "06", title: "Defence", subtitle: "shields · energy grid" },
+  { view: NavView.Defence, index: "05", title: "Defence", subtitle: "shields · energy grid" },
   {
     view: NavView.FireControl,
-    index: "07",
+    index: "06",
     title: "Fire Control",
     subtitle: "target lock · engage",
   },
-  { view: NavView.ShipStatus, index: "08", title: "Ship Status", subtitle: "life support · log" },
+  { view: NavView.ShipStatus, index: "07", title: "Ship Status", subtitle: "life support · log" },
   {
     view: NavView.Science,
-    index: "09",
+    index: "08",
     title: "Science",
     subtitle: "probes · sensors · particles",
   },
-  { view: NavView.Logs, index: "10", title: "Logs", subtitle: "records · database search" },
+  { view: NavView.Logs, index: "09", title: "Logs", subtitle: "records · database search" },
 ];
 
-/** Scrollable list of the ten console view buttons. */
+/** Scrollable list of the nine console view buttons. */
 export function NavViewList(): JSX.Element {
   const activeView = useSpacecraftStore((state) => state.activeView);
   const setActiveView = useSpacecraftStore((state) => state.setActiveView);

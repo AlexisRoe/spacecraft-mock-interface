@@ -16,11 +16,10 @@ export type ControlMode = "autopilot" | "manual";
 export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
 
 /**
- * The ten console views reachable from the nav bar.
+ * The nine console views reachable from the nav bar.
  */
 export const NavView = {
   Navigation: "navigation",
-  ManualFlight: "manual-flight",
   Propulsion: "propulsion",
   FieldsFtl: "fields-ftl",
   Communications: "communications",
