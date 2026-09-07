@@ -1,8 +1,23 @@
+.manual-steering-wheel__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
 .manual-steering-wheel {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   display: block;
-  background-color: var(--color-white);
 }
 
 .manual-steering-wheel__wedge {
@@ -52,6 +67,21 @@
 
 .manual-steering-wheel__stick-dot {
   fill: var(--color-black);
+  pointer-events: none;
+}
+
+.manual-steering-wheel__ring {
+  fill: none;
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 3;
+  pointer-events: none;
+}
+
+.manual-steering-wheel__wedge-ticks line {
+  stroke: var(--color-grey-mid);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 3;
   pointer-events: none;
 }
 
