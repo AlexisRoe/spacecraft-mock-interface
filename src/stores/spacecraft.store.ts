@@ -16,6 +16,11 @@ export type ControlMode = "autopilot" | "manual";
 export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
 
 /**
+ * Flight action selectable in the manual navigation view's primary column.
+ */
+export type FlightAction = "NULL RATES" | "ALIGN TO WAYPOINT";
+
+/**
  * The nine console views reachable from the nav bar.
  */
 export const NavView = {
@@ -65,6 +70,14 @@ export interface SpacecraftState {
   shieldIntegrity: number;
   /** Currently selected console view. */
   activeView: NavView;
+  /** Selected flight action in the manual navigation view's primary column. */
+  manualFlightAction: FlightAction;
+  /** Commanded RCS thrust percentage set via the manual navigation thrust dialer. */
+  manualThrustPercent: number;
+  /** Index of the active RCS firing direction in the manual navigation thrust vector panel. */
+  manualThrustDirectionIndex: number;
+  /** Index of the active wedge field in the manual navigation steering wheel, if any. */
+  manualSteeringActiveWedge: number | null;
   /** Sets the active console view. */
   setActiveView: (view: NavView) => void;
   /** Sets the active flight control mode. */
@@ -77,6 +90,14 @@ export interface SpacecraftState {
   setHullIntegrity: (value: number) => void;
   /** Sets shield integrity, clamped to the 0-100 range. */
   setShieldIntegrity: (value: number) => void;
+  /** Sets the selected manual navigation flight action. */
+  setManualFlightAction: (action: FlightAction) => void;
+  /** Sets the commanded manual navigation thrust percentage, clamped to 0-100. */
+  setManualThrustPercent: (value: number) => void;
+  /** Sets the active manual navigation thrust vector direction index. */
+  setManualThrustDirectionIndex: (index: number) => void;
+  /** Sets the active manual navigation steering wheel wedge index. */
+  setManualSteeringActiveWedge: (index: number | null) => void;
 }
 
 /**
@@ -96,10 +117,19 @@ export const useSpacecraftStore = create<SpacecraftState>((set) => ({
   reactorOutputMw: 412,
   shieldIntegrity: 94,
   activeView: NavView.Navigation,
+  manualFlightAction: "NULL RATES",
+  manualThrustPercent: 35,
+  manualThrustDirectionIndex: 3,
+  manualSteeringActiveWedge: null,
   setActiveView: (view) => set({ activeView: view }),
   setControlMode: (mode) => set({ controlMode: mode }),
   setFlightState: (flightState) => set({ flightState }),
   setStatus: (status) => set({ status }),
   setHullIntegrity: (value) => set({ hullIntegrity: Math.min(100, Math.max(0, value)) }),
   setShieldIntegrity: (value) => set({ shieldIntegrity: Math.min(100, Math.max(0, value)) }),
+  setManualFlightAction: (action) => set({ manualFlightAction: action }),
+  setManualThrustPercent: (value) =>
+    set({ manualThrustPercent: Math.min(100, Math.max(0, value)) }),
+  setManualThrustDirectionIndex: (index) => set({ manualThrustDirectionIndex: index }),
+  setManualSteeringActiveWedge: (index) => set({ manualSteeringActiveWedge: index }),
 }));

@@ -6,7 +6,13 @@ import { NavigationView } from "./navigation.view";
 describe("NavigationView", () => {
   afterEach(() => {
     act(() => {
-      useSpacecraftStore.setState({ controlMode: "autopilot" });
+      useSpacecraftStore.setState({
+        controlMode: "autopilot",
+        manualFlightAction: "NULL RATES",
+        manualThrustPercent: 35,
+        manualThrustDirectionIndex: 3,
+        manualSteeringActiveWedge: null,
+      });
     });
   });
 

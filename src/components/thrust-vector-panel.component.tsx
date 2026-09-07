@@ -1,4 +1,5 @@
-import { type JSX, useState } from "react";
+import type { JSX } from "react";
+import { useSpacecraftStore } from "../stores/spacecraft.store";
 import { truncate } from "../utils/truncate.util";
 
 import "./thrust-vector-panel.component.css";
@@ -23,9 +24,11 @@ const THRUST_DIRECTIONS: ThrustDirection[] = [
 /**
  * RCS thruster direction selector: a 2x3 grid of firing-direction buttons
  * (active direction shown inverted) above a velocity/impulse stat readout.
+ * The active direction is persisted in the spacecraft store.
  */
 export function ThrustVectorPanel(): JSX.Element {
-  const [activeIndex, setActiveIndex] = useState(3);
+  const activeIndex = useSpacecraftStore((state) => state.manualThrustDirectionIndex);
+  const setActiveIndex = useSpacecraftStore((state) => state.setManualThrustDirectionIndex);
   const active = THRUST_DIRECTIONS[activeIndex];
 
   return (

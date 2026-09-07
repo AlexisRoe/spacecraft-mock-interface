@@ -1,4 +1,4 @@
-import { type JSX, useState } from "react";
+import type { JSX } from "react";
 import { ConsoleGrid } from "../components/console-grid.component";
 import { ConsoleHeader } from "../components/console-header.component";
 import { ManualSteeringWheel } from "../components/manual-steering-wheel.component";
@@ -9,12 +9,9 @@ import {
 import { StatDisplay } from "../components/stat-display.component";
 import { ThrustDialer } from "../components/thrust-dialer.component";
 import { ThrustVectorPanel } from "../components/thrust-vector-panel.component";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { type FlightAction, useSpacecraftStore } from "../stores/spacecraft.store";
 
 import "./navigation.view.css";
-
-/** Flight action selectable in the manual navigation view's primary column. */
-type FlightAction = "NULL RATES" | "ALIGN TO WAYPOINT";
 
 const FLIGHT_ACTIONS: FlightAction[] = ["NULL RATES", "ALIGN TO WAYPOINT"];
 
@@ -22,7 +19,8 @@ const FLIGHT_ACTIONS: FlightAction[] = ["NULL RATES", "ALIGN TO WAYPOINT"];
 export function NavigationView(): JSX.Element {
   const controlMode = useSpacecraftStore((state) => state.controlMode);
   const isAutopilot = controlMode === "autopilot";
-  const [flightAction, setFlightAction] = useState<FlightAction>("NULL RATES");
+  const flightAction = useSpacecraftStore((state) => state.manualFlightAction);
+  const setFlightAction = useSpacecraftStore((state) => state.setManualFlightAction);
 
   const header = (
     <ConsoleGrid.Header>

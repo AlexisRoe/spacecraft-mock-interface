@@ -1,4 +1,5 @@
-import { type JSX, type KeyboardEvent, type MouseEvent, useState } from "react";
+import type { JSX, KeyboardEvent, MouseEvent } from "react";
+import { useSpacecraftStore } from "../stores/spacecraft.store";
 
 import "./thrust-dialer.component.css";
 
@@ -11,10 +12,12 @@ function formatTick(tick: number): string {
 
 /**
  * Vertical thrust dialer: tap anywhere on the scale to set a 0-100% thrust
- * value, shown as a striped fill on the bar and as a readout below it.
+ * value, shown as a striped fill on the bar and as a readout below it. The
+ * value is persisted in the spacecraft store.
  */
 export function ThrustDialer(): JSX.Element {
-  const [value, setValue] = useState(35);
+  const value = useSpacecraftStore((state) => state.manualThrustPercent);
+  const setValue = useSpacecraftStore((state) => state.setManualThrustPercent);
 
   function handleSetFromPointer(event: MouseEvent<HTMLDivElement>): void {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -24,9 +27,9 @@ export function ThrustDialer(): JSX.Element {
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>): void {
     if (event.key === "ArrowUp" || event.key === "ArrowRight") {
-      setValue((current) => Math.min(100, current + 1));
+      setValue(Math.min(100, value + 1));
     } else if (event.key === "ArrowDown" || event.key === "ArrowLeft") {
-      setValue((current) => Math.max(0, current - 1));
+      setValue(Math.max(0, value - 1));
     }
   }
 

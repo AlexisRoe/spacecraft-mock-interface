@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useSpacecraftStore } from "../stores/spacecraft.store";
 
 import "./manual-steering-wheel.component.css";
 
@@ -61,13 +62,17 @@ function pointOnRadius(angleDeg: number, radius: number): [number, number] {
 /**
  * Attitude control wheel: a center disc with a draggable yaw/pitch stick,
  * surrounded by eight wedge fields for roll and RCS translation commands.
+ * The active wedge is persisted in the spacecraft store; the stick itself is
+ * momentary and always springs back to center, so it isn't persisted.
  */
 export function ManualSteeringWheel(): JSX.Element {
-  const [activeWedge, setActiveWedge] = useState<number | null>(null);
+  const activeWedge = useSpacecraftStore((state) => state.manualSteeringActiveWedge);
+  const setActiveWedge = useSpacecraftStore((state) => state.setManualSteeringActiveWedge);
   const [stick, setStick] = useState({ x: 0, y: 0 });
   const [isDraggingStick, setDraggingStick] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
   const [discAspectCorrection, setDiscAspectCorrection] = useState(1);
+  const wedgeFlashTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -79,6 +84,20 @@ export function ManualSteeringWheel(): JSX.Element {
     observer.observe(svg);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    return () => clearTimeout(wedgeFlashTimeout.current);
+  }, []);
+
+  function pressWedge(index: number): void {
+    clearTimeout(wedgeFlashTimeout.current);
+    setActiveWedge(index);
+  }
+
+  function releaseWedge(): void {
+    clearTimeout(wedgeFlashTimeout.current);
+    wedgeFlashTimeout.current = setTimeout(() => setActiveWedge(null), 150);
+  }
 
   function applyStickPosition(event: ReactPointerEvent<SVGCircleElement>): void {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -134,11 +153,19 @@ export function ManualSteeringWheel(): JSX.Element {
             tabIndex={0}
             aria-label={field.label}
             aria-pressed={index === activeWedge}
-            onClick={() => setActiveWedge(index)}
+            onPointerDown={() => pressWedge(index)}
+            onPointerUp={releaseWedge}
+            onPointerLeave={releaseWedge}
+            onPointerCancel={releaseWedge}
             onKeyDown={(event) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
-                setActiveWedge(index);
+                pressWedge(index);
+              }
+            }}
+            onKeyUp={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                releaseWedge();
               }
             }}
           />
@@ -196,13 +223,6 @@ export function ManualSteeringWheel(): JSX.Element {
             })}
           </g>
         </g>
-        <rect
-          className="manual-steering-wheel__frame"
-          x={1}
-          y={1}
-          width={SIZE - 2}
-          height={SIZE - 2}
-        />
       </svg>
     </div>
   );

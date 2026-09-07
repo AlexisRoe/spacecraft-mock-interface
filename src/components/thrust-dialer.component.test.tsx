@@ -1,8 +1,15 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { useSpacecraftStore } from "../stores/spacecraft.store";
 import { ThrustDialer } from "./thrust-dialer.component";
 
 describe("ThrustDialer", () => {
+  afterEach(() => {
+    act(() => {
+      useSpacecraftStore.setState({ manualThrustPercent: 35 });
+    });
+  });
+
   it("shows the default thrust value", () => {
     render(<ThrustDialer />);
     expect(screen.getByText("35%")).toBeInTheDocument();
