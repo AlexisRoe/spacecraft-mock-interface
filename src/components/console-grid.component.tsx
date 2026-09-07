@@ -8,7 +8,7 @@ export interface ConsoleGridHeaderProps {
   children?: ReactNode;
 }
 
-/** Header area of a {@link ConsoleGrid} layout, spanning both columns. */
+/** Header area of a {@link ConsoleGrid} layout, spanning the full width. */
 function Header({ children }: ConsoleGridHeaderProps): JSX.Element {
   return <div className="console-grid__header">{children}</div>;
 }
@@ -19,7 +19,7 @@ export interface ConsoleGridLeftProps {
   children?: ReactNode;
 }
 
-/** Left column of a {@link ConsoleGrid} layout. */
+/** Left column of a {@link ConsoleGrid} `"split"` layout. */
 function Left({ children }: ConsoleGridLeftProps): JSX.Element {
   return <div className="console-grid__left">{children}</div>;
 }
@@ -30,26 +30,86 @@ export interface ConsoleGridRightProps {
   children?: ReactNode;
 }
 
-/** Right column of a {@link ConsoleGrid} layout. */
+/** Right column of a {@link ConsoleGrid} `"split"` layout. */
 function Right({ children }: ConsoleGridRightProps): JSX.Element {
   return <div className="console-grid__right">{children}</div>;
 }
 
-/** Props for {@link ConsoleGrid}. */
-export interface ConsoleGridProps {
-  /** Should be composed of {@link ConsoleGrid.Header}, {@link ConsoleGrid.Left}, and
-   * {@link ConsoleGrid.Right}. */
+/** Props for {@link ConsoleGrid.Primary}. */
+export interface ConsoleGridPrimaryProps {
+  /** Content rendered inside the flexible first column. */
+  children?: ReactNode;
+}
+
+/** First (`1fr`) column of a {@link ConsoleGrid} `"manual"` layout. */
+function Primary({ children }: ConsoleGridPrimaryProps): JSX.Element {
+  return <div className="console-grid__primary">{children}</div>;
+}
+
+/** Props for {@link ConsoleGrid.Secondary}. */
+export interface ConsoleGridSecondaryProps {
+  /** Content rendered inside the second (`auto`) column. */
+  children?: ReactNode;
+}
+
+/** Second (`auto`) column of a {@link ConsoleGrid} `"manual"` layout. */
+function Secondary({ children }: ConsoleGridSecondaryProps): JSX.Element {
+  return <div className="console-grid__secondary">{children}</div>;
+}
+
+/** Props for {@link ConsoleGrid.Tertiary}. */
+export interface ConsoleGridTertiaryProps {
+  /** Content rendered inside the third (`auto`) column. */
+  children?: ReactNode;
+}
+
+/** Third (`auto`) column of a {@link ConsoleGrid} `"manual"` layout. */
+function Tertiary({ children }: ConsoleGridTertiaryProps): JSX.Element {
+  return <div className="console-grid__tertiary">{children}</div>;
+}
+
+/** Props for {@link ConsoleGrid.Footer}. */
+export interface ConsoleGridFooterProps {
+  /** Content rendered inside the footer row. */
   children?: ReactNode;
 }
 
 /**
- * Base 2x2 console layout: a full-width header row above a two-column content
- * row. Used as the starting layout for individual console views.
+ * Footer row of a {@link ConsoleGrid} `"manual"` layout, spanning all three
+ * columns below a 1px solid divider.
  */
-export function ConsoleGrid({ children }: ConsoleGridProps): JSX.Element {
-  return <div className="console-grid">{children}</div>;
+function Footer({ children }: ConsoleGridFooterProps): JSX.Element {
+  return <div className="console-grid__footer">{children}</div>;
+}
+
+/** Props for {@link ConsoleGrid}. */
+export interface ConsoleGridProps {
+  /** Content rendered inside the grid; composition depends on `variant`. */
+  children?: ReactNode;
+  /**
+   * Layout variant. `"split"` (default) renders a full-width header above a
+   * two-column `Left`/`Right` row. `"manual"` renders a full-width header,
+   * a first row of three columns (`1fr auto auto`) via `Primary`/`Secondary`/
+   * `Tertiary`, and a full-width `auto` `Footer` row below a 1px solid line.
+   */
+  variant?: "split" | "manual";
+}
+
+/**
+ * Base console layout: a full-width header row above a content area. Used as
+ * the starting layout for individual console views.
+ */
+export function ConsoleGrid({ children, variant = "split" }: ConsoleGridProps): JSX.Element {
+  const className = ["console-grid", variant === "manual" && "console-grid--manual"]
+    .filter(Boolean)
+    .join(" ");
+  return <div className={className}>{children}</div>;
 }
 
 ConsoleGrid.Header = Header;
 ConsoleGrid.Left = Left;
 ConsoleGrid.Right = Right;
+ConsoleGrid.Primary = Primary;
+ConsoleGrid.Secondary = Secondary;
+ConsoleGrid.Tertiary = Tertiary;
+ConsoleGrid.Footer = Footer;

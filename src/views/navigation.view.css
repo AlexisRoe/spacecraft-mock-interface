@@ -1,0 +1,29 @@
+.navigation-view__column {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  min-height: 0;
+}
+
+.navigation-view__column-label {
+  padding: 0.5rem 1.5rem;
+  border-top: 1px solid var(--color-black);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.navigation-view__footer-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+}
+
+.navigation-view__footer-cell {
+  padding: 1rem 1.5rem;
+}
+
+.navigation-view__footer-cell:not(:last-child) {
+  border-right: 1px solid var(--color-black);
+}

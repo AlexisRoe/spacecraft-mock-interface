@@ -16,12 +16,15 @@ describe("NavigationView", () => {
     expect(screen.getByText("◄ SHIP")).toBeInTheDocument();
   });
 
-  it("renders the placeholder in manual mode", () => {
+  it("renders the manual layout with footer stats in manual mode", () => {
     act(() => {
       useSpacecraftStore.setState({ controlMode: "manual" });
     });
 
     render(<NavigationView />);
-    expect(screen.getByText("Navigation View")).toBeInTheDocument();
+    expect(screen.getByText("Flight Path")).toBeInTheDocument();
+    expect(screen.getByText("Trajectory")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "STBD +Y" })).toBeInTheDocument();
+    expect(screen.getByText("HELM 01")).toBeInTheDocument();
   });
 });
