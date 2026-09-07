@@ -34,6 +34,21 @@ const BACKGROUND_STARS = [
   { xPct: 73, yPct: 35 },
   { xPct: 61, yPct: 74 },
   { xPct: 88, yPct: 52 },
+  { xPct: 5, yPct: 48 },
+  { xPct: 15, yPct: 15 },
+  { xPct: 22, yPct: 70 },
+  { xPct: 38, yPct: 20 },
+  { xPct: 52, yPct: 12 },
+  { xPct: 57, yPct: 62 },
+  { xPct: 68, yPct: 15 },
+  { xPct: 78, yPct: 60 },
+  { xPct: 85, yPct: 22 },
+  { xPct: 93, yPct: 68 },
+  { xPct: 95, yPct: 30 },
+  { xPct: 13, yPct: 82 },
+  { xPct: 49, yPct: 82 },
+  { xPct: 30, yPct: 10 },
+  { xPct: 75, yPct: 78 },
 ];
 
 /**

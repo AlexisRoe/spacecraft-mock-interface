@@ -4,8 +4,8 @@
   min-height: 0;
   overflow: hidden;
   background-image:
-    repeating-linear-gradient(0deg, var(--color-grey-lighter) 0 1px, transparent 1px 48px),
-    repeating-linear-gradient(90deg, var(--color-grey-lighter) 0 1px, transparent 1px 48px);
+    repeating-linear-gradient(0deg, var(--color-grey-lightest) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, var(--color-grey-lightest) 0 1px, transparent 1px 48px);
   background-color: var(--color-white);
 }
 
