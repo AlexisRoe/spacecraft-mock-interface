@@ -12,7 +12,8 @@ describe("NavigationView", () => {
 
   it("renders the autopilot panels by default", () => {
     render(<NavigationView />);
-    expect(screen.getAllByText(/^Param \d+$/)).toHaveLength(18);
+    expect(screen.getByRole("img", { name: "Attitude gyro compass" })).toBeInTheDocument();
+    expect(screen.getAllByText(/^Param \d+$/)).toHaveLength(8);
   });
 
   it("renders the placeholder in manual mode", () => {

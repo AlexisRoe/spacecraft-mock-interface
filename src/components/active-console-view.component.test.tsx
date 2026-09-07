@@ -12,7 +12,7 @@ describe("ActiveConsoleView", () => {
 
   it("renders the view matching the active nav item", () => {
     render(<ActiveConsoleView />);
-    expect(screen.getAllByText(/^Param \d+$/).length).toBeGreaterThan(0);
+    expect(screen.getByRole("img", { name: "Attitude gyro compass" })).toBeInTheDocument();
   });
 
   it("switches views when the active view changes", () => {
