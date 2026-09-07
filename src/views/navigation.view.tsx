@@ -1,6 +1,7 @@
 import { type JSX, useState } from "react";
 import { ConsoleGrid } from "../components/console-grid.component";
 import { ConsoleHeader } from "../components/console-header.component";
+import { ManualSteeringWheel } from "../components/manual-steering-wheel.component";
 import {
   NavigationAutopilotLeft,
   NavigationAutopilotRight,
@@ -52,7 +53,7 @@ export function NavigationView(): JSX.Element {
       {header}
       <ConsoleGrid.Primary>
         <div className="navigation-view__column">
-          <div />
+          <ManualSteeringWheel />
           <div className="navigation-view__primary-actions">
             {FLIGHT_ACTIONS.map((action) => (
               <button

@@ -27,6 +27,7 @@ describe("NavigationView", () => {
     );
     expect(screen.getByRole("button", { name: "ALIGN TO WAYPOINT" })).toBeInTheDocument();
     expect(screen.getByRole("slider", { name: "Thrust" })).toBeInTheDocument();
+    expect(screen.getByRole("slider", { name: "Yaw and pitch stick" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "STBD +Y" })).toBeInTheDocument();
     expect(screen.getByText("HELM 01")).toBeInTheDocument();
   });
