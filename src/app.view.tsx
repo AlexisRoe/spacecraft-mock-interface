@@ -1,3 +1,4 @@
+import { ActiveConsoleView } from "./components/active-console-view.component";
 import { ApplicationFrame } from "./components/application-frame.component";
 import { DashboardFooter } from "./components/dashboard-footer.component";
 import { DashboardHeader } from "./components/dashboard-header.component";
@@ -27,7 +28,9 @@ export function App() {
           <NavViewList />
           <MasterCaution summary="No advisories." lastAcknowledgement="09:14:02" />
         </ApplicationFrame.Nav>
-        <ApplicationFrame.Article></ApplicationFrame.Article>
+        <ApplicationFrame.Article>
+          <ActiveConsoleView />
+        </ApplicationFrame.Article>
       </ApplicationFrame.Content>
       <ApplicationFrame.Footer>
         <DashboardFooter />
