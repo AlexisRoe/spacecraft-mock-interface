@@ -13,9 +13,7 @@ export interface DashboardFooterProps {
  * select between "Station Keep", "Cruise", and "Warp Prep") on the left, and
  * a compact system status readout on the right.
  */
-export function DashboardFooter({
-  groupLabel = "Helm",
-}: DashboardFooterProps): JSX.Element {
+export function DashboardFooter({ groupLabel = "Helm" }: DashboardFooterProps): JSX.Element {
   return (
     <>
       <FlightStateSwitch

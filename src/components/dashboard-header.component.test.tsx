@@ -31,7 +31,8 @@ describe("DashboardHeader", () => {
     expect(screen.getByText("14:07:32")).toBeInTheDocument();
     expect(screen.getByText("250")).toBeInTheDocument();
     expect(screen.getByText("Ecliptic J2000")).toBeInTheDocument();
-    expect(screen.getByText("Cruise · 0.041 c")).toBeInTheDocument();
+    expect(screen.getByText("Flight State (0.04c)")).toBeInTheDocument();
+    expect(screen.getByText("Cruise")).toBeInTheDocument();
   });
 
   it("uses configurable labels for the control switches", () => {

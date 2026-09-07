@@ -66,8 +66,8 @@ export function DashboardHeader({
 
         <StatDisplay
           className="stat-display--highlight inset-padding"
-          label="Flight State"
-          value={`${flightState} · ${velocityC.toFixed(3)} c`}
+          label={`Flight State (${velocityC.toFixed(2)}c)`}
+          value={flightState}
         />
       </div>
     </>
