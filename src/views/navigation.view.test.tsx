@@ -1,9 +1,25 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { act, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
+import { useSpacecraftStore } from "../stores/spacecraft.store";
 import { NavigationView } from "./navigation.view";
 
 describe("NavigationView", () => {
-  it("renders the navigation view title", () => {
+  afterEach(() => {
+    act(() => {
+      useSpacecraftStore.setState({ controlMode: "autopilot" });
+    });
+  });
+
+  it("renders the autopilot panels by default", () => {
+    render(<NavigationView />);
+    expect(screen.getAllByText(/^Param \d+$/)).toHaveLength(18);
+  });
+
+  it("renders the placeholder in manual mode", () => {
+    act(() => {
+      useSpacecraftStore.setState({ controlMode: "manual" });
+    });
+
     render(<NavigationView />);
     expect(screen.getByText("Navigation View")).toBeInTheDocument();
   });

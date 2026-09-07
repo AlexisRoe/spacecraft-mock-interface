@@ -12,7 +12,7 @@ describe("ActiveConsoleView", () => {
 
   it("renders the view matching the active nav item", () => {
     render(<ActiveConsoleView />);
-    expect(screen.getByText("Navigation View")).toBeInTheDocument();
+    expect(screen.getAllByText(/^Param \d+$/).length).toBeGreaterThan(0);
   });
 
   it("switches views when the active view changes", () => {

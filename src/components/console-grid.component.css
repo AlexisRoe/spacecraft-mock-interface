@@ -12,22 +12,24 @@
 
 .console-grid__header {
   grid-area: header;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 .console-grid__left {
   grid-area: left;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   min-height: 0;
   overflow: hidden;
+  border-left: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
 }
 
 .console-grid__right {
   grid-area: right;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   min-height: 0;
   overflow: hidden;
 }
