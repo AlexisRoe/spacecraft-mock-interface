@@ -32,3 +32,11 @@ img,
 svg {
   filter: grayscale(1) contrast(200%);
 }
+
+/* Utility classes */
+
+.flex-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}

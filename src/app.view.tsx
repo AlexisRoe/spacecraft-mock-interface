@@ -1,6 +1,8 @@
+import { ApplicationFrame } from "./components/application-frame.component";
 import { RotateDeviceNotice } from "./components/rotate-device-notice.component";
 import { useOrientation } from "./hooks/use-orientation.hook";
 import { useSpacecraftStore } from "./stores/spacecraft.store";
+
 import "./app.view.css";
 
 /**
@@ -18,17 +20,10 @@ export function App() {
   }
 
   return (
-    <main className="app-view">
-      <img
-        className="app-view__crest"
-        src="/icons/icon-192x192.png"
-        alt="Ship crest"
-        width={64}
-        height={64}
-      />
-      <h1 className="app-view__title">{shipName}</h1>
-      <p className="app-view__status">Status: {status}</p>
-      <p className="app-view__hull">Hull integrity: {hullIntegrity}%</p>
-    </main>
+    <ApplicationFrame>
+      <ApplicationFrame.Header></ApplicationFrame.Header>
+      <ApplicationFrame.Content></ApplicationFrame.Content>
+      <ApplicationFrame.Footer></ApplicationFrame.Footer>
+    </ApplicationFrame>
   );
 }
