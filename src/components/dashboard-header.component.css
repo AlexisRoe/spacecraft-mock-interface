@@ -20,7 +20,7 @@
 .dashboard-header__ship-subtitle {
   font-size: 0.7rem;
   letter-spacing: 0.03em;
-  color: #aaaaaa;
+  color: var(--color-grey-light);
 }
 
 .dashboard-header__stats {

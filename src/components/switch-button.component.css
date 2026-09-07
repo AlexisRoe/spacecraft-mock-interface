@@ -1,7 +1,7 @@
 .switch-button {
   border: none;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-black);
+  color: var(--color-white);
   font-family: inherit;
   font-size: 0.85rem;
   font-weight: bold;

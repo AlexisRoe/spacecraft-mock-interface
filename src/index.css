@@ -4,6 +4,14 @@
   font-display: swap;
 }
 
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey-light: #aaaaaa;
+  --color-grey-mid: #666666;
+  --color-grey-dark: #444444;
+}
+
 *,
 *::before,
 *::after {
@@ -23,8 +31,8 @@ body,
 }
 
 body {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   font-family: "SpacecraftMono", monospace;
 }
 
@@ -46,6 +54,6 @@ svg {
 }
 
 .color-invert {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }

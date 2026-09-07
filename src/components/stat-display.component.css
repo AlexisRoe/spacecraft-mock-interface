@@ -9,7 +9,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #aaaaaa;
+  color: var(--color-grey-light);
 }
 
 .stat-display__value {
@@ -20,8 +20,8 @@
 .stat-display--highlight {
   align-items: flex-end;
   justify-content: center;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   text-align: right;
   width: 13rem;
   min-width: 13rem;
@@ -37,7 +37,7 @@
 }
 
 .stat-display--highlight .stat-display__label {
-  color: #666666;
+  color: var(--color-grey-mid);
 }
 
 .stat-display--highlight .stat-display__value {

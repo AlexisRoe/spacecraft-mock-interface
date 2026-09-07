@@ -5,12 +5,12 @@
   font-size: 0.75rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #aaaaaa;
+  color: var(--color-grey-light);
   white-space: nowrap;
   height: 100%;
   margin-right: 1rem;
 }
 
 .system-status-readout__separator {
-  color: #666666;
+  color: var(--color-grey-mid);
 }

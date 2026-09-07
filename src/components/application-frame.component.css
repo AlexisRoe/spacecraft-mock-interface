@@ -13,8 +13,8 @@
   grid-area: header;
   width: 100%;
   align-items: stretch;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 .application-frame__content {
@@ -29,16 +29,16 @@
 .application-frame__nav {
   display: flex;
   flex-direction: column;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-black);
+  color: var(--color-white);
   height: 100%;
   min-height: 0;
   overflow: hidden;
 }
 
 .application-frame__article {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
   height: 100%;
   min-height: 0;
   overflow: hidden;
@@ -48,6 +48,6 @@
   grid-area: footer;
   width: 100%;
   align-items: stretch;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-black);
+  color: var(--color-white);
 }

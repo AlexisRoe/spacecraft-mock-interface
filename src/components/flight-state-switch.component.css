@@ -11,7 +11,7 @@
   font-weight: bold;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #aaaaaa;
+  color: var(--color-grey-light);
   margin-right: 1rem;
 }
 

@@ -14,5 +14,5 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: #aaaaaa;
+  color: var(--color-grey-light);
 }
