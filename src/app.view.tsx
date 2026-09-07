@@ -21,7 +21,7 @@ export function App() {
     <main className="app-view">
       <img
         className="app-view__crest"
-        src="/icons/icon-192.svg"
+        src="/icons/icon-192x192.png"
         alt="Ship crest"
         width={64}
         height={64}
