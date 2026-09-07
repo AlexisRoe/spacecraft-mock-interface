@@ -22,7 +22,10 @@ describe("NavigationView", () => {
     });
 
     render(<NavigationView />);
-    expect(screen.getByText("Flight Path")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "NULL RATES" })).toHaveClass(
+      "navigation-view__primary-action--active",
+    );
+    expect(screen.getByRole("button", { name: "ALIGN TO WAYPOINT" })).toBeInTheDocument();
     expect(screen.getByRole("slider", { name: "Thrust" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "STBD +Y" })).toBeInTheDocument();
     expect(screen.getByText("HELM 01")).toBeInTheDocument();

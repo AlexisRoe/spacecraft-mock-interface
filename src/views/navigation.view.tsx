@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { type JSX, useState } from "react";
 import { ConsoleGrid } from "../components/console-grid.component";
 import { ConsoleHeader } from "../components/console-header.component";
 import {
@@ -12,10 +12,16 @@ import { useSpacecraftStore } from "../stores/spacecraft.store";
 
 import "./navigation.view.css";
 
+/** Flight action selectable in the manual navigation view's primary column. */
+type FlightAction = "NULL RATES" | "ALIGN TO WAYPOINT";
+
+const FLIGHT_ACTIONS: FlightAction[] = ["NULL RATES", "ALIGN TO WAYPOINT"];
+
 /** Navigation console view: attitude and star chart. */
 export function NavigationView(): JSX.Element {
   const controlMode = useSpacecraftStore((state) => state.controlMode);
   const isAutopilot = controlMode === "autopilot";
+  const [flightAction, setFlightAction] = useState<FlightAction>("NULL RATES");
 
   const header = (
     <ConsoleGrid.Header>
@@ -47,7 +53,24 @@ export function NavigationView(): JSX.Element {
       <ConsoleGrid.Primary>
         <div className="navigation-view__column">
           <div />
-          <span className="navigation-view__column-label">Flight Path</span>
+          <div className="navigation-view__primary-actions">
+            {FLIGHT_ACTIONS.map((action) => (
+              <button
+                key={action}
+                type="button"
+                className={[
+                  "navigation-view__primary-action",
+                  action === flightAction && "navigation-view__primary-action--active",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                aria-pressed={action === flightAction}
+                onClick={() => setFlightAction(action)}
+              >
+                {action}
+              </button>
+            ))}
+          </div>
         </div>
       </ConsoleGrid.Primary>
       <ConsoleGrid.Secondary>
