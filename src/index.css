@@ -21,6 +21,14 @@
   transition: none !important;
   animation: none !important;
   scroll-behavior: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 html,
@@ -58,4 +66,26 @@ svg {
 .color-invert {
   background-color: var(--color-white);
   color: var(--color-black);
+}
+
+button,
+input,
+textarea,
+select,
+a {
+  outline: none !important;
+}
+
+button:focus,
+button:focus-visible,
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible,
+a:focus,
+a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
