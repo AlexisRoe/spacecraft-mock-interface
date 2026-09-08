@@ -1,6 +1,6 @@
 import type { JSX } from "react";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
-import { truncate } from "../utils/truncate.util";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
+import { truncate } from "../../utils/truncate.util";
 
 import "./thrust-vector-panel.component.css";
 

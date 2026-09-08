@@ -1,6 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import { useNavigationStore, Views } from "../stores/navigation.store";
+import { useNavigationStore, Views } from "../../stores/navigation.store";
 import { ViewStateSwitch } from "./view-state-switch.component";
 
 describe("ViewStateSwitch", () => {

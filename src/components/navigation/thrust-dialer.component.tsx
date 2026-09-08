@@ -1,5 +1,5 @@
 import type { JSX, KeyboardEvent, MouseEvent } from "react";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 
 import "./thrust-dialer.component.css";
 

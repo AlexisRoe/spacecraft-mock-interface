@@ -1,10 +1,10 @@
-import { ActiveConsoleView } from "./components/active-console-view.component";
-import { ApplicationFrame } from "./components/application-frame.component";
-import { DashboardFooter } from "./components/dashboard-footer.component";
-import { DashboardHeader } from "./components/dashboard-header.component";
-import { MasterCaution } from "./components/master-caution.component";
-import { NavViewList } from "./components/nav-view-list.component";
-import { RotateDeviceNotice } from "./components/rotate-device-notice.component";
+import { ActiveConsoleView } from "./components/common/active-console-view.component";
+import { ApplicationFrame } from "./components/common/application-frame.component";
+import { DashboardFooter } from "./components/common/dashboard-footer.component";
+import { DashboardHeader } from "./components/common/dashboard-header.component";
+import { MasterCaution } from "./components/common/master-caution.component";
+import { NavViewList } from "./components/common/nav-view-list.component";
+import { RotateDeviceNotice } from "./components/common/rotate-device-notice.component";
 import { useOrientation } from "./hooks/use-orientation.hook";
 
 /**

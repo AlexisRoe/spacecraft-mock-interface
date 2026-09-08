@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 
 import "./system-status-readout.component.css";
 

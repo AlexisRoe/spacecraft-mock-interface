@@ -1,6 +1,6 @@
 import type { JSX } from "react";
-import { useNavigationStore } from "../stores/navigation.store";
-import { NAV_VIEW_COMPONENTS } from "../utils/nav-view-registry.util";
+import { useNavigationStore } from "../../stores/navigation.store";
+import { NAV_VIEW_COMPONENTS } from "../../utils/nav-view-registry.util";
 
 /** Renders the console view matching the currently selected nav item. */
 export function ActiveConsoleView(): JSX.Element {

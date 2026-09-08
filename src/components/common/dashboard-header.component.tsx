@@ -1,6 +1,6 @@
 import type { JSX } from "react";
-import { useClock } from "../hooks/use-clock.hook";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useClock } from "../../hooks/use-clock.hook";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 import { StatDisplay } from "./stat-display.component";
 import { ViewStateSwitch } from "./view-state-switch.component";
 

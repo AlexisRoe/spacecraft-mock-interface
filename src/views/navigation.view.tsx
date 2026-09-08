@@ -1,14 +1,14 @@
 import type { JSX } from "react";
-import { ConsoleGrid } from "../components/console-grid.component";
-import { ConsoleHeader } from "../components/console-header.component";
-import { ManualSteeringWheel } from "../components/manual-steering-wheel.component";
+import { ConsoleGrid } from "../components/common/console-grid.component";
+import { ConsoleHeader } from "../components/common/console-header.component";
+import { StatDisplay } from "../components/common/stat-display.component";
+import { ManualSteeringWheel } from "../components/navigation/manual-steering-wheel.component";
 import {
   NavigationAutopilotLeft,
   NavigationAutopilotRight,
-} from "../components/navigation-autopilot.component";
-import { StatDisplay } from "../components/stat-display.component";
-import { ThrustDialer } from "../components/thrust-dialer.component";
-import { ThrustVectorPanel } from "../components/thrust-vector-panel.component";
+} from "../components/navigation/navigation-autopilot.component";
+import { ThrustDialer } from "../components/navigation/thrust-dialer.component";
+import { ThrustVectorPanel } from "../components/navigation/thrust-vector-panel.component";
 import { useViewState } from "../hooks/use-view-state.hook";
 import { type FlightAction, useSpacecraftStore } from "../stores/spacecraft.store";
 

@@ -1,7 +1,7 @@
 import { type JSX, useState } from "react";
+import { StatDisplay } from "../common/stat-display.component";
 import { GyroCompass } from "./gyro-compass.component";
 import { StarChart } from "./star-chart.component";
-import { StatDisplay } from "./stat-display.component";
 
 import "./navigation-autopilot.component.css";
 

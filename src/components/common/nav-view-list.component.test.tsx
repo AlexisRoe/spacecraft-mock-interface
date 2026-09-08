@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { useNavigationStore } from "../stores/navigation.store";
+import { useNavigationStore } from "../../stores/navigation.store";
 import { NavViewList } from "./nav-view-list.component";
 
 describe("NavViewList", () => {

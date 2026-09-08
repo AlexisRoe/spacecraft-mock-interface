@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 import { ThrustDialer } from "./thrust-dialer.component";
 
 describe("ThrustDialer", () => {

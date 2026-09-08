@@ -1,6 +1,6 @@
 import type { JSX } from "react";
-import type { FlightState } from "../stores/spacecraft.store";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import type { FlightState } from "../../stores/spacecraft.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 import { SwitchButton } from "./switch-button.component";
 
 import "./flight-state-switch.component.css";

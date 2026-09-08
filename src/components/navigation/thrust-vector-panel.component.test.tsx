@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 import { ThrustVectorPanel } from "./thrust-vector-panel.component";
 
 describe("ThrustVectorPanel", () => {

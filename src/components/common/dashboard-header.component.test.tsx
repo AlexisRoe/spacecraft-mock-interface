@@ -1,7 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { useNavigationStore, Views } from "../stores/navigation.store";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useNavigationStore, Views } from "../../stores/navigation.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 import { DashboardHeader } from "./dashboard-header.component";
 
 describe("DashboardHeader", () => {

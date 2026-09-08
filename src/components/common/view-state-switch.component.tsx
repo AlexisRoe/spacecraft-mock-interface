@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { useViewState } from "../hooks/use-view-state.hook";
+import { useViewState } from "../../hooks/use-view-state.hook";
 import { SwitchButton } from "./switch-button.component";
 
 import "./view-state-switch.component.css";

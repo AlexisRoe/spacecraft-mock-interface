@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { useNavigationStore, Views } from "../stores/navigation.store";
+import { useNavigationStore, Views } from "../../stores/navigation.store";
 import { NavViewButton } from "./nav-view-button.component";
 
 import "./nav-view-list.component.css";

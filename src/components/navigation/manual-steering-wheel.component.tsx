@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useSpacecraftStore } from "../../stores/spacecraft.store";
 
 import "./manual-steering-wheel.component.css";
 
