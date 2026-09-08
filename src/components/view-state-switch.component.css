@@ -1,11 +1,11 @@
-.control-mode-switch {
+.view-state-switch {
   display: flex;
   align-items: stretch;
   gap: 0.35rem;
   height: 100%;
 }
 
-.control-mode-switch__label {
+.view-state-switch__label {
   align-self: center;
   font-size: 0.7rem;
   font-weight: bold;
@@ -15,7 +15,7 @@
   margin-right: 1rem;
 }
 
-.control-mode-switch__options {
+.view-state-switch__options {
   display: flex;
   align-items: stretch;
   height: 100%;

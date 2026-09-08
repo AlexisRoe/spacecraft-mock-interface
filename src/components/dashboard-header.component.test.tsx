@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { useNavigationStore, Views } from "../stores/navigation.store";
 import { useSpacecraftStore } from "../stores/spacecraft.store";
 import { DashboardHeader } from "./dashboard-header.component";
 
@@ -13,9 +14,11 @@ describe("DashboardHeader", () => {
       registry: "LH-4471",
       station: "Helm Station 01",
       referenceFrame: "Ecliptic J2000",
-      controlMode: "autopilot",
       flightState: "Cruise",
       velocityC: 0.041,
+    });
+    act(() => {
+      useNavigationStore.setState({ activeView: Views.Navigation, viewState: "view-state-a" });
     });
   });
 
@@ -35,9 +38,16 @@ describe("DashboardHeader", () => {
     expect(screen.getByText("Cruise")).toBeInTheDocument();
   });
 
-  it("uses configurable labels for the control switches", () => {
-    render(<DashboardHeader autopilotLabel="Auto" manualLabel="Manual override" />);
-    expect(screen.getByRole("button", { name: "Auto" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Manual override" })).toBeInTheDocument();
+  it("renders the active view's toggle, with labels that change per view", () => {
+    render(<DashboardHeader />);
+    expect(screen.getByRole("button", { name: "Automatic" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Manual" })).toBeInTheDocument();
+
+    act(() => {
+      useNavigationStore.getState().setActiveView(Views.Ops);
+    });
+
+    expect(screen.getByRole("button", { name: "Weapons" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Defence" })).toBeInTheDocument();
   });
 });

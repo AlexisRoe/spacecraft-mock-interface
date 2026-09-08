@@ -1,12 +1,12 @@
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useNavigationStore, Views } from "../stores/navigation.store";
 import { ConsoleViewPlaceholder } from "./console-view-placeholder.component";
 
 describe("ConsoleViewPlaceholder", () => {
   afterEach(() => {
     act(() => {
-      useSpacecraftStore.setState({ controlMode: "autopilot" });
+      useNavigationStore.setState({ activeView: Views.Navigation, viewState: "view-state-a" });
     });
   });
 
@@ -15,18 +15,18 @@ describe("ConsoleViewPlaceholder", () => {
     expect(screen.getByText("Navigation View")).toBeInTheDocument();
   });
 
-  it("reports the current control mode", () => {
+  it("reports the current view state label", () => {
     render(<ConsoleViewPlaceholder title="Navigation" />);
-    expect(screen.getByText(/Control Mode: autopilot/)).toBeInTheDocument();
+    expect(screen.getByText(/State: Automatic/)).toBeInTheDocument();
   });
 
-  it("updates when the control mode changes", () => {
+  it("updates when the view state changes", () => {
     render(<ConsoleViewPlaceholder title="Navigation" />);
 
     act(() => {
-      useSpacecraftStore.getState().setControlMode("manual");
+      useNavigationStore.getState().setViewState("view-state-b");
     });
 
-    expect(screen.getByText(/Control Mode: manual/)).toBeInTheDocument();
+    expect(screen.getByText(/State: Manual/)).toBeInTheDocument();
   });
 });

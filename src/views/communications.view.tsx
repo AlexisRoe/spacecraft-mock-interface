@@ -1,7 +1,28 @@
 import type { JSX } from "react";
+import { ConsoleGrid } from "../components/console-grid.component";
+import { ConsoleHeader } from "../components/console-header.component";
 import { ConsoleViewPlaceholder } from "../components/console-view-placeholder.component";
+import { useViewState } from "../hooks/use-view-state.hook";
 
-/** Communications console view: spectrum, channels, and audio. */
+/** Communications console view: manual (view-state-a) and channels (view-state-b). */
 export function CommunicationsView(): JSX.Element {
-  return <ConsoleViewPlaceholder title="Communications" />;
+  const { isStateA } = useViewState();
+
+  return (
+    <ConsoleGrid>
+      <ConsoleGrid.Header>
+        <ConsoleHeader
+          title="Communications"
+          stateAStatus="Manual channel control"
+          stateBStatus="Channel scan active"
+        />
+      </ConsoleGrid.Header>
+      <ConsoleGrid.Left>
+        <ConsoleViewPlaceholder title={isStateA ? "Manual" : "Channels"} />
+      </ConsoleGrid.Left>
+      <ConsoleGrid.Right>
+        <ConsoleViewPlaceholder title={isStateA ? "Spectrum" : "Audio"} />
+      </ConsoleGrid.Right>
+    </ConsoleGrid>
+  );
 }

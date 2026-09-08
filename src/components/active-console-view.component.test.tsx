@@ -1,12 +1,12 @@
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { NavView, useSpacecraftStore } from "../stores/spacecraft.store";
+import { useNavigationStore, Views } from "../stores/navigation.store";
 import { ActiveConsoleView } from "./active-console-view.component";
 
 describe("ActiveConsoleView", () => {
   afterEach(() => {
     act(() => {
-      useSpacecraftStore.setState({ activeView: NavView.Navigation });
+      useNavigationStore.setState({ activeView: Views.Navigation, viewState: "view-state-a" });
     });
   });
 
@@ -19,9 +19,9 @@ describe("ActiveConsoleView", () => {
     render(<ActiveConsoleView />);
 
     act(() => {
-      useSpacecraftStore.getState().setActiveView(NavView.Propulsion);
+      useNavigationStore.getState().setActiveView(Views.Propulsion);
     });
 
-    expect(screen.getByText("Propulsion View")).toBeInTheDocument();
+    expect(screen.getByText("Conventional View")).toBeInTheDocument();
   });
 });

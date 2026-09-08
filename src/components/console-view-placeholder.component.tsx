@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useViewState } from "../hooks/use-view-state.hook";
 
 import "./console-view-placeholder.component.css";
 
@@ -10,17 +10,17 @@ export interface ConsoleViewPlaceholderProps {
 }
 
 /**
- * Mock content for a console view: names the view and reports the currently
- * selected control mode. Each real console view will replace this with its
- * own UI, split further by control mode.
+ * Mock content for a console view: names the view and reports the label of
+ * the currently active header toggle state. Each real console view will
+ * replace this with its own UI, split further by toggle state.
  */
 export function ConsoleViewPlaceholder({ title }: ConsoleViewPlaceholderProps): JSX.Element {
-  const controlMode = useSpacecraftStore((state) => state.controlMode);
+  const { isStateA, labelA, labelB } = useViewState();
 
   return (
     <div className="console-view-placeholder inset-padding">
       <p className="console-view-placeholder__title">{title} View</p>
-      <p className="console-view-placeholder__control-mode">Control Mode: {controlMode}</p>
+      <p className="console-view-placeholder__control-mode">State: {isStateA ? labelA : labelB}</p>
     </div>
   );
 }

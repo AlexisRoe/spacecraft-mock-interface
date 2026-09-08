@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useViewState } from "../hooks/use-view-state.hook";
 
 import "./console-header.component.css";
 
@@ -7,24 +7,24 @@ import "./console-header.component.css";
 export interface ConsoleHeaderProps {
   /** View title displayed on the left, e.g. "Space Navigation". */
   title: string;
-  /** Status text shown on the right while in autopilot mode. */
-  autopilotStatus: string;
-  /** Status text shown on the right while in manual mode. */
-  manualStatus: string;
+  /** Status text shown on the right while the view is in "view-state-a". */
+  stateAStatus: string;
+  /** Status text shown on the right while the view is in "view-state-b". */
+  stateBStatus: string;
 }
 
 /**
- * Header bar for a {@link ConsoleGrid} view: the view title on the left and a
- * control-mode-dependent status line on the right, sourced from
- * {@link useSpacecraftStore}.
+ * Header bar for a {@link ConsoleGrid} view: the view title on the left and
+ * a header-toggle-state-dependent status line on the right, sourced from
+ * {@link useViewState}.
  */
 export function ConsoleHeader({
   title,
-  autopilotStatus,
-  manualStatus,
+  stateAStatus,
+  stateBStatus,
 }: ConsoleHeaderProps): JSX.Element {
-  const controlMode = useSpacecraftStore((state) => state.controlMode);
-  const status = controlMode === "autopilot" ? autopilotStatus : manualStatus;
+  const { isStateA } = useViewState();
+  const status = isStateA ? stateAStatus : stateBStatus;
 
   return (
     <div className="console-header flex-row inset-padding">

@@ -1,21 +1,21 @@
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSpacecraftStore } from "../stores/spacecraft.store";
+import { useNavigationStore, Views } from "../stores/navigation.store";
 import { ConsoleHeader } from "./console-header.component";
 
 describe("ConsoleHeader", () => {
   afterEach(() => {
     act(() => {
-      useSpacecraftStore.setState({ controlMode: "autopilot" });
+      useNavigationStore.setState({ activeView: Views.Navigation, viewState: "view-state-a" });
     });
   });
 
-  it("renders the title and autopilot status by default", () => {
+  it("renders the title and view-state-a status by default", () => {
     render(
       <ConsoleHeader
         title="Space Navigation"
-        autopilotStatus="Autopilot following plotted course"
-        manualStatus="Direct law · RCS + main drive"
+        stateAStatus="Autopilot following plotted course"
+        stateBStatus="Direct law · RCS + main drive"
       />,
     );
 
@@ -23,16 +23,16 @@ describe("ConsoleHeader", () => {
     expect(screen.getByText("Autopilot following plotted course")).toBeInTheDocument();
   });
 
-  it("shows the manual status when control mode is manual", () => {
+  it("shows the view-state-b status when the view is toggled", () => {
     act(() => {
-      useSpacecraftStore.setState({ controlMode: "manual" });
+      useNavigationStore.getState().setViewState("view-state-b");
     });
 
     render(
       <ConsoleHeader
         title="Space Navigation"
-        autopilotStatus="Autopilot following plotted course"
-        manualStatus="Direct law · RCS + main drive"
+        stateAStatus="Autopilot following plotted course"
+        stateBStatus="Direct law · RCS + main drive"
       />,
     );
 
