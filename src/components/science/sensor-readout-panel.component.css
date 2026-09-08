@@ -1,0 +1,22 @@
+.sensor-readout-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1px;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  background-color: var(--color-black);
+  border-top: 1px solid var(--color-black);
+}
+
+.sensor-readout-panel > *:nth-child(2n) {
+  background-color: var(--color-grey-lightest);
+}
+
+.sensor-readout-panel > *:nth-child(2n) .sensor-readout__title,
+.sensor-readout-panel > *:nth-child(2n) .sensor-readout__value,
+.sensor-readout-panel > *:nth-child(2n) .sensor-readout__unit,
+.sensor-readout-panel > *:nth-child(2n) .sensor-readout__subtitle {
+  color: var(--color-black);
+}
