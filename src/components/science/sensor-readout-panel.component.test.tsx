@@ -7,12 +7,22 @@ describe("SensorReadoutPanel", () => {
     render(
       <SensorReadoutPanel
         readouts={[
-          { title: "Gravimetric Array", subtitle: "Shift +18 mGal at 03:40" },
-          { title: "Ion Density Probe", subtitle: "44.6 particles/cm³" },
+          {
+            value: "+18",
+            unit: "mGal",
+            title: "Gravimetric Array",
+            subtitle: "Shift detected at 03:40",
+          },
+          {
+            value: "44.6",
+            unit: "cm⁻³",
+            title: "Ion Density Probe",
+            subtitle: "Particle count",
+          },
         ]}
       />,
     );
-    expect(screen.getByText("Gravimetric Array")).toBeInTheDocument();
-    expect(screen.getByText("Ion Density Probe")).toBeInTheDocument();
+    expect(screen.getByText("Gravimetric Array", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("Ion Density Probe", { exact: false })).toBeInTheDocument();
   });
 });

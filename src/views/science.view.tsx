@@ -8,14 +8,14 @@ import { SensorReadoutPanel } from "../components/science/sensor-readout-panel.c
 import { useViewState } from "../hooks/use-view-state.hook";
 
 const SENSOR_READOUTS: SensorReadoutProps[] = [
-  { title: "Gravimetric Array", subtitle: "Shift +18 mGal at 03:40" },
-  { title: "Gamma Flux Monitor", subtitle: "0.042 µSv/h off aft hull" },
-  { title: "Cosmic Background Rad", subtitle: "3.11 mrem/day, steady" },
-  { title: "Hull Dose Accumulator", subtitle: "0.008 Sv/h, within limits" },
-  { title: "Neutrino Detector", subtitle: "1.284e6 ct/s, no flare" },
-  { title: "Ion Density Probe", subtitle: "44.6 particles/cm³" },
-  { title: "Solar Wind Vane", subtitle: "412 km/s, quiet sector" },
-  { title: "Magnetometer Array", subtitle: "18.9 nT, field nominal" },
+  { value: "+18", unit: "mGal", title: "Gravimetric Array", subtitle: "Shift detected at 03:40" },
+  { value: "0.042", unit: "µSv/h", title: "Gamma Flux Monitor", subtitle: "Off aft hull" },
+  { value: "3.11", unit: "mrem/day", title: "Cosmic Background Rad", subtitle: "Steady" },
+  { value: "0.008", unit: "Sv/h", title: "Hull Dose Accumulator", subtitle: "Within limits" },
+  { value: "1.284e6", unit: "ct/s", title: "Neutrino Detector", subtitle: "No flare" },
+  { value: "44.6", unit: "cm⁻³", title: "Ion Density Probe", subtitle: "Particle count" },
+  { value: "412", unit: "km/s", title: "Solar Wind Vane", subtitle: "Quiet sector" },
+  { value: "18.9", unit: "nT", title: "Magnetometer Array", subtitle: "Field nominal" },
 ];
 
 /** Science console view: sensors (view-state-a) and props (view-state-b). */

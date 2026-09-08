@@ -1,23 +1,44 @@
 .sensor-readout {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.4rem;
-  height: 100%;
-  min-height: 6rem;
-  padding: 1rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.5rem;
+  padding: 0.85rem 1.25rem;
   background-color: var(--color-white);
 }
 
+.sensor-readout__value {
+  flex: 0 0 auto;
+  min-width: 4rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+
+.sensor-readout__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  min-width: 0;
+  text-align: right;
+}
+
 .sensor-readout__title {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
+.sensor-readout__unit {
+  font-weight: normal;
+  color: var(--color-grey-mid);
+}
+
 .sensor-readout__subtitle {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--color-grey-light);
