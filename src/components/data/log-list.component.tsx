@@ -127,7 +127,9 @@ export function LogList(): JSX.Element {
         aria-pressed={isRecording}
         onClick={handleRecordClick}
       >
-        <span className="log-list__record-caption">Record</span>
+        <span className="log-list__record-caption">
+          {isRecording ? "Audio Channel Open · HELM 01" : "Helm 01 · Open Channel"}
+        </span>
         <span className="log-list__record-label">
           {isRecording ? "Recording In Progress · Click To Stop" : "Record New Log"}
         </span>

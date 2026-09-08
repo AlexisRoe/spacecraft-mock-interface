@@ -4,6 +4,7 @@
   gap: 0;
   height: 100%;
   min-height: 0;
+  border-left: 1px solid #000000;
 }
 
 .code-entry-pad__grid {
@@ -13,6 +14,7 @@
   grid-template-columns: repeat(10, 1fr);
   grid-auto-rows: 1fr;
   gap: 0;
+  border-top: 1px solid #000000;
 }
 
 .code-entry-pad__glyph {
@@ -21,7 +23,9 @@
   place-items: center;
   background: #ffffff;
   color: #000000;
-  border: 1px solid #000000;
+  border: none;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
   padding: 0.15rem;
 }
 
@@ -42,35 +46,62 @@
   grid-template-columns: 1fr 1fr;
   gap: 0;
   flex-shrink: 0;
+  border-bottom: 1px solid #000000;
 }
 
 .code-entry-pad__edit-button {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   padding: 0.5rem;
-  background: #000000;
-  color: #ffffff;
-  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  border: none;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
+.code-entry-pad__edit-button:first-child {
+  border-right: 1px solid #000000;
+}
+
 .code-entry-pad__edit-button:active {
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
 }
 
 .code-entry-pad__execute {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
   flex-shrink: 0;
   height: 4.5rem;
-  background: #000000;
-  color: #ffffff;
-  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  border: none;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 1.25rem;
-  font-weight: bold;
 }
 
 .code-entry-pad__execute:active {
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
+}
+
+.code-entry-pad__button-caption {
+  font-size: 0.7rem;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  color: var(--color-grey-light);
+}
+
+.code-entry-pad__button-label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.code-entry-pad__execute .code-entry-pad__button-label {
+  font-size: 1.25rem;
 }

@@ -32,14 +32,17 @@ export function CodeEntryPad(): JSX.Element {
       </div>
       <div className="code-entry-pad__edit-row">
         <button type="button" className="code-entry-pad__edit-button" onClick={appendLineBreak}>
-          Line Break
+          <span className="code-entry-pad__button-caption">Helm 01 · Insert Break</span>
+          <span className="code-entry-pad__button-label">Line Break</span>
         </button>
         <button type="button" className="code-entry-pad__edit-button" onClick={deleteLast}>
-          Delete
+          <span className="code-entry-pad__button-caption">Purge Last Token</span>
+          <span className="code-entry-pad__button-label">Delete</span>
         </button>
       </div>
       <button type="button" className="code-entry-pad__execute" onClick={executeProgram}>
-        Execute
+        <span className="code-entry-pad__button-caption">Uplink To Core Systems</span>
+        <span className="code-entry-pad__button-label">Execute</span>
       </button>
     </div>
   );

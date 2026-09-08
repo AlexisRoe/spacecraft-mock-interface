@@ -74,11 +74,11 @@ export function LogDetail(): JSX.Element {
       </div>
       <div className="log-detail__actions">
         <button type="button" className="log-detail__action" onClick={() => {}}>
-          <span className="log-detail__action-caption">Record</span>
+          <span className="log-detail__action-caption">Helm 01 · Revise Ship's Log</span>
           <span className="log-detail__action-label">Update</span>
         </button>
         <button type="button" className="log-detail__action" onClick={() => {}}>
-          <span className="log-detail__action-caption">Record</span>
+          <span className="log-detail__action-caption">Purge From Archive</span>
           <span className="log-detail__action-label">Delete</span>
         </button>
       </div>
