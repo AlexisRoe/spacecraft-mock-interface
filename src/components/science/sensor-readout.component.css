@@ -1,0 +1,24 @@
+.sensor-readout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+  height: 100%;
+  min-height: 6rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--color-white);
+}
+
+.sensor-readout__title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sensor-readout__subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+}

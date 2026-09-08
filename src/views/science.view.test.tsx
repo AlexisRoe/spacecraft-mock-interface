@@ -12,8 +12,9 @@ describe("ScienceView", () => {
 
   it("renders the sensors layout by default", () => {
     render(<ScienceView />);
-    expect(screen.getByText("Sensors View")).toBeInTheDocument();
-    expect(screen.getByText("Particles View")).toBeInTheDocument();
+    expect(screen.getByText("Gravimetric Array")).toBeInTheDocument();
+    expect(screen.getByText("Magnetometer Array")).toBeInTheDocument();
+    expect(screen.getByLabelText("Sensor phase field plot")).toBeInTheDocument();
   });
 
   it("renders the props layout in view-state-b", () => {
