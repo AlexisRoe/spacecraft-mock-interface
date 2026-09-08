@@ -11,6 +11,8 @@ export interface ProbeConsoleState {
   bays: ProbeBay[];
   /** Id of the bay the control panel (deploy/destroy, sensor sweep) acts on. */
   selectedBayId: string;
+  /** Sets which bay the control panel (deploy/destroy, sensor sweep) acts on. */
+  selectBay: (id: string) => void;
   /** Releases the probe racked in `id`, marking it deployed. */
   deployProbe: (id: string) => void;
   /** Recalls the probe deployed from `id`, marking it ready again. */
@@ -23,6 +25,7 @@ export interface ProbeConsoleState {
 export const useProbeConsoleStore = create<ProbeConsoleState>((set) => ({
   bays: INITIAL_PROBE_BAYS,
   selectedBayId: INITIAL_PROBE_BAYS[0].id,
+  selectBay: (id) => set({ selectedBayId: id }),
   deployProbe: (id) =>
     set((state) => ({
       bays: state.bays.map((bay) => (bay.id === id ? { ...bay, status: "deployed" } : bay)),

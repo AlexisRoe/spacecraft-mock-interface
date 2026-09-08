@@ -52,6 +52,12 @@
   border-bottom: 1px solid var(--color-black);
   text-align: left;
   font-family: inherit;
+  cursor: pointer;
+}
+
+.probe-deployment-panel__bay--selected {
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 .probe-deployment-panel__bay-header {
@@ -79,6 +85,10 @@
   color: var(--color-black);
 }
 
+.probe-deployment-panel__bay--selected .probe-deployment-panel__bay-status--active {
+  color: var(--color-white);
+}
+
 .probe-deployment-panel__bay-name {
   font-size: 1.05rem;
   font-weight: bold;
@@ -97,6 +107,13 @@
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   color: var(--color-grey-mid);
+}
+
+.probe-deployment-panel__bay--selected .probe-deployment-panel__bay-label,
+.probe-deployment-panel__bay--selected .probe-deployment-panel__bay-status,
+.probe-deployment-panel__bay--selected .probe-deployment-panel__bay-designation,
+.probe-deployment-panel__bay--selected .probe-deployment-panel__bay-summary {
+  color: var(--color-grey-lighter);
 }
 
 .probe-deployment-panel__control {

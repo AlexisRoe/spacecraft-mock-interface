@@ -55,26 +55,17 @@ function pairBaysWithDetail(bays: ProbeBay[]): Array<[ProbeBay, ProbeDiagramDeta
 }
 
 /**
- * Roster index of the bay whose target marker is always shown on the
- * diagram, regardless of its deployment status — a fixed reference probe.
- */
-const ALWAYS_VISIBLE_INDEX = 0;
-
-/**
  * Right-hand diagram of the Science view's probes state: a planet body at
  * the centre of a set of orbital range rings, with a home marker for the
- * ship's orbital relay. One reference probe's trajectory, footprint, comms
- * link and bold-ringed target marker are always drawn; the other bays'
- * probes appear on the diagram only once deployed, and disappear again once
- * recalled. Fills the available space and scales responsively via its SVG
- * viewBox.
+ * ship's orbital relay. Each bay's trajectory, footprint, comms link and
+ * bold-ringed target marker appear on the diagram only once its probe is
+ * deployed, and disappear again once it's recalled. Fills the available
+ * space and scales responsively via its SVG viewBox.
  */
 export function ProbeDeploymentDiagram(): JSX.Element {
   const bays = useProbeConsoleStore((state) => state.bays);
   const paired = pairBaysWithDetail(bays);
-  const visiblePaired = paired.filter(
-    ([bay], index) => index === ALWAYS_VISIBLE_INDEX || bay.status === "deployed",
-  );
+  const visiblePaired = paired.filter(([bay]) => bay.status === "deployed");
 
   return (
     <div className="probe-deployment-diagram">

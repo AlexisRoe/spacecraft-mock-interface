@@ -19,18 +19,15 @@ describe("ProbeDeploymentPanel", () => {
     expect(screen.getByText("MK I Deep Sounder")).toBeInTheDocument();
   });
 
-  it("does not react to clicking a bay in the list", () => {
+  it("selects a bay by clicking it in the list", () => {
     render(<ProbeDeploymentPanel />);
     fireEvent.click(screen.getByText("MK IV Field Mapper"));
-    expect(useProbeConsoleStore.getState().selectedBayId).toBe(INITIAL_PROBE_BAYS[0].id);
+    expect(useProbeConsoleStore.getState().selectedBayId).toBe(INITIAL_PROBE_BAYS[1].id);
   });
 
-  it("deploys the fixed control bay", () => {
-    useProbeConsoleStore.setState({
-      bays: INITIAL_PROBE_BAYS,
-      selectedBayId: INITIAL_PROBE_BAYS[1].id,
-    });
+  it("deploys the selected bay", () => {
     render(<ProbeDeploymentPanel />);
+    fireEvent.click(screen.getByText("MK IV Field Mapper"));
     fireEvent.click(screen.getByRole("button", { name: /Deploy Probe/ }));
     expect(useProbeConsoleStore.getState().bays[1].status).toBe("deployed");
   });

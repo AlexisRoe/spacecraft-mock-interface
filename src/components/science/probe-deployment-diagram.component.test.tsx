@@ -17,11 +17,14 @@ describe("ProbeDeploymentDiagram", () => {
     expect(screen.getByLabelText("Probe deployment diagram")).toBeInTheDocument();
   });
 
-  it("always shows the reference probe's trajectory and marker", () => {
+  it("draws a marker and trajectory only for deployed bays", () => {
+    const deployedCount = INITIAL_PROBE_BAYS.filter((bay) => bay.status === "deployed").length;
     const { container } = render(<ProbeDeploymentDiagram />);
-    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(1);
+    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(
+      deployedCount,
+    );
     expect(container.querySelectorAll(".probe-deployment-diagram__marker--deployed").length).toBe(
-      1,
+      deployedCount,
     );
   });
 
@@ -30,17 +33,24 @@ describe("ProbeDeploymentDiagram", () => {
     if (!readyBay) {
       throw new Error("expected an initial ready bay for this test");
     }
+    const deployedCount = INITIAL_PROBE_BAYS.filter((bay) => bay.status === "deployed").length;
     const { container } = render(<ProbeDeploymentDiagram />);
-    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(1);
+    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(
+      deployedCount,
+    );
 
     act(() => {
       useProbeConsoleStore.getState().deployProbe(readyBay.id);
     });
-    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(2);
+    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(
+      deployedCount + 1,
+    );
 
     act(() => {
       useProbeConsoleStore.getState().destroyProbe(readyBay.id);
     });
-    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(1);
+    expect(container.querySelectorAll(".probe-deployment-diagram__trajectory").length).toBe(
+      deployedCount,
+    );
   });
 });

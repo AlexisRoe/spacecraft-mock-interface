@@ -42,4 +42,10 @@ describe("useProbeConsoleStore", () => {
     const bay = useProbeConsoleStore.getState().bays.find((entry) => entry.id === bayId);
     expect(bay?.sweepMode).toBe("stepped");
   });
+
+  it("selects a different bay as the control target", () => {
+    const otherBayId = INITIAL_PROBE_BAYS[1].id;
+    useProbeConsoleStore.getState().selectBay(otherBayId);
+    expect(useProbeConsoleStore.getState().selectedBayId).toBe(otherBayId);
+  });
 });

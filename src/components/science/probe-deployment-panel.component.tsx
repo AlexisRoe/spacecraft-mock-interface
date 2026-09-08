@@ -13,12 +13,14 @@ const SWEEP_MODES: Array<{ value: ProbeSweepMode; label: string }> = [
 
 /**
  * Left-hand panel of the Science view's probes state: the roster of probe
- * bays, deploy/recall control for the selected bay, its sensor-sweep mode,
- * and a science-bus/storage load readout.
+ * bays (selectable to pick the control target), deploy/recall control for
+ * the selected bay, its sensor-sweep mode, and a science-bus/storage load
+ * readout.
  */
 export function ProbeDeploymentPanel(): JSX.Element {
   const bays = useProbeConsoleStore((state) => state.bays);
   const selectedBayId = useProbeConsoleStore((state) => state.selectedBayId);
+  const selectBay = useProbeConsoleStore((state) => state.selectBay);
   const deployProbe = useProbeConsoleStore((state) => state.deployProbe);
   const destroyProbe = useProbeConsoleStore((state) => state.destroyProbe);
   const setSweepMode = useProbeConsoleStore((state) => state.setSweepMode);
@@ -30,7 +32,18 @@ export function ProbeDeploymentPanel(): JSX.Element {
     <div className="probe-deployment-panel">
       <div className="probe-deployment-panel__list">
         {bays.map((bay) => (
-          <div key={bay.id} className="probe-deployment-panel__bay">
+          <button
+            key={bay.id}
+            type="button"
+            className={[
+              "probe-deployment-panel__bay",
+              bay.id === selectedBayId && "probe-deployment-panel__bay--selected",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-pressed={bay.id === selectedBayId}
+            onClick={() => selectBay(bay.id)}
+          >
             <span className="probe-deployment-panel__bay-header">
               <span className="probe-deployment-panel__bay-label">{bay.bayLabel}</span>
               <span
@@ -47,7 +60,7 @@ export function ProbeDeploymentPanel(): JSX.Element {
             <span className="probe-deployment-panel__bay-name">{bay.name}</span>
             <span className="probe-deployment-panel__bay-designation">{bay.designation}</span>
             <span className="probe-deployment-panel__bay-summary">{bay.readySummary}</span>
-          </div>
+          </button>
         ))}
       </div>
 
