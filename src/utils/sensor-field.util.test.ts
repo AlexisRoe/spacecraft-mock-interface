@@ -14,6 +14,8 @@ describe("generateSensorFieldData", () => {
     const data = generateSensorFieldData(7);
     expect(data.clusterPoints.length).toBeGreaterThan(0);
     expect(data.streamPoints.length).toBeGreaterThan(0);
+    expect(data.sparsePoints.length).toBeGreaterThan(0);
+    expect(data.squarePoints.length).toBeGreaterThan(0);
     expect(data.traceNodes).toHaveLength(10);
     expect(data.tracePath.startsWith("M ")).toBe(true);
     expect(data.topBars).toHaveLength(42);

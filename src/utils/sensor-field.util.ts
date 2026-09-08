@@ -11,6 +11,18 @@ export interface SensorFieldPoint {
   y: number;
   /** Marker radius, in plot-space units. */
   r: number;
+  /** Greyscale shade index (0 darkest - 4 lightest) used to vary marker fill. */
+  shade: number;
+}
+
+/** A single plotted marker in the {@link SensorFieldData} quiet-zone square cluster. */
+export interface SensorFieldSquare {
+  /** X coordinate in plot-space (matches the component's SVG viewBox). */
+  x: number;
+  /** Y coordinate in plot-space (matches the component's SVG viewBox). */
+  y: number;
+  /** Square side length, in plot-space units. */
+  s: number;
 }
 
 /** A single histogram bar in the {@link SensorFieldData} top/side spectra. */
@@ -27,6 +39,10 @@ export interface SensorFieldData {
   clusterPoints: SensorFieldPoint[];
   /** Sparse scatter stream representing a drifting particle emission. */
   streamPoints: SensorFieldPoint[];
+  /** Sparse background scatter spread across the whole plot area (noise floor). */
+  sparsePoints: SensorFieldPoint[];
+  /** Small square markers in the quiet-zone cluster, bottom-left of the plot. */
+  squarePoints: SensorFieldSquare[];
   /** Nodes of the scanning trend line, left to right across the plot. */
   traceNodes: { x: number; y: number }[];
   /** SVG path `d` attribute connecting `traceNodes`. */
@@ -69,8 +85,21 @@ export function generateSensorFieldData(seed: number): SensorFieldData {
         x: +x.toFixed(1),
         y: +y.toFixed(1),
         r: +(0.8 + rng() * 1.9).toFixed(2),
+        shade: Math.floor(rng() * 3),
       });
     }
+  }
+
+  const sparsePoints: SensorFieldPoint[] = [];
+  for (let i = 0; i < 20; i++) {
+    const x = PLOT_X0 + rng() * (PLOT_X1 - PLOT_X0);
+    const y = PLOT_Y0 + rng() * (PLOT_Y1 - PLOT_Y0);
+    sparsePoints.push({
+      x: +x.toFixed(1),
+      y: +y.toFixed(1),
+      r: +(0.6 + rng() * 0.9).toFixed(2),
+      shade: 3 + Math.floor(rng() * 2),
+    });
   }
 
   const streamPoints: SensorFieldPoint[] = [];
@@ -83,7 +112,17 @@ export function generateSensorFieldData(seed: number): SensorFieldData {
         x: +x.toFixed(1),
         y: +y.toFixed(1),
         r: +(1.6 + rng() * 2.6).toFixed(2),
+        shade: 1,
       });
+    }
+  }
+
+  const squarePoints: SensorFieldSquare[] = [];
+  for (let i = 0; i < 6; i++) {
+    const x = 244 + gaussian(rng) * 40;
+    const y = 532 + gaussian(rng) * 24;
+    if (isInsidePlot(x, y)) {
+      squarePoints.push({ x: +x.toFixed(1), y: +y.toFixed(1), s: +(4 + rng() * 2).toFixed(1) });
     }
   }
 
@@ -114,5 +153,14 @@ export function generateSensorFieldData(seed: number): SensorFieldData {
     return { position: i, size: +(Math.min(1, v) * 76).toFixed(2) };
   });
 
-  return { clusterPoints, streamPoints, traceNodes, tracePath, topBars, sideBars };
+  return {
+    clusterPoints,
+    streamPoints,
+    sparsePoints,
+    squarePoints,
+    traceNodes,
+    tracePath,
+    topBars,
+    sideBars,
+  };
 }
