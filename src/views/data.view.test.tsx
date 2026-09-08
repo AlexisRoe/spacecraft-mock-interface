@@ -16,13 +16,13 @@ describe("DataConsoleView", () => {
     expect(screen.getByText("Database Search View")).toBeInTheDocument();
   });
 
-  it("renders the code layout in view-state-b", () => {
+  it("renders the code console in view-state-b", () => {
     act(() => {
       useNavigationStore.setState({ activeView: Views.Data, viewState: "view-state-b" });
     });
 
-    render(<DataConsoleView />);
-    expect(screen.getByText("Code View")).toBeInTheDocument();
-    expect(screen.getByText("Diagnostics View")).toBeInTheDocument();
+    const { container } = render(<DataConsoleView />);
+    expect(container.querySelector(".code-editor-view")).toBeInTheDocument();
+    expect(container.querySelector(".code-entry-pad")).toBeInTheDocument();
   });
 });

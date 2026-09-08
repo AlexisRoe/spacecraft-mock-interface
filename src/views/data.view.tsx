@@ -2,6 +2,8 @@ import type { JSX } from "react";
 import { ConsoleGrid } from "../components/common/console-grid.component";
 import { ConsoleHeader } from "../components/common/console-header.component";
 import { ConsoleViewPlaceholder } from "../components/common/console-view-placeholder.component";
+import { CodeEditorView } from "../components/data/code-editor-view.component";
+import { CodeEntryPad } from "../components/data/code-entry-pad.component";
 import { useViewState } from "../hooks/use-view-state.hook";
 
 /** Data console view: records/logs (view-state-a) and code (view-state-b). */
@@ -18,10 +20,10 @@ export function DataConsoleView(): JSX.Element {
         />
       </ConsoleGrid.Header>
       <ConsoleGrid.Left>
-        <ConsoleViewPlaceholder title={isStateA ? "Logs" : "Code"} />
+        {isStateA ? <ConsoleViewPlaceholder title="Logs" /> : <CodeEditorView />}
       </ConsoleGrid.Left>
       <ConsoleGrid.Right>
-        <ConsoleViewPlaceholder title={isStateA ? "Database Search" : "Diagnostics"} />
+        {isStateA ? <ConsoleViewPlaceholder title="Database Search" /> : <CodeEntryPad />}
       </ConsoleGrid.Right>
     </ConsoleGrid>
   );
