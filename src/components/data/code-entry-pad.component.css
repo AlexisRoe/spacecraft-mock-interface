@@ -46,30 +46,31 @@
 
 .code-entry-pad__edit-button {
   padding: 0.5rem;
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
   border: 1px solid #000000;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .code-entry-pad__edit-button:active {
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }
 
 .code-entry-pad__execute {
   flex-shrink: 0;
   height: 4.5rem;
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
   border: 1px solid #000000;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
 .code-entry-pad__execute:active {
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }

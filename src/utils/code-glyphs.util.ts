@@ -504,6 +504,16 @@ export const CODE_GLYPHS: CodeGlyph[] = [
   },
   {
     code: "055",
+    symbolId: "stPurge",
+    shapes: [
+      { tag: "circle", attrs: { cx: "12", cy: "12", r: "8.5" } },
+      { tag: "circle", attrs: { cx: "9", cy: "10", r: "1.3", fill: "currentColor" } },
+      { tag: "circle", attrs: { cx: "15", cy: "10", r: "1.3", fill: "currentColor" } },
+      { tag: "path", attrs: { d: "M8.5 15.5 Q12 13 15.5 15.5" } },
+    ],
+  },
+  {
+    code: "056",
     symbolId: "stSafe",
     shapes: [
       { tag: "path", attrs: { d: "M12 3 L21 12 L12 21 L3 12 Z" } },
@@ -511,7 +521,7 @@ export const CODE_GLYPHS: CodeGlyph[] = [
     ],
   },
   {
-    code: "056",
+    code: "057",
     symbolId: "stSealed",
     shapes: [
       { tag: "path", attrs: { d: "M12 3 L21 12 L12 21 L3 12 Z" } },
@@ -520,7 +530,7 @@ export const CODE_GLYPHS: CodeGlyph[] = [
     ],
   },
   {
-    code: "057",
+    code: "058",
     symbolId: "stTimed",
     shapes: [
       { tag: "path", attrs: { d: "M12 3 L21 12 L12 21 L3 12 Z" } },
@@ -528,7 +538,7 @@ export const CODE_GLYPHS: CodeGlyph[] = [
     ],
   },
   {
-    code: "058",
+    code: "059",
     symbolId: "stVoid",
     shapes: [
       { tag: "path", attrs: { d: "M12 3 L21 12 L12 21 L3 12 Z" } },

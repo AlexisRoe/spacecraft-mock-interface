@@ -7,7 +7,7 @@ import { CodeEditorView } from "./code-editor-view.component";
 describe("CodeEditorView", () => {
   afterEach(() => {
     act(() => {
-      useCodeConsoleStore.setState({ program: [] });
+      useCodeConsoleStore.setState({ program: [], selfDestructActive: false });
     });
   });
 
@@ -32,5 +32,14 @@ describe("CodeEditorView", () => {
     render(<CodeEditorView />);
     expect(screen.getByText("001")).toBeInTheDocument();
     expect(screen.getByText("002")).toBeInTheDocument();
+  });
+
+  it("renders the self destruct panel instead of the program when active", () => {
+    act(() => {
+      useCodeConsoleStore.setState({ selfDestructActive: true });
+    });
+    const { container } = render(<CodeEditorView />);
+    expect(container.querySelector(".self-destruct-panel")).not.toBeNull();
+    expect(container.querySelector(".code-editor-view__line")).toBeNull();
   });
 });

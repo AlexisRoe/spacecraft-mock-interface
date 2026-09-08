@@ -6,7 +6,11 @@ import { useCodeConsoleStore } from "./code-console.store";
 describe("useCodeConsoleStore", () => {
   afterEach(() => {
     act(() => {
-      useCodeConsoleStore.setState({ program: [], executedLength: null });
+      useCodeConsoleStore.setState({
+        program: [],
+        executedLength: null,
+        selfDestructActive: false,
+      });
     });
   });
 
@@ -54,5 +58,39 @@ describe("useCodeConsoleStore", () => {
       useCodeConsoleStore.getState().executeProgram();
     });
     expect(useCodeConsoleStore.getState().executedLength).toBe(2);
+  });
+
+  it("does not activate self destruct just from entering the special glyph", () => {
+    act(() => {
+      useCodeConsoleStore.getState().appendGlyph("055");
+    });
+    expect(useCodeConsoleStore.getState().selfDestructActive).toBe(false);
+  });
+
+  it("activates self destruct when the special glyph is entered and executed", () => {
+    act(() => {
+      useCodeConsoleStore.getState().appendGlyph("000");
+      useCodeConsoleStore.getState().appendGlyph("055");
+      useCodeConsoleStore.getState().executeProgram();
+    });
+    expect(useCodeConsoleStore.getState().selfDestructActive).toBe(true);
+  });
+
+  it("does not activate self destruct executing a program without the special glyph", () => {
+    act(() => {
+      useCodeConsoleStore.getState().appendGlyph("000");
+      useCodeConsoleStore.getState().executeProgram();
+    });
+    expect(useCodeConsoleStore.getState().selfDestructActive).toBe(false);
+  });
+
+  it("resets the program and clears self destruct on abort", () => {
+    act(() => {
+      useCodeConsoleStore.getState().appendGlyph("055");
+      useCodeConsoleStore.getState().executeProgram();
+      useCodeConsoleStore.getState().abortSelfDestruct();
+    });
+    expect(useCodeConsoleStore.getState().selfDestructActive).toBe(false);
+    expect(useCodeConsoleStore.getState().program).toEqual([]);
   });
 });

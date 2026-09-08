@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import { useCodeConsoleStore } from "../../stores/code-console.store";
 import { findCodeGlyph, LINE_BREAK_TOKEN } from "../../utils/code-glyphs.util";
 import { CodeGlyphIcon } from "./code-glyph-icon.component";
+import { SelfDestructPanel } from "./self-destruct-panel.component";
 
 import "./code-editor-view.component.css";
 
@@ -20,11 +21,17 @@ function toLines(program: string[]): string[][] {
 
 /**
  * Left-hand panel of the Data view's code state: the entered program,
- * rendered as numbered lines of glyphs.
+ * rendered as numbered lines of glyphs. Replaced by {@link SelfDestructPanel}
+ * when the self-destruct easter egg has been triggered.
  */
 export function CodeEditorView(): JSX.Element {
+  const selfDestructActive = useCodeConsoleStore((state) => state.selfDestructActive);
   const program = useCodeConsoleStore((state) => state.program);
   const lines = toLines(program);
+
+  if (selfDestructActive) {
+    return <SelfDestructPanel />;
+  }
 
   return (
     <div className="code-editor-view inset-padding">
