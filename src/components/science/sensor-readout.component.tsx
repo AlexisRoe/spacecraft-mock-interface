@@ -15,19 +15,18 @@ export interface SensorReadoutProps {
 }
 
 /**
- * Single boxed sensor telemetry tile, in two columns: the bare value on the
- * left, and the title (with its unit) plus context on the right.
+ * Single boxed sensor telemetry tile: the bare value shown large across the
+ * top, with the channel title (and its unit) and context line stacked below.
  */
 export function SensorReadout({ value, unit, title, subtitle }: SensorReadoutProps): JSX.Element {
   return (
     <div className="sensor-readout">
-      <span className="sensor-readout__value">{value}</span>
-      <span className="sensor-readout__details">
-        <span className="sensor-readout__title">
-          {title} <span className="sensor-readout__unit">{unit}</span>
-        </span>
-        <span className="sensor-readout__subtitle">{subtitle}</span>
+      <span className="sensor-readout__title">{title}</span>
+      <span className="sensor-readout__value">
+        {value}
+        <span className="sensor-readout__unit">{unit}</span>
       </span>
+      <span className="sensor-readout__subtitle">{subtitle}</span>
     </div>
   );
 }

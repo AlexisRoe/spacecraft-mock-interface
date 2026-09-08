@@ -1,0 +1,187 @@
+.probe-deployment-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.probe-deployment-panel__list {
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.probe-deployment-panel__status {
+  flex: 1;
+  min-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1rem;
+  background-color: var(--color-grey-lightest);
+  border-top: 1px solid var(--color-black);
+  text-align: center;
+}
+
+.probe-deployment-panel__status-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-grey-dark);
+}
+
+.probe-deployment-panel__status-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.probe-deployment-panel__bay {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 1.5rem;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: none;
+  border-bottom: 1px solid var(--color-black);
+  text-align: left;
+  font-family: inherit;
+}
+
+.probe-deployment-panel__bay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.probe-deployment-panel__bay-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.probe-deployment-panel__bay-name {
+  font-size: 1.05rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.probe-deployment-panel__bay-designation {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+}
+
+.probe-deployment-panel__bay-summary {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--color-grey-mid);
+}
+
+.probe-deployment-panel__control {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-black);
+}
+
+.probe-deployment-panel__action {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 3rem;
+  padding: 1.5rem 1.25rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  font-family: inherit;
+  text-align: left;
+}
+
+.probe-deployment-panel__action-context {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-lighter);
+}
+
+.probe-deployment-panel__action-label {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.probe-deployment-panel__action-hint {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--color-grey-lighter);
+}
+
+.probe-deployment-panel__sweep {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-black);
+}
+
+.probe-deployment-panel__sweep-title {
+  padding: 0.5rem 1.25rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.probe-deployment-panel__sweep-modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background-color: var(--color-black);
+}
+
+.probe-deployment-panel__sweep-mode {
+  min-height: 1.5rem;
+  padding: 1.25rem 0.5rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: none;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.probe-deployment-panel__sweep-mode:disabled {
+  color: var(--color-grey-lighter);
+}
+
+.probe-deployment-panel__sweep-mode--active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.probe-deployment-panel__stats {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-top: 1px solid var(--color-black);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}

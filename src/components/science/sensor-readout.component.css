@@ -1,28 +1,21 @@
 .sensor-readout {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 4.5rem;
-  padding: 0.85rem 1.25rem;
-  background-color: var(--color-white);
-}
-
-.sensor-readout__value {
-  flex: 0 0 auto;
-  min-width: 4rem;
-  font-size: 1.4rem;
-  font-weight: bold;
-  letter-spacing: 0.02em;
-}
-
-.sensor-readout__details {
-  display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 0.2rem;
+  justify-content: center;
+  gap: 0.4rem;
   min-width: 0;
-  text-align: right;
+  min-height: 6rem;
+  padding: 1.25rem;
+  background-color: var(--color-white);
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.sensor-readout__title,
+.sensor-readout__value,
+.sensor-readout__subtitle {
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .sensor-readout__title {
@@ -30,9 +23,19 @@
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.sensor-readout__value {
+  font-size: clamp(1.4rem, 8cqw, 2.25rem);
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .sensor-readout__unit {
+  margin-left: 0.5rem;
+  font-size: 1rem;
   font-weight: normal;
   color: var(--color-grey-mid);
 }
