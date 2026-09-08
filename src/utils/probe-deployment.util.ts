@@ -65,7 +65,7 @@ export const INITIAL_PROBE_BAYS: ProbeBay[] = [
     designation: "SIG-CLASS III · UNIT 0304-B",
     readySummary: "Ground-penetrating radar array",
     deployedSummary: "Away 01:05:41 · 812 km",
-    status: "deployed",
+    status: "ready",
     sweepMode: "parked",
     target: { x: 102, y: 730 },
   },

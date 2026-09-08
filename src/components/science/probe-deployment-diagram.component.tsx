@@ -57,15 +57,17 @@ function pairBaysWithDetail(bays: ProbeBay[]): Array<[ProbeBay, ProbeDiagramDeta
 /**
  * Right-hand diagram of the Science view's probes state: a planet body at
  * the centre of a set of orbital range rings, with a home marker for the
- * ship's orbital relay and, for each currently deployed probe, a curved
- * trajectory, landing footprint, comms link and bold-ringed target marker
- * drawn out to its fixed position. Recalled probes are omitted entirely.
+ * ship's orbital relay and a target marker for every probe bay, always
+ * visible at its fixed position. A ready bay's target is a hollow standby
+ * diamond; once deployed it switches to a bold-ringed marker with its
+ * curved trajectory, landing footprint, comms link and arrowhead drawn out.
  * Fills the available space and scales responsively via its SVG viewBox.
  */
 export function ProbeDeploymentDiagram(): JSX.Element {
   const bays = useProbeConsoleStore((state) => state.bays);
   const paired = pairBaysWithDetail(bays);
   const deployedPaired = paired.filter(([bay]) => bay.status === "deployed");
+  const readyPaired = paired.filter(([bay]) => bay.status !== "deployed");
 
   return (
     <div className="probe-deployment-diagram">
@@ -208,7 +210,7 @@ export function ProbeDeploymentDiagram(): JSX.Element {
 
           <g fill="var(--color-black)">
             {deployedPaired.map(([bay]) => (
-              <g key={`marker-${bay.id}`}>
+              <g key={`marker-${bay.id}`} className="probe-deployment-diagram__marker--deployed">
                 <circle
                   cx={bay.target.x}
                   cy={bay.target.y}
@@ -219,6 +221,18 @@ export function ProbeDeploymentDiagram(): JSX.Element {
                 />
                 <circle cx={bay.target.x} cy={bay.target.y} r="18" fill="none" strokeWidth="4" />
               </g>
+            ))}
+          </g>
+
+          <g fill="none">
+            {readyPaired.map(([bay]) => (
+              <path
+                key={`marker-${bay.id}`}
+                className="probe-deployment-diagram__marker--ready"
+                d={`M${bay.target.x},${bay.target.y - 12} L${bay.target.x + 12},${bay.target.y} L${bay.target.x},${bay.target.y + 12} L${bay.target.x - 12},${bay.target.y} Z`}
+                strokeWidth="1.6"
+                strokeDasharray="2 3"
+              />
             ))}
           </g>
 

@@ -47,6 +47,14 @@ describe("ProbeDeploymentPanel", () => {
     expect(useProbeConsoleStore.getState().bays[0].sweepMode).toBe("stepped");
   });
 
+  it("labels each bay in the list as active or inactive", () => {
+    render(<ProbeDeploymentPanel />);
+    const inactiveCount = INITIAL_PROBE_BAYS.filter((bay) => bay.status !== "deployed").length;
+    const activeCount = INITIAL_PROBE_BAYS.filter((bay) => bay.status === "deployed").length;
+    expect(screen.getAllByText("Inactive")).toHaveLength(inactiveCount);
+    expect(screen.getAllByText("Active")).toHaveLength(activeCount);
+  });
+
   it("marks the action indicator filled only while the probe is deployed", () => {
     const { container } = render(<ProbeDeploymentPanel />);
     const indicator = container.querySelector(".probe-deployment-panel__action-indicator");

@@ -67,6 +67,18 @@
   color: var(--color-grey-mid);
 }
 
+.probe-deployment-panel__bay-status {
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+}
+
+.probe-deployment-panel__bay-status--active {
+  color: var(--color-black);
+}
+
 .probe-deployment-panel__bay-name {
   font-size: 1.05rem;
   font-weight: bold;

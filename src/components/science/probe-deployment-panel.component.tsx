@@ -33,6 +33,16 @@ export function ProbeDeploymentPanel(): JSX.Element {
           <div key={bay.id} className="probe-deployment-panel__bay">
             <span className="probe-deployment-panel__bay-header">
               <span className="probe-deployment-panel__bay-label">{bay.bayLabel}</span>
+              <span
+                className={[
+                  "probe-deployment-panel__bay-status",
+                  bay.status === "deployed" && "probe-deployment-panel__bay-status--active",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                {bay.status === "deployed" ? "Active" : "Inactive"}
+              </span>
             </span>
             <span className="probe-deployment-panel__bay-name">{bay.name}</span>
             <span className="probe-deployment-panel__bay-designation">{bay.designation}</span>
