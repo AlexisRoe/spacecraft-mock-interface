@@ -55,19 +55,26 @@ function pairBaysWithDetail(bays: ProbeBay[]): Array<[ProbeBay, ProbeDiagramDeta
 }
 
 /**
+ * Roster index of the bay whose target marker is always shown on the
+ * diagram, regardless of its deployment status — a fixed reference probe.
+ */
+const ALWAYS_VISIBLE_INDEX = 0;
+
+/**
  * Right-hand diagram of the Science view's probes state: a planet body at
  * the centre of a set of orbital range rings, with a home marker for the
- * ship's orbital relay and a target marker for every probe bay, always
- * visible at its fixed position. A ready bay's target is a hollow standby
- * diamond; once deployed it switches to a bold-ringed marker with its
- * curved trajectory, landing footprint, comms link and arrowhead drawn out.
- * Fills the available space and scales responsively via its SVG viewBox.
+ * ship's orbital relay. One reference probe's trajectory, footprint, comms
+ * link and bold-ringed target marker are always drawn; the other bays'
+ * probes appear on the diagram only once deployed, and disappear again once
+ * recalled. Fills the available space and scales responsively via its SVG
+ * viewBox.
  */
 export function ProbeDeploymentDiagram(): JSX.Element {
   const bays = useProbeConsoleStore((state) => state.bays);
   const paired = pairBaysWithDetail(bays);
-  const deployedPaired = paired.filter(([bay]) => bay.status === "deployed");
-  const readyPaired = paired.filter(([bay]) => bay.status !== "deployed");
+  const visiblePaired = paired.filter(
+    ([bay], index) => index === ALWAYS_VISIBLE_INDEX || bay.status === "deployed",
+  );
 
   return (
     <div className="probe-deployment-diagram">
@@ -160,7 +167,7 @@ export function ProbeDeploymentDiagram(): JSX.Element {
           <circle cx={PLANET_X} cy={PLANET_Y} r="350" strokeWidth="1.6" />
           <circle cx={PLANET_X} cy={PLANET_Y} r="460" strokeWidth="1.6" />
 
-          {deployedPaired.map(([bay, detail]) => (
+          {visiblePaired.map(([bay, detail]) => (
             <g key={`footprint-${bay.id}`} strokeWidth="1.4">
               <line {...detail.footprintLineA} />
               <line {...detail.footprintLineB} />
@@ -175,7 +182,7 @@ export function ProbeDeploymentDiagram(): JSX.Element {
             </g>
           ))}
 
-          {deployedPaired.map(([bay, detail]) => (
+          {visiblePaired.map(([bay, detail]) => (
             <path
               key={`trajectory-${bay.id}`}
               className="probe-deployment-diagram__trajectory"
@@ -184,7 +191,7 @@ export function ProbeDeploymentDiagram(): JSX.Element {
             />
           ))}
 
-          {deployedPaired.map(([bay]) => (
+          {visiblePaired.map(([bay]) => (
             <line
               key={`comms-${bay.id}`}
               x1={HOME_X}
@@ -209,7 +216,7 @@ export function ProbeDeploymentDiagram(): JSX.Element {
           </g>
 
           <g fill="var(--color-black)">
-            {deployedPaired.map(([bay]) => (
+            {visiblePaired.map(([bay]) => (
               <g key={`marker-${bay.id}`} className="probe-deployment-diagram__marker--deployed">
                 <circle
                   cx={bay.target.x}
@@ -224,19 +231,7 @@ export function ProbeDeploymentDiagram(): JSX.Element {
             ))}
           </g>
 
-          <g fill="none">
-            {readyPaired.map(([bay]) => (
-              <path
-                key={`marker-${bay.id}`}
-                className="probe-deployment-diagram__marker--ready"
-                d={`M${bay.target.x},${bay.target.y - 12} L${bay.target.x + 12},${bay.target.y} L${bay.target.x},${bay.target.y + 12} L${bay.target.x - 12},${bay.target.y} Z`}
-                strokeWidth="1.6"
-                strokeDasharray="2 3"
-              />
-            ))}
-          </g>
-
-          {deployedPaired.map(([bay, detail]) => (
+          {visiblePaired.map(([bay, detail]) => (
             <path key={`arrowhead-${bay.id}`} d={detail.arrowhead} strokeWidth="2" fill="none" />
           ))}
         </g>
