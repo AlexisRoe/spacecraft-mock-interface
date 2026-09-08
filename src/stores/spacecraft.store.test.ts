@@ -5,7 +5,6 @@ describe("useSpacecraftStore", () => {
   beforeEach(() => {
     useSpacecraftStore.setState({
       shipName: "USS Placeholder",
-      controlMode: "autopilot",
       status: "nominal",
       hullIntegrity: 100,
     });
@@ -22,10 +21,5 @@ describe("useSpacecraftStore", () => {
 
     useSpacecraftStore.getState().setHullIntegrity(-20);
     expect(useSpacecraftStore.getState().hullIntegrity).toBe(0);
-  });
-
-  it("updates the control mode", () => {
-    useSpacecraftStore.getState().setControlMode("manual");
-    expect(useSpacecraftStore.getState().controlMode).toBe("manual");
   });
 });

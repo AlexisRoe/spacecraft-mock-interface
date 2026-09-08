@@ -1,0 +1,22 @@
+.view-state-switch {
+  display: flex;
+  align-items: stretch;
+  gap: 0.35rem;
+  height: 100%;
+}
+
+.view-state-switch__label {
+  align-self: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+  margin-right: 1rem;
+}
+
+.view-state-switch__options {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}

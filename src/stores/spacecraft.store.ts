@@ -6,11 +6,6 @@ import { create } from "zustand";
 export type SpacecraftStatus = "nominal" | "warning" | "critical";
 
 /**
- * Active flight control mode.
- */
-export type ControlMode = "autopilot" | "manual";
-
-/**
  * Active flight state.
  */
 export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
@@ -19,26 +14,6 @@ export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
  * Flight action selectable in the manual navigation view's primary column.
  */
 export type FlightAction = "NULL RATES" | "ALIGN TO WAYPOINT";
-
-/**
- * The nine console views reachable from the nav bar.
- */
-export const NavView = {
-  Navigation: "navigation",
-  Propulsion: "propulsion",
-  FieldsFtl: "fields-ftl",
-  Communications: "communications",
-  Defence: "defence",
-  FireControl: "fire-control",
-  ShipStatus: "ship-status",
-  Science: "science",
-  Logs: "logs",
-} as const;
-
-/**
- * Identifier for one of the ten console views reachable from the nav bar.
- */
-export type NavView = (typeof NavView)[keyof typeof NavView];
 
 /**
  * Shape of the spacecraft state and the actions available to mutate it.
@@ -54,8 +29,6 @@ export interface SpacecraftState {
   station: string;
   /** Reference frame used for navigation, e.g. "Ecliptic J2000". */
   referenceFrame: string;
-  /** Active flight control mode. */
-  controlMode: ControlMode;
   /** Current flight state. */
   flightState: FlightState;
   /** Current velocity as a fraction of light speed. */
@@ -68,8 +41,6 @@ export interface SpacecraftState {
   reactorOutputMw: number;
   /** Shield integrity percentage, from 0 to 100. */
   shieldIntegrity: number;
-  /** Currently selected console view. */
-  activeView: NavView;
   /** Selected flight action in the manual navigation view's primary column. */
   manualFlightAction: FlightAction;
   /** Commanded RCS thrust percentage set via the manual navigation thrust dialer. */
@@ -78,10 +49,6 @@ export interface SpacecraftState {
   manualThrustDirectionIndex: number;
   /** Index of the active wedge field in the manual navigation steering wheel, if any. */
   manualSteeringActiveWedge: number | null;
-  /** Sets the active console view. */
-  setActiveView: (view: NavView) => void;
-  /** Sets the active flight control mode. */
-  setControlMode: (mode: ControlMode) => void;
   /** Sets the active flight state. */
   setFlightState: (flightState: FlightState) => void;
   /** Updates the overall operational status. */
@@ -109,20 +76,16 @@ export const useSpacecraftStore = create<SpacecraftState>((set) => ({
   registry: "LH-4471",
   station: "Helm Station 01",
   referenceFrame: "Ecliptic J2000",
-  controlMode: "autopilot",
   flightState: "Cruise",
   velocityC: 0.041,
   status: "nominal",
   hullIntegrity: 100,
   reactorOutputMw: 412,
   shieldIntegrity: 94,
-  activeView: NavView.Navigation,
   manualFlightAction: "NULL RATES",
   manualThrustPercent: 35,
   manualThrustDirectionIndex: 3,
   manualSteeringActiveWedge: null,
-  setActiveView: (view) => set({ activeView: view }),
-  setControlMode: (mode) => set({ controlMode: mode }),
   setFlightState: (flightState) => set({ flightState }),
   setStatus: (status) => set({ status }),
   setHullIntegrity: (value) => set({ hullIntegrity: Math.min(100, Math.max(0, value)) }),

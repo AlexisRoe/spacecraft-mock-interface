@@ -1,0 +1,63 @@
+.self-destruct-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-grey-lightest);
+  color: #000000;
+  font-family: monospace;
+}
+
+.self-destruct-panel__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid #000000;
+}
+
+.self-destruct-panel__dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  background: #ffffff;
+}
+
+.self-destruct-panel__title {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.self-destruct-panel__body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  padding: 0.75rem 1rem;
+  overflow-y: auto;
+}
+
+.self-destruct-panel__line {
+  font-size: 0.85rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: left;
+}
+
+.self-destruct-panel__abort-phrase {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,24 +1,24 @@
 import type { JSX } from "react";
-import { ConsoleGrid } from "../components/console-grid.component";
-import { ConsoleHeader } from "../components/console-header.component";
-import { ManualSteeringWheel } from "../components/manual-steering-wheel.component";
+import { ConsoleGrid } from "../components/common/console-grid.component";
+import { ConsoleHeader } from "../components/common/console-header.component";
+import { StatDisplay } from "../components/common/stat-display.component";
+import { ManualSteeringWheel } from "../components/navigation/manual-steering-wheel.component";
 import {
   NavigationAutopilotLeft,
   NavigationAutopilotRight,
-} from "../components/navigation-autopilot.component";
-import { StatDisplay } from "../components/stat-display.component";
-import { ThrustDialer } from "../components/thrust-dialer.component";
-import { ThrustVectorPanel } from "../components/thrust-vector-panel.component";
+} from "../components/navigation/navigation-autopilot.component";
+import { ThrustDialer } from "../components/navigation/thrust-dialer.component";
+import { ThrustVectorPanel } from "../components/navigation/thrust-vector-panel.component";
+import { useViewState } from "../hooks/use-view-state.hook";
 import { type FlightAction, useSpacecraftStore } from "../stores/spacecraft.store";
 
 import "./navigation.view.css";
 
 const FLIGHT_ACTIONS: FlightAction[] = ["NULL RATES", "ALIGN TO WAYPOINT"];
 
-/** Navigation console view: attitude and star chart. */
+/** Navigation console view: automatic (view-state-a) and manual (view-state-b). */
 export function NavigationView(): JSX.Element {
-  const controlMode = useSpacecraftStore((state) => state.controlMode);
-  const isAutopilot = controlMode === "autopilot";
+  const { isStateA: isAutomatic } = useViewState();
   const flightAction = useSpacecraftStore((state) => state.manualFlightAction);
   const setFlightAction = useSpacecraftStore((state) => state.setManualFlightAction);
 
@@ -26,13 +26,13 @@ export function NavigationView(): JSX.Element {
     <ConsoleGrid.Header>
       <ConsoleHeader
         title="Space Navigation"
-        autopilotStatus="Autopilot following plotted course"
-        manualStatus="Direct law · RCS + main drive"
+        stateAStatus="Autopilot following plotted course"
+        stateBStatus="Direct law · RCS + main drive"
       />
     </ConsoleGrid.Header>
   );
 
-  if (isAutopilot) {
+  if (isAutomatic) {
     return (
       <ConsoleGrid>
         {header}
