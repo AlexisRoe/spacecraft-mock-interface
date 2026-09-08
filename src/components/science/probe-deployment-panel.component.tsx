@@ -65,17 +65,29 @@ export function ProbeDeploymentPanel(): JSX.Element {
                 : deployProbe(selectedBay.id)
             }
           >
-            <span className="probe-deployment-panel__action-context">
-              {`${selectedBay.bayLabel} · ${selectedBay.name}`}
+            <span className="probe-deployment-panel__action-text">
+              <span className="probe-deployment-panel__action-context">
+                {`${selectedBay.bayLabel} · ${selectedBay.name}`}
+              </span>
+              <span className="probe-deployment-panel__action-label">
+                {selectedBay.status === "deployed" ? "Destroy Probe" : "Deploy Probe"}
+              </span>
+              <span className="probe-deployment-panel__action-hint">
+                {selectedBay.status === "deployed"
+                  ? "Recalls and safes the probe, freeing the bay"
+                  : "Releases the probe and begins its sweep"}
+              </span>
             </span>
-            <span className="probe-deployment-panel__action-label">
-              {selectedBay.status === "deployed" ? "Destroy Probe" : "Deploy Probe"}
-            </span>
-            <span className="probe-deployment-panel__action-hint">
-              {selectedBay.status === "deployed"
-                ? "Recalls and safes the probe, freeing the bay"
-                : "Releases the probe and begins its sweep"}
-            </span>
+            <span
+              className={[
+                "probe-deployment-panel__action-indicator",
+                selectedBay.status === "deployed" &&
+                  "probe-deployment-panel__action-indicator--deployed",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-hidden="true"
+            />
           </button>
 
           <div className="probe-deployment-panel__sweep">

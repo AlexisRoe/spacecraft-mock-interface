@@ -46,4 +46,13 @@ describe("ProbeDeploymentPanel", () => {
     fireEvent.click(screen.getByRole("button", { name: "Stepped" }));
     expect(useProbeConsoleStore.getState().bays[0].sweepMode).toBe("stepped");
   });
+
+  it("marks the action indicator filled only while the probe is deployed", () => {
+    const { container } = render(<ProbeDeploymentPanel />);
+    const indicator = container.querySelector(".probe-deployment-panel__action-indicator");
+    expect(indicator).toHaveClass("probe-deployment-panel__action-indicator--deployed");
+
+    fireEvent.click(screen.getByRole("button", { name: /Destroy Probe/ }));
+    expect(indicator).not.toHaveClass("probe-deployment-panel__action-indicator--deployed");
+  });
 });
