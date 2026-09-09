@@ -1,0 +1,81 @@
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1px;
+  height: 100%;
+  background-color: var(--color-black);
+  border-top: 1px solid var(--color-black);
+  overflow-y: auto;
+}
+
+.channel-grid__tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 5.5rem;
+  padding: 1rem 1.1rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.channel-grid__tile--active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.channel-grid__tile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.channel-grid__tile-kind {
+  font-size: 0.6rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.channel-grid__tile--active .channel-grid__tile-kind {
+  color: var(--color-grey-lighter);
+}
+
+.channel-grid__tile-status {
+  font-size: 0.6rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-grey-light);
+}
+
+.channel-grid__tile-status--open {
+  color: var(--color-black);
+}
+
+.channel-grid__tile--active .channel-grid__tile-status--open {
+  color: var(--color-white);
+}
+
+.channel-grid__tile-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.channel-grid__tile-frequency {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--color-grey-mid);
+}
+
+.channel-grid__tile--active .channel-grid__tile-frequency {
+  color: var(--color-grey-lighter);
+}
