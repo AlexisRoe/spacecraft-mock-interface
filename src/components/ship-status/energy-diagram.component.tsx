@@ -40,15 +40,17 @@ export function EnergyDiagram(): JSX.Element {
         {systems.map((system) => (
           <div className="energy-diagram__row" key={system.id}>
             <span className="energy-diagram__row-label">{system.label}</span>
-            <div className="energy-diagram__row-track">
-              <div className="energy-diagram__row-fill" style={{ width: `${system.percent}%` }} />
-            </div>
-            <span className="energy-diagram__row-value">
-              {system.percent}%
-              <span className="energy-diagram__row-gwh">
-                {formatGwh(reactorOutputGwh, system.percent)} GWH
+            <div className="energy-diagram__row-line">
+              <div className="energy-diagram__row-track">
+                <div className="energy-diagram__row-fill" style={{ width: `${system.percent}%` }} />
+              </div>
+              <span className="energy-diagram__row-value">
+                {system.percent}%
+                <span className="energy-diagram__row-gwh">
+                  {formatGwh(reactorOutputGwh, system.percent)} GWH
+                </span>
               </span>
-            </span>
+            </div>
           </div>
         ))}
       </div>
