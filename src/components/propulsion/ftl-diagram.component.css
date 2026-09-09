@@ -1,0 +1,77 @@
+.ftl-diagram {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.ftl-diagram__svg {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.ftl-diagram__readouts {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--color-black);
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.ftl-diagram__readout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ftl-diagram__readout span:first-child {
+  color: var(--color-grey-mid);
+}
+
+.ftl-diagram__readout span:last-child {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.ftl-diagram__flash-button {
+  border: none;
+  border-top: 1px solid var(--color-black);
+  background-color: var(--color-grey-lightest);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.ftl-diagram__flash-button:disabled {
+  color: var(--color-grey-mid);
+  cursor: default;
+}
+
+.ftl-diagram__engage-button {
+  border: none;
+  border-top: 1px solid var(--color-black);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1.15rem;
+  cursor: pointer;
+}
+
+.ftl-diagram__engage-button--active {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}

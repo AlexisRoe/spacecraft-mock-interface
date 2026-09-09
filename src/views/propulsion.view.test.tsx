@@ -22,7 +22,9 @@ describe("PropulsionView", () => {
     });
 
     render(<PropulsionView />);
-    expect(screen.getByText("FTL View")).toBeInTheDocument();
-    expect(screen.getByText("Warp Field View")).toBeInTheDocument();
+    expect(screen.getByText("Intermix Ratio")).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: "Matter/antimatter intermix and field coil schematic" }),
+    ).toBeInTheDocument();
   });
 });

@@ -1,0 +1,130 @@
+.ftl-control-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.ftl-control-panel__section {
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.ftl-control-panel__row-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.ftl-control-panel__slider-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.ftl-control-panel__slider {
+  flex: 1;
+  height: 1.7rem;
+  border: 1px solid var(--color-black);
+  cursor: pointer;
+}
+
+.ftl-control-panel__slider-fill {
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-black) 0 6px,
+    var(--color-white) 6px 12px
+  );
+}
+
+.ftl-control-panel__balance-button {
+  border: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0 0.85rem;
+  cursor: pointer;
+}
+
+.ftl-control-panel__geometry-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--color-black);
+}
+
+.ftl-control-panel__geometry-button {
+  border: none;
+  border-right: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.9rem 0.5rem;
+  cursor: pointer;
+}
+
+.ftl-control-panel__geometry-button:last-child {
+  border-right: none;
+}
+
+.ftl-control-panel__geometry-button--active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.ftl-control-panel__readouts {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.ftl-control-panel__readout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-right: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  overflow: hidden;
+}
+
+.ftl-control-panel__readout:nth-child(2n) {
+  border-right: none;
+}
+
+.ftl-control-panel__readout:nth-child(n + 5) {
+  border-bottom: none;
+}
+
+.ftl-control-panel__readout-label {
+  min-width: 0;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.ftl-control-panel__readout-value {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  white-space: nowrap;
+}

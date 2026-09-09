@@ -8,7 +8,7 @@ export type SpacecraftStatus = "nominal" | "warning" | "critical";
 /**
  * Active flight state.
  */
-export type FlightState = "Station Keep" | "Cruise" | "Warp Prep";
+export type FlightState = "Station Keep" | "Cruise" | "Warp Prep" | "FTL";
 
 /**
  * Flight action selectable in the manual navigation view's primary column.
@@ -31,7 +31,7 @@ export interface SpacecraftState {
   referenceFrame: string;
   /** Current flight state. */
   flightState: FlightState;
-  /** Current velocity as a fraction of light speed. */
+  /** Current velocity as a fraction (or multiple) of light speed. */
   velocityC: number;
   /** Current overall operational status. */
   status: SpacecraftStatus;
@@ -51,6 +51,8 @@ export interface SpacecraftState {
   manualSteeringActiveWedge: number | null;
   /** Sets the active flight state. */
   setFlightState: (flightState: FlightState) => void;
+  /** Sets the current velocity as a fraction (or multiple) of light speed. */
+  setVelocityC: (velocityC: number) => void;
   /** Updates the overall operational status. */
   setStatus: (status: SpacecraftStatus) => void;
   /** Sets hull integrity, clamped to the 0-100 range. */
@@ -87,6 +89,7 @@ export const useSpacecraftStore = create<SpacecraftState>((set) => ({
   manualThrustDirectionIndex: 3,
   manualSteeringActiveWedge: null,
   setFlightState: (flightState) => set({ flightState }),
+  setVelocityC: (velocityC) => set({ velocityC }),
   setStatus: (status) => set({ status }),
   setHullIntegrity: (value) => set({ hullIntegrity: Math.min(100, Math.max(0, value)) }),
   setShieldIntegrity: (value) => set({ shieldIntegrity: Math.min(100, Math.max(0, value)) }),
