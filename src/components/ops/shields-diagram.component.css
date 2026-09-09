@@ -1,0 +1,85 @@
+.shields-diagram {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.shields-diagram__svg-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shields-diagram__svg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.shields-diagram__warning {
+  margin: 0;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--color-black);
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.shields-diagram__controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.shields-diagram__regen-button {
+  border: none;
+  border-top: 1px solid var(--color-black);
+  background-color: var(--color-grey-lightest);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1.75rem;
+  cursor: pointer;
+}
+
+.shields-diagram__regen-button:disabled {
+  color: var(--color-grey-mid);
+  cursor: default;
+}
+
+.shields-diagram__raise-button {
+  border: none;
+  border-top: 1px solid var(--color-black);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1.75rem;
+  cursor: pointer;
+}
+
+.shields-diagram__raise-button--active {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.shields-diagram__raise-button:disabled {
+  background-color: var(--color-grey-lightest);
+  color: var(--color-grey-mid);
+  cursor: default;
+}

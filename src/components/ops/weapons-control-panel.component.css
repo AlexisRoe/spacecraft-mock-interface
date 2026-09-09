@@ -1,0 +1,275 @@
+.weapons-control-panel {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.weapons-control-panel__target-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.weapons-control-panel__stat-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.weapons-control-panel__stat-track {
+  border: 1px solid var(--color-black);
+  height: 1.1rem;
+}
+
+.weapons-control-panel__stat-fill {
+  height: 100%;
+}
+
+.weapons-control-panel__stat-fill--shield {
+  background-color: var(--color-black);
+}
+
+.weapons-control-panel__stat-fill--hull {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-black) 0 5px,
+    transparent 5px 10px
+  );
+}
+
+.weapons-control-panel__segmented {
+  display: flex;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.weapons-control-panel__segment {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-right: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.weapons-control-panel__segment:last-child {
+  border-right: none;
+}
+
+.weapons-control-panel__segment--selected {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.weapons-control-panel__segment-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.weapons-control-panel__segment-value {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.weapons-control-panel__lock-button {
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.weapons-control-panel__lock-button:disabled {
+  cursor: not-allowed;
+}
+
+.weapons-control-panel__lock-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.weapons-control-panel__lock-value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.weapons-control-panel__status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--color-black);
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.weapons-control-panel__status-label {
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.weapons-control-panel__status-row .weapons-control-panel__segmented {
+  flex: 1;
+  border-bottom: none;
+  border: 1px solid var(--color-grey-dark);
+}
+
+.weapons-control-panel__status-segment {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-right: 1px solid var(--color-grey-dark);
+  background-color: var(--color-black);
+  color: var(--color-grey-light);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.weapons-control-panel__status-segment:last-child {
+  border-right: none;
+}
+
+.weapons-control-panel__status-segment--selected {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.weapons-control-panel__weapons {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.weapons-control-panel__weapon-card {
+  flex: 1;
+  min-height: 0;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.weapons-control-panel__weapon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.weapons-control-panel__weapon-detail {
+  font-size: 0.65rem;
+  font-weight: normal;
+  color: var(--color-grey-mid);
+  text-transform: uppercase;
+}
+
+.weapons-control-panel__weapon-track {
+  border: 1px solid var(--color-black);
+  height: 0.85rem;
+}
+
+.weapons-control-panel__weapon-fill {
+  height: 100%;
+  background-color: var(--color-black);
+}
+
+.weapons-control-panel__weapon-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.weapons-control-panel__fire-buttons {
+  display: flex;
+}
+
+.weapons-control-panel__fire-button {
+  flex: 1;
+  padding: 1.5rem 1rem;
+  border: none;
+  border-right: 1px solid var(--color-black);
+  background-color: var(--color-grey-lightest);
+  color: var(--color-grey-mid);
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: not-allowed;
+}
+
+.weapons-control-panel__fire-button:last-child {
+  border-right: none;
+}
+
+.weapons-control-panel__fire-button--armed {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.weapons-control-panel__fire-button--firing {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+}
+
+.weapons-control-panel__fire-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.weapons-control-panel__fire-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,70 @@
+.shield-quadrant-card {
+  border-right: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.shield-quadrant-card:nth-child(2n) {
+  border-right: none;
+}
+
+.shield-quadrant-card:nth-child(n + 3) {
+  border-bottom: none;
+}
+
+.shield-quadrant-card--inactive {
+  color: var(--color-grey-mid);
+}
+
+.shield-quadrant-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.shield-quadrant-card__label {
+  min-width: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.shield-quadrant-card__percent {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.shield-quadrant-card__slider {
+  margin-top: 0.65rem;
+  height: 1.1rem;
+  border: 1px solid currentColor;
+  cursor: pointer;
+}
+
+.shield-quadrant-card__slider[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.shield-quadrant-card__slider-fill {
+  height: 100%;
+  background-image: repeating-linear-gradient(45deg, currentColor 0 5px, transparent 5px 10px);
+}
+
+.shield-quadrant-card__toggle-button {
+  margin-top: 0.65rem;
+  border: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.45rem;
+  cursor: pointer;
+}
