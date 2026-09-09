@@ -1,7 +1,8 @@
 import type { JSX } from "react";
 import { ConsoleGrid } from "../components/common/console-grid.component";
 import { ConsoleHeader } from "../components/common/console-header.component";
-import { ConsoleViewPlaceholder } from "../components/common/console-view-placeholder.component";
+import { EnergyDiagram } from "../components/ship-status/energy-diagram.component";
+import { EnergyDistributionPanel } from "../components/ship-status/energy-distribution-panel.component";
 import { ShipStatusOverview } from "../components/ship-status/ship-status-overview.component";
 import { useViewState } from "../hooks/use-view-state.hook";
 
@@ -22,10 +23,10 @@ export function ShipStatusView(): JSX.Element {
       <ConsoleGrid>
         <ConsoleGrid.Header>{HEADER}</ConsoleGrid.Header>
         <ConsoleGrid.Left>
-          <ConsoleViewPlaceholder title="Energy" />
+          <EnergyDiagram />
         </ConsoleGrid.Left>
         <ConsoleGrid.Right>
-          <ConsoleViewPlaceholder title="Reactor Grid" />
+          <EnergyDistributionPanel />
         </ConsoleGrid.Right>
       </ConsoleGrid>
     );

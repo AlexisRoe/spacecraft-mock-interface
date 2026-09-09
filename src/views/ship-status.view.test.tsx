@@ -12,8 +12,8 @@ describe("ShipStatusView", () => {
 
   it("renders the energy layout by default", () => {
     render(<ShipStatusView />);
-    expect(screen.getByText("Energy View")).toBeInTheDocument();
-    expect(screen.getByText("Reactor Grid View")).toBeInTheDocument();
+    expect(screen.getByText("Reactor Output")).toBeInTheDocument();
+    expect(screen.getByRole("slider", { name: "Drive" })).toBeInTheDocument();
   });
 
   it("renders the systems overview layout in view-state-b", () => {

@@ -1,0 +1,14 @@
+.energy-distribution-panel {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.energy-distribution-panel > * {
+  border-right: 1px solid var(--color-black);
+}
+
+.energy-distribution-panel > *:last-child {
+  border-right: none;
+}

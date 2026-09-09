@@ -1,0 +1,75 @@
+.energy-dialer {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  min-height: 0;
+}
+
+.energy-dialer__label {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--color-black);
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.energy-dialer__scale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.5rem;
+  min-height: 0;
+}
+
+.energy-dialer__bar {
+  position: relative;
+  width: 1.75rem;
+  flex: 1;
+  border: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  cursor: pointer;
+}
+
+.energy-dialer__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--color-black) 0 2px,
+    var(--color-white) 2px 4px
+  );
+}
+
+.energy-dialer__ticks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+  font-size: 0.55rem;
+  letter-spacing: 0.02em;
+  color: var(--color-grey-mid);
+  text-align: center;
+}
+
+.energy-dialer__readout {
+  padding: 0.5rem;
+  border-top: 1px solid var(--color-black);
+  text-align: center;
+}
+
+.energy-dialer__readout-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.energy-dialer__readout-value {
+  font-size: 0.95rem;
+  font-weight: bold;
+}
