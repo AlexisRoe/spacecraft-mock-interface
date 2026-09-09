@@ -131,11 +131,6 @@ export function FtlDiagram(): JSX.Element {
         </defs>
         <rect x="0" y="0" width="460" height="320" fill="url(#ftl-diagram-dots)" />
 
-        <g fill="none" stroke="var(--color-grey-light)" strokeWidth={1} strokeLinecap="round">
-          <path d="M10 10 h20 M10 10 v20 M450 10 h-20 M450 10 v20" />
-          <path d="M10 310 h20 M10 310 v-20 M450 310 h-20 M450 310 v-20" />
-        </g>
-
         <g fill="none" stroke="var(--color-black)" strokeLinecap="round" strokeLinejoin="round">
           {/* matter / antimatter tanks */}
           <rect x="16" y="40" width="100" height="56" rx="27" strokeWidth={2} />
