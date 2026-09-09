@@ -8,7 +8,8 @@ import "./shields-control-panel.component.css";
 /**
  * Left-hand panel of the Ops console's Defence view: a 2x2 grid of the four
  * shield quadrants (fore, aft, dorsal, ventral), each showing its energy
- * allocation and current charge, with a slider to redistribute energy across
+ * allocation (which reads as 0% whenever the grid is lowered — see
+ * {@link ShieldQuadrantCard}), with a slider to redistribute energy across
  * the active quadrants and a button to activate or deactivate its emitter.
  * Deactivating a quadrant hands its share to the remaining active ones, and
  * reactivating re-splits the grid's energy evenly across whichever quadrants
@@ -41,6 +42,7 @@ export function ShieldsControlPanel(): JSX.Element {
           <ShieldQuadrantCard
             key={quadrant.id}
             quadrant={quadrant}
+            raised={raised}
             onSetAllocation={(percent) => setAllocation(quadrant.id, percent)}
             onToggleActive={() => toggleActive(quadrant.id)}
           />

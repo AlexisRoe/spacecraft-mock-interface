@@ -33,23 +33,14 @@
   text-transform: uppercase;
 }
 
-.shield-quadrant-card__charge {
+.shield-quadrant-card__percent {
   flex-shrink: 0;
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-.shield-quadrant-card__row-label {
-  margin-top: 0.65rem;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.62rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
 .shield-quadrant-card__slider {
-  margin-top: 0.35rem;
+  margin-top: 0.65rem;
   height: 1.1rem;
   border: 1px solid currentColor;
   cursor: pointer;

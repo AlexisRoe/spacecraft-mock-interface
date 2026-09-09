@@ -3,17 +3,18 @@ import { create } from "zustand";
 /** Identifier for one of the four shield emitter quadrants. */
 export type ShieldQuadrantId = "fore" | "aft" | "dorsal" | "ventral";
 
-/** A single shield quadrant's allocation, charge, and emitter state. */
+/** A single shield quadrant's allocation and emitter state. */
 export interface ShieldQuadrant {
   /** Identifier for this quadrant. */
   id: ShieldQuadrantId;
   /** Short uppercase label, e.g. "Dorsal". */
   label: string;
-  /** Share of the shield grid's energy allocated to this quadrant, 0-100. Always 0 while inactive. */
+  /**
+   * Share of the shield grid's energy allocated to this quadrant, 0-100 —
+   * doubling as its shield strength once raised. Always 0 while inactive.
+   */
   percent: number;
-  /** Current shield strength for this quadrant, 0-100. Restored to 100 by {@link ShieldsState.regenerateShields}. */
-  chargePercent: number;
-  /** Whether this quadrant's emitter is active. Inactive emitters hold no charge or allocation. */
+  /** Whether this quadrant's emitter is active. Inactive emitters hold no allocation. */
   active: boolean;
 }
 
@@ -44,7 +45,11 @@ export interface ShieldsState {
   raiseShields: () => void;
   /** Lowers the shield grid. */
   lowerShields: () => void;
-  /** Starts a 3-second regeneration cycle, if one isn't already running. */
+  /**
+   * Starts a 3-second regeneration cycle, if one isn't already running,
+   * which re-splits the grid's energy evenly across active quadrants on
+   * completion.
+   */
   regenerateShields: () => void;
   /** Advances the active regeneration cycle by one second, ending it at zero. */
   tickRegeneration: () => void;
@@ -55,10 +60,10 @@ const QUADRANT_IDS: ShieldQuadrantId[] = ["fore", "aft", "dorsal", "ventral"];
 const REGEN_DURATION_SECONDS = 3;
 
 const INITIAL_QUADRANTS: ShieldQuadrant[] = [
-  { id: "fore", label: "Fore", percent: 25, chargePercent: 100, active: true },
-  { id: "aft", label: "Aft", percent: 25, chargePercent: 100, active: true },
-  { id: "dorsal", label: "Dorsal", percent: 25, chargePercent: 100, active: true },
-  { id: "ventral", label: "Ventral", percent: 25, chargePercent: 100, active: true },
+  { id: "fore", label: "Fore", percent: 25, active: true },
+  { id: "aft", label: "Aft", percent: 25, active: true },
+  { id: "dorsal", label: "Dorsal", percent: 25, active: true },
+  { id: "ventral", label: "Ventral", percent: 25, active: true },
 ];
 
 /** Splits 100 as evenly as possible across `activeIds`, handing any rounding remainder to the first ones. */
@@ -125,8 +130,9 @@ function rebalance(
 
 /**
  * Global store holding the mocked shield grid: each quadrant's energy
- * allocation, current charge, and active/inactive emitter state, plus
- * whether the grid is raised. Shown on the Ops console's Defence view.
+ * allocation (which doubles as its strength once raised) and
+ * active/inactive emitter state, plus whether the grid is raised. Shown on
+ * the Ops console's Defence view.
  */
 export const useShieldsStore = create<ShieldsState>((set) => ({
   quadrants: INITIAL_QUADRANTS,
@@ -164,10 +170,7 @@ export const useShieldsStore = create<ShieldsState>((set) => ({
       return {
         regenerating: false,
         regenSecondsRemaining: 0,
-        quadrants: state.quadrants.map((quadrant) => ({
-          ...quadrant,
-          chargePercent: quadrant.active ? 100 : 0,
-        })),
+        quadrants: distribute(state.quadrants),
       };
     }),
 }));

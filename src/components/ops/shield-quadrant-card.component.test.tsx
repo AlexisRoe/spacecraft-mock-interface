@@ -6,29 +6,43 @@ import { ShieldQuadrantCard } from "./shield-quadrant-card.component";
 const ACTIVE_QUADRANT: ShieldQuadrant = {
   id: "fore",
   label: "Fore",
-  percent: 25,
-  chargePercent: 87,
+  percent: 60,
   active: true,
 };
 
 describe("ShieldQuadrantCard", () => {
-  it("shows the quadrant's label, allocation, and charge", () => {
+  it("shows the quadrant's allocation while raised, matching the slider", () => {
     render(
       <ShieldQuadrantCard
         quadrant={ACTIVE_QUADRANT}
+        raised={true}
         onSetAllocation={vi.fn()}
         onToggleActive={vi.fn()}
       />,
     );
     expect(screen.getByText("Fore")).toBeInTheDocument();
-    expect(screen.getByText("87%")).toBeInTheDocument();
-    expect(screen.getByText("25%")).toBeInTheDocument();
+    expect(screen.getByText("60%")).toBeInTheDocument();
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "60");
+  });
+
+  it("reads 0% while the grid is lowered, even with an active allocation", () => {
+    render(
+      <ShieldQuadrantCard
+        quadrant={ACTIVE_QUADRANT}
+        raised={false}
+        onSetAllocation={vi.fn()}
+        onToggleActive={vi.fn()}
+      />,
+    );
+    expect(screen.getByText("0%")).toBeInTheDocument();
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "0");
   });
 
   it("shows OFF and a disabled slider while inactive", () => {
     render(
       <ShieldQuadrantCard
         quadrant={{ ...ACTIVE_QUADRANT, active: false, percent: 0 }}
+        raised={true}
         onSetAllocation={vi.fn()}
         onToggleActive={vi.fn()}
       />,
@@ -42,6 +56,7 @@ describe("ShieldQuadrantCard", () => {
     render(
       <ShieldQuadrantCard
         quadrant={ACTIVE_QUADRANT}
+        raised={true}
         onSetAllocation={vi.fn()}
         onToggleActive={onToggleActive}
       />,

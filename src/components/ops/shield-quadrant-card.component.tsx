@@ -7,6 +7,8 @@ import "./shield-quadrant-card.component.css";
 export interface ShieldQuadrantCardProps {
   /** Quadrant reading and allocation to display. */
   quadrant: ShieldQuadrant;
+  /** Whether the shield grid is currently raised; while false, the readout and slider display 0%. */
+  raised: boolean;
   /** Called with a new 0-100 allocation when the energy slider is set. */
   onSetAllocation: (percent: number) => void;
   /** Called to activate or deactivate this quadrant's emitter. */
@@ -37,18 +39,26 @@ function nudgeOnArrowKeys(
 }
 
 /**
- * Single shield quadrant card: current energy allocation (as a slider) and
- * charge readout, plus an activate/deactivate toggle. Used in a 2x2 grid by
- * {@link ShieldsControlPanel}, one per quadrant. While inactive, the slider
- * is disabled and reads 0%, since {@link useShieldsStore} always redistributes
- * a deactivated quadrant's share to the others.
+ * Single shield quadrant card: current energy allocation, shown both as a
+ * headline percentage and as a slider to adjust it, plus an
+ * activate/deactivate toggle. Used in a 2x2 grid by
+ * {@link ShieldsControlPanel}, one per quadrant. That same allocation is
+ * what the paired {@link ShieldsDiagram} renders as this quadrant's shield
+ * strength once raised, so the two always agree — while the grid is
+ * lowered, neither provides any shielding, so both read 0% here too, even
+ * though the underlying allocation (and the slider's position, which
+ * still reflects it) is unchanged. While inactive, the slider is disabled
+ * and reads 0%, since {@link useShieldsStore} always redistributes a
+ * deactivated quadrant's share to the others.
  */
 export function ShieldQuadrantCard({
   quadrant,
+  raised,
   onSetAllocation,
   onToggleActive,
 }: ShieldQuadrantCardProps): JSX.Element {
-  const { label, percent, chargePercent, active } = quadrant;
+  const { label, percent, active } = quadrant;
+  const strength = active && raised ? percent : 0;
 
   return (
     <div
@@ -58,15 +68,9 @@ export function ShieldQuadrantCard({
     >
       <div className="shield-quadrant-card__top">
         <span className="shield-quadrant-card__label">{label}</span>
-        <span className="shield-quadrant-card__charge">
-          {active ? `${Math.round(chargePercent)}%` : "OFF"}
-        </span>
+        <span className="shield-quadrant-card__percent">{active ? `${strength}%` : "OFF"}</span>
       </div>
 
-      <div className="shield-quadrant-card__row-label">
-        <span>Energy</span>
-        <span>{`${percent}%`}</span>
-      </div>
       <div
         className="shield-quadrant-card__slider"
         onClick={(event) => active && setFromPointer(event, onSetAllocation)}
@@ -76,10 +80,10 @@ export function ShieldQuadrantCard({
         aria-label={`${label} energy allocation`}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-valuenow={percent}
+        aria-valuenow={strength}
         aria-disabled={!active}
       >
-        <div className="shield-quadrant-card__slider-fill" style={{ width: `${percent}%` }} />
+        <div className="shield-quadrant-card__slider-fill" style={{ width: `${strength}%` }} />
       </div>
 
       <button

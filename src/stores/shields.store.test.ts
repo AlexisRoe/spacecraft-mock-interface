@@ -88,12 +88,8 @@ describe("useShieldsStore", () => {
     expect(useShieldsStore.getState().raised).toBe(false);
   });
 
-  it("runs a regeneration cycle down to completion, restoring active quadrants to full charge", () => {
-    act(() => {
-      useShieldsStore.setState((state) => ({
-        quadrants: state.quadrants.map((quadrant) => ({ ...quadrant, chargePercent: 40 })),
-      }));
-    });
+  it("runs a regeneration cycle down to completion, re-splitting energy evenly across active quadrants", () => {
+    act(() => useShieldsStore.getState().setAllocation("fore", 70));
 
     act(() => useShieldsStore.getState().regenerateShields());
     expect(useShieldsStore.getState().regenerating).toBe(true);
@@ -105,9 +101,9 @@ describe("useShieldsStore", () => {
 
     act(() => useShieldsStore.getState().tickRegeneration());
     expect(useShieldsStore.getState().regenerating).toBe(false);
-    expect(
-      useShieldsStore.getState().quadrants.every((quadrant) => quadrant.chargePercent === 100),
-    ).toBe(true);
+    expect(useShieldsStore.getState().quadrants.every((quadrant) => quadrant.percent === 25)).toBe(
+      true,
+    );
   });
 
   it("ignores a regeneration start while one is already running", () => {
