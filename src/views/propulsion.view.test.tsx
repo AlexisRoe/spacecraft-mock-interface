@@ -12,8 +12,8 @@ describe("PropulsionView", () => {
 
   it("renders the conventional layout by default", () => {
     render(<PropulsionView />);
-    expect(screen.getByText("Conventional View")).toBeInTheDocument();
-    expect(screen.getByText("Reactor View")).toBeInTheDocument();
+    expect(screen.getByText("Torch P1")).toBeInTheDocument();
+    expect(screen.getByText("Tokamak Core")).toBeInTheDocument();
   });
 
   it("renders the FTL layout in view-state-b", () => {
@@ -22,7 +22,9 @@ describe("PropulsionView", () => {
     });
 
     render(<PropulsionView />);
-    expect(screen.getByText("FTL View")).toBeInTheDocument();
-    expect(screen.getByText("Warp Field View")).toBeInTheDocument();
+    expect(screen.getByText("Intermix Ratio")).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: "Matter/antimatter intermix and field coil schematic" }),
+    ).toBeInTheDocument();
   });
 });

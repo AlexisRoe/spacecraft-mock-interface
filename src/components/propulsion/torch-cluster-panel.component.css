@@ -1,0 +1,80 @@
+.torch-cluster-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.torch-cluster-panel__grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  border-top: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+}
+
+.torch-cluster-panel__fuel {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.torch-cluster-panel__fuel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.torch-cluster-panel__fuel-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.torch-cluster-panel__fuel-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.torch-cluster-panel__fuel-track {
+  height: 1.1rem;
+  border: 1px solid var(--color-black);
+}
+
+.torch-cluster-panel__fuel-fill {
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-black) 0 6px,
+    var(--color-white) 6px 12px
+  );
+}
+
+.torch-cluster-panel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.torch-cluster-panel__burn-button {
+  border: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}

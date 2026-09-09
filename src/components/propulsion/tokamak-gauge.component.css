@@ -1,0 +1,19 @@
+.tokamak-gauge {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+}
+
+.tokamak-gauge__track {
+  stroke: var(--color-grey-lighter);
+  stroke-width: 4;
+}
+
+.tokamak-gauge__fill {
+  stroke: var(--color-black);
+  stroke-width: 4;
+}
+
+.tokamak-gauge__core {
+  fill: var(--color-black);
+}
