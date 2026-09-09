@@ -1,0 +1,76 @@
+.comms-manual-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.comms-manual-panel__section {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.comms-manual-panel__section--fill {
+  flex: 1;
+  min-height: 0;
+}
+
+.comms-manual-panel__section-title {
+  padding: 0.5rem 1.25rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.comms-manual-panel__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.comms-manual-panel__row + .comms-manual-panel__row {
+  border-top: 1px solid var(--color-black);
+}
+
+.comms-manual-panel__button {
+  min-height: 3.25rem;
+  padding: 0.85rem 1.1rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: none;
+  border-right: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+}
+
+.comms-manual-panel__row .comms-manual-panel__button {
+  border-bottom: none;
+}
+
+.comms-manual-panel__row .comms-manual-panel__button:last-child {
+  border-right: none;
+}
+
+.comms-manual-panel__button:disabled {
+  color: var(--color-grey-light);
+  cursor: default;
+}
+
+.comms-manual-panel__button--active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.comms-manual-panel__section--fill .comms-manual-panel__button {
+  flex: 1;
+}
