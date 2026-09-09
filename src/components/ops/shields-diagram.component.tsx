@@ -5,20 +5,28 @@ import { computeShieldSectorLayers } from "../../utils/compute-shield-sectors.ut
 
 import "./shields-diagram.component.css";
 
-/** Renders one quadrant's three hatched arc bands, scaled to its energy allocation while raised, and blank otherwise. */
-function ShieldQuadrantArcs({ quadrant, raised }: { quadrant: ShieldQuadrant; raised: boolean }) {
-  const strength = quadrant.active && raised ? quadrant.percent : 0;
-  const layers = computeShieldSectorLayers(quadrant.id, strength);
+/**
+ * Renders one quadrant's three hatched arc bands, scaled to its energy
+ * allocation. Renders nothing at all while the grid is lowered, the
+ * quadrant is inactive, or it holds no energy allocation.
+ */
+function ShieldQuadrantArcs({
+  quadrant,
+  raised,
+}: {
+  quadrant: ShieldQuadrant;
+  raised: boolean;
+}): JSX.Element | null {
+  if (!quadrant.active || !raised || quadrant.percent <= 0) return null;
+
+  const layers = computeShieldSectorLayers(quadrant.id, quadrant.percent);
 
   return (
     <>
-      {layers.map((layer) => (
-        <path
-          key={layer.id}
-          d={layer.d}
-          fill={layer.strokeWidth <= 0 ? "none" : `url(#${layer.id})`}
-        />
-      ))}
+      {layers.map(
+        (layer) =>
+          layer.strokeWidth > 0 && <path key={layer.id} d={layer.d} fill={`url(#${layer.id})`} />,
+      )}
     </>
   );
 }
@@ -29,8 +37,9 @@ function ShieldQuadrantArcs({ quadrant, raised }: { quadrant: ShieldQuadrant; ra
  * arced around the hull, sourced from {@link useShieldsStore}. Each
  * quadrant's arc hatches in three concentric bands that fill as its energy
  * allocation (set from the paired {@link ShieldsControlPanel} on the left)
- * climbs, but only while the grid is raised; an inactive quadrant shows no
- * arc at all. Below the diagram: raise/lower and regenerate controls.
+ * climbs. A quadrant's arc is hidden entirely while the grid is lowered,
+ * while the quadrant is inactive, or while it holds no energy allocation.
+ * Below the diagram: raise/lower and regenerate controls.
  * Raising requires the reactor to have energy allocated to shields (see
  * {@link useEnergyDistributionStore}) and at least one active quadrant.
  */

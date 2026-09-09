@@ -54,4 +54,25 @@ describe("ShieldsDiagram", () => {
     screen.getByRole("button", { name: "Regenerate Shields" }).click();
     expect(useShieldsStore.getState().regenerating).toBe(true);
   });
+
+  it("draws no shield arcs while the grid is lowered", () => {
+    const { container } = render(<ShieldsDiagram />);
+    expect(container.querySelectorAll('path[fill^="url(#shield-hatch"]')).toHaveLength(0);
+  });
+
+  it("draws shield arcs for active, energized quadrants once raised", () => {
+    const { container } = render(<ShieldsDiagram />);
+    act(() => useShieldsStore.getState().raiseShields());
+    expect(container.querySelectorAll('path[fill^="url(#shield-hatch"]').length).toBeGreaterThan(0);
+  });
+
+  it("draws no arc for a quadrant with no energy allocated, even while raised", () => {
+    act(() => {
+      useShieldsStore.getState().setAllocation("fore", 0);
+      useShieldsStore.getState().raiseShields();
+    });
+
+    const { container } = render(<ShieldsDiagram />);
+    expect(container.querySelectorAll('path[fill^="url(#shield-hatch-fore"]')).toHaveLength(0);
+  });
 });
