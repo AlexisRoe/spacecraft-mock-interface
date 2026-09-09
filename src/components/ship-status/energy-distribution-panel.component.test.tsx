@@ -8,7 +8,7 @@ const INITIAL_SYSTEMS = useEnergyDistributionStore.getState().systems;
 describe("EnergyDistributionPanel", () => {
   afterEach(() => {
     act(() => {
-      useEnergyDistributionStore.setState({ systems: INITIAL_SYSTEMS });
+      useEnergyDistributionStore.setState({ systems: INITIAL_SYSTEMS, isReactorOnline: true });
     });
   });
 
@@ -30,5 +30,19 @@ describe("EnergyDistributionPanel", () => {
       .systems.reduce((sum, system) => sum + system.percent, 0);
     expect(total).toBe(100);
     expect(screen.getByRole("slider", { name: "Drive" })).toHaveAttribute("aria-valuenow", "31");
+  });
+
+  it("renders the reactor shutdown button", () => {
+    render(<EnergyDistributionPanel />);
+    expect(screen.getByRole("button", { name: "Emergency Shutdown" })).toBeInTheDocument();
+  });
+
+  it("disables the dialers once the reactor is shut down", () => {
+    render(<EnergyDistributionPanel />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Emergency Shutdown" }));
+
+    expect(screen.getByRole("slider", { name: "Drive" })).toHaveAttribute("aria-valuenow", "0");
+    expect(screen.getByRole("slider", { name: "Drive" })).toHaveAttribute("aria-disabled", "true");
   });
 });

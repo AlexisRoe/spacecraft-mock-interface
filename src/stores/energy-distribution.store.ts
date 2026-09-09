@@ -19,11 +19,17 @@ export interface EnergyDistributionState {
   reactorOutputGwh: number;
   /** All six systems and their current share of the reactor's output. */
   systems: EnergySystem[];
+  /** Whether the reactor is online. While `false`, no system receives power. */
+  isReactorOnline: boolean;
   /**
    * Sets `id`'s allocation to `percent` (clamped to 0-100), proportionally
    * rescaling the other five systems so the total never exceeds 100%.
    */
   setAllocation: (id: EnergySystemId, percent: number) => void;
+  /** Shuts the reactor down, cutting power to all systems. */
+  shutDownReactor: () => void;
+  /** Brings the reactor back online, restoring the prior allocations. */
+  restartReactor: () => void;
 }
 
 const INITIAL_SYSTEMS: EnergySystem[] = [
@@ -74,6 +80,9 @@ function rebalance(systems: EnergySystem[], id: EnergySystemId, percent: number)
 export const useEnergyDistributionStore = create<EnergyDistributionState>((set) => ({
   reactorOutputGwh: 850,
   systems: INITIAL_SYSTEMS,
+  isReactorOnline: true,
   setAllocation: (id, percent) =>
     set((state) => ({ systems: rebalance(state.systems, id, percent) })),
+  shutDownReactor: () => set({ isReactorOnline: false }),
+  restartReactor: () => set({ isReactorOnline: true }),
 }));

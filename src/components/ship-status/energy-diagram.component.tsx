@@ -16,7 +16,8 @@ function formatGwh(reactorOutputGwh: number, percent: number): string {
 export function EnergyDiagram(): JSX.Element {
   const reactorOutputGwh = useEnergyDistributionStore((state) => state.reactorOutputGwh);
   const systems = useEnergyDistributionStore((state) => state.systems);
-  const allocated = systems.reduce((sum, system) => sum + system.percent, 0);
+  const isReactorOnline = useEnergyDistributionStore((state) => state.isReactorOnline);
+  const allocated = isReactorOnline ? systems.reduce((sum, system) => sum + system.percent, 0) : 0;
 
   return (
     <div className="energy-diagram">
@@ -24,7 +25,7 @@ export function EnergyDiagram(): JSX.Element {
         <div>
           <div className="energy-diagram__header-label">Reactor Output</div>
           <div className="energy-diagram__header-value">
-            {reactorOutputGwh.toFixed(0)}
+            {isReactorOnline ? reactorOutputGwh.toFixed(0) : "0"}
             <span className="energy-diagram__header-unit">GWH max</span>
           </div>
         </div>
@@ -37,22 +38,25 @@ export function EnergyDiagram(): JSX.Element {
         </div>
       </div>
       <div className="energy-diagram__bars">
-        {systems.map((system) => (
-          <div className="energy-diagram__row" key={system.id}>
-            <span className="energy-diagram__row-label">{system.label}</span>
-            <div className="energy-diagram__row-line">
-              <div className="energy-diagram__row-track">
-                <div className="energy-diagram__row-fill" style={{ width: `${system.percent}%` }} />
-              </div>
-              <span className="energy-diagram__row-value">
-                {system.percent}%
-                <span className="energy-diagram__row-gwh">
-                  {formatGwh(reactorOutputGwh, system.percent)} GWH
+        {systems.map((system) => {
+          const percent = isReactorOnline ? system.percent : 0;
+          return (
+            <div className="energy-diagram__row" key={system.id}>
+              <span className="energy-diagram__row-label">{system.label}</span>
+              <div className="energy-diagram__row-line">
+                <div className="energy-diagram__row-track">
+                  <div className="energy-diagram__row-fill" style={{ width: `${percent}%` }} />
+                </div>
+                <span className="energy-diagram__row-value">
+                  {percent}%
+                  <span className="energy-diagram__row-gwh">
+                    {formatGwh(reactorOutputGwh, percent)} GWH
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

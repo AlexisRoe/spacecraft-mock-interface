@@ -13,7 +13,7 @@ function totalPercent(): number {
 describe("useEnergyDistributionStore", () => {
   afterEach(() => {
     act(() => {
-      useEnergyDistributionStore.setState({ systems: INITIAL_SYSTEMS });
+      useEnergyDistributionStore.setState({ systems: INITIAL_SYSTEMS, isReactorOnline: true });
     });
   });
 
@@ -57,5 +57,18 @@ describe("useEnergyDistributionStore", () => {
     const others = systems.filter((system) => system.id !== "drive");
     expect(others.every((system) => system.percent === 12)).toBe(true);
     expect(totalPercent()).toBe(100);
+  });
+
+  it("shuts down and restarts the reactor, preserving allocations", () => {
+    act(() => {
+      useEnergyDistributionStore.getState().shutDownReactor();
+    });
+    expect(useEnergyDistributionStore.getState().isReactorOnline).toBe(false);
+    expect(totalPercent()).toBe(100);
+
+    act(() => {
+      useEnergyDistributionStore.getState().restartReactor();
+    });
+    expect(useEnergyDistributionStore.getState().isReactorOnline).toBe(true);
   });
 });

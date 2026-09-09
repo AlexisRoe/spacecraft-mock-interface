@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+.energy-dialer__bar[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
 .energy-dialer__fill {
   position: absolute;
   left: 0;
