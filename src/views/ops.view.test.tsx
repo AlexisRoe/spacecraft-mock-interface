@@ -12,8 +12,8 @@ describe("OpsView", () => {
 
   it("renders the weapons layout by default", () => {
     render(<OpsView />);
-    expect(screen.getByText("Weapons View")).toBeInTheDocument();
-    expect(screen.getByText("Target Lock View")).toBeInTheDocument();
+    expect(screen.getByText("Target Shield")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Targeting grid" })).toBeInTheDocument();
   });
 
   it("renders the defence layout in view-state-b", () => {
