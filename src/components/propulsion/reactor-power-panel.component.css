@@ -1,0 +1,125 @@
+.reactor-power-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.reactor-power-panel__core {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.reactor-power-panel__core-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.reactor-power-panel__core-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.reactor-power-panel__core-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.reactor-power-panel__bus {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.75rem 1rem;
+}
+
+.reactor-power-panel__bus-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+  margin-bottom: 0.75rem;
+}
+
+.reactor-power-panel__bus-row + .reactor-power-panel__bus-row {
+  margin-top: 0.75rem;
+}
+
+.reactor-power-panel__bus-row-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.reactor-power-panel__bus-track {
+  height: 0.85rem;
+  border: 1px solid var(--color-black);
+}
+
+.reactor-power-panel__bus-fill {
+  height: 100%;
+  background-color: var(--color-black);
+}
+
+.reactor-power-panel__profiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--color-black);
+}
+
+.reactor-power-panel__profile-button {
+  border: none;
+  border-right: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.reactor-power-panel__profile-button:nth-child(2n) {
+  border-right: none;
+}
+
+.reactor-power-panel__profile-button:nth-child(n + 3) {
+  border-bottom: none;
+}
+
+.reactor-power-panel__profile-caption {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey-mid);
+}
+
+.reactor-power-panel__profile-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.reactor-power-panel__profile-button--active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.reactor-power-panel__profile-button--active .reactor-power-panel__profile-caption {
+  color: var(--color-grey-lighter);
+}

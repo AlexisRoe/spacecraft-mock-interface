@@ -12,8 +12,8 @@ describe("PropulsionView", () => {
 
   it("renders the conventional layout by default", () => {
     render(<PropulsionView />);
-    expect(screen.getByText("Conventional View")).toBeInTheDocument();
-    expect(screen.getByText("Reactor View")).toBeInTheDocument();
+    expect(screen.getByText("Torch P1")).toBeInTheDocument();
+    expect(screen.getByText("Tokamak Core")).toBeInTheDocument();
   });
 
   it("renders the FTL layout in view-state-b", () => {

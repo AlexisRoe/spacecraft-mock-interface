@@ -2,6 +2,8 @@ import type { JSX } from "react";
 import { ConsoleGrid } from "../components/common/console-grid.component";
 import { ConsoleHeader } from "../components/common/console-header.component";
 import { ConsoleViewPlaceholder } from "../components/common/console-view-placeholder.component";
+import { ReactorPowerPanel } from "../components/propulsion/reactor-power-panel.component";
+import { TorchClusterPanel } from "../components/propulsion/torch-cluster-panel.component";
 import { useViewState } from "../hooks/use-view-state.hook";
 
 /** Propulsion console view: conventional engines (view-state-a) and FTL (view-state-b). */
@@ -18,10 +20,10 @@ export function PropulsionView(): JSX.Element {
         />
       </ConsoleGrid.Header>
       <ConsoleGrid.Left>
-        <ConsoleViewPlaceholder title={isStateA ? "Conventional" : "FTL"} />
+        {isStateA ? <TorchClusterPanel /> : <ConsoleViewPlaceholder title="FTL" />}
       </ConsoleGrid.Left>
       <ConsoleGrid.Right>
-        <ConsoleViewPlaceholder title={isStateA ? "Reactor" : "Warp Field"} />
+        {isStateA ? <ReactorPowerPanel /> : <ConsoleViewPlaceholder title="Warp Field" />}
       </ConsoleGrid.Right>
     </ConsoleGrid>
   );

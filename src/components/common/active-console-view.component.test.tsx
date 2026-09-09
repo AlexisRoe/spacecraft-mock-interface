@@ -22,6 +22,6 @@ describe("ActiveConsoleView", () => {
       useNavigationStore.getState().setActiveView(Views.Propulsion);
     });
 
-    expect(screen.getByText("Conventional View")).toBeInTheDocument();
+    expect(screen.getByText("Torch P1")).toBeInTheDocument();
   });
 });
