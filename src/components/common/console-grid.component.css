@@ -24,6 +24,8 @@
   color: var(--color-black);
   min-height: 0;
   overflow: hidden;
+  border-left: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
 }
 
 .console-grid--manual {

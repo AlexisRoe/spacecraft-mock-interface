@@ -20,6 +20,16 @@
   row-gap: 0.15rem;
 }
 
+.ship-system-panel__button:nth-child(4n) {
+  border-right: none;
+}
+
+/* 11 systems in a 4-column grid: the last row (items 9-11) sits on the
+   panel's outer edge and shouldn't get a row-divider border. */
+.ship-system-panel__button:nth-child(n + 9) {
+  border-bottom: none;
+}
+
 .ship-system-panel__callout {
   grid-row: 1 / span 2;
   font-size: 0.7rem;
