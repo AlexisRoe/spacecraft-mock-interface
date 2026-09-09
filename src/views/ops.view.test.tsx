@@ -22,7 +22,7 @@ describe("OpsView", () => {
     });
 
     render(<OpsView />);
-    expect(screen.getByText("Defence View")).toBeInTheDocument();
-    expect(screen.getByText("Shield Grid View")).toBeInTheDocument();
+    expect(screen.getByText("Fore")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Raise Shields" })).toBeInTheDocument();
   });
 });

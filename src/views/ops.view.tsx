@@ -2,6 +2,8 @@ import type { JSX } from "react";
 import { ConsoleGrid } from "../components/common/console-grid.component";
 import { ConsoleHeader } from "../components/common/console-header.component";
 import { ConsoleViewPlaceholder } from "../components/common/console-view-placeholder.component";
+import { ShieldsControlPanel } from "../components/ops/shields-control-panel.component";
+import { ShieldsDiagram } from "../components/ops/shields-diagram.component";
 import { useViewState } from "../hooks/use-view-state.hook";
 
 /** Ops console view: weapons (view-state-a) and defence (view-state-b). */
@@ -18,10 +20,10 @@ export function OpsView(): JSX.Element {
         />
       </ConsoleGrid.Header>
       <ConsoleGrid.Left>
-        <ConsoleViewPlaceholder title={isStateA ? "Weapons" : "Defence"} />
+        {isStateA ? <ConsoleViewPlaceholder title="Weapons" /> : <ShieldsControlPanel />}
       </ConsoleGrid.Left>
       <ConsoleGrid.Right>
-        <ConsoleViewPlaceholder title={isStateA ? "Target Lock" : "Shield Grid"} />
+        {isStateA ? <ConsoleViewPlaceholder title="Target Lock" /> : <ShieldsDiagram />}
       </ConsoleGrid.Right>
     </ConsoleGrid>
   );
