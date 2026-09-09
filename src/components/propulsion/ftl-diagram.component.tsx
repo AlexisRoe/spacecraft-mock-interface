@@ -185,14 +185,28 @@ export function FtlDiagram(): JSX.Element {
             strokeWidth={1.2}
           />
 
-          {/* core to nacelle manifold */}
+          {/* core to nacelle manifold: control points share their anchor's y, so the
+              line leaves the core and meets the nacelle both dead horizontal. Cased
+              the same as the tank feed lines, so it reads as the same hollow pipe. */}
           <path
-            d={`M346 148 C356 ${(148 + NACELLE_A_CENTER.y) / 2 + 15} 366 ${(148 + NACELLE_A_CENTER.y) / 2 - 15} ${NACELLE_A_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_A_CENTER.y}`}
+            d={`M346 148 C368 148 368 ${NACELLE_A_CENTER.y} ${NACELLE_A_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_A_CENTER.y}`}
+            stroke="var(--color-grey-lightest)"
+            strokeWidth={nacelleAWidth + 6}
+            opacity={fieldOpacity}
+          />
+          <path
+            d={`M346 172 C368 172 368 ${NACELLE_B_CENTER.y} ${NACELLE_B_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_B_CENTER.y}`}
+            stroke="var(--color-grey-lightest)"
+            strokeWidth={nacelleBWidth + 6}
+            opacity={fieldOpacity}
+          />
+          <path
+            d={`M346 148 C368 148 368 ${NACELLE_A_CENTER.y} ${NACELLE_A_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_A_CENTER.y}`}
             strokeWidth={nacelleAWidth}
             opacity={fieldOpacity}
           />
           <path
-            d={`M346 172 C356 ${(172 + NACELLE_B_CENTER.y) / 2 - 15} 366 ${(172 + NACELLE_B_CENTER.y) / 2 + 15} ${NACELLE_B_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_B_CENTER.y}`}
+            d={`M346 172 C368 172 368 ${NACELLE_B_CENTER.y} ${NACELLE_B_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_B_CENTER.y}`}
             strokeWidth={nacelleBWidth}
             opacity={fieldOpacity}
           />
