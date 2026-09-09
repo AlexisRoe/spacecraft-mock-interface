@@ -48,9 +48,23 @@
 .ship-system-panel__value {
   font-size: 1.05rem;
   font-weight: bold;
+  text-transform: uppercase;
+}
+
+.ship-system-panel__unit {
+  margin-left: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-grey-mid);
 }
 
 .ship-system-panel__button--active {
   background-color: var(--color-black);
   color: var(--color-white);
+}
+
+.ship-system-panel__button--active .ship-system-panel__unit {
+  color: var(--color-grey-lighter);
 }

@@ -40,7 +40,10 @@ export function ShipSystemPanel({
         >
           <span className="ship-system-panel__callout">{system.callout}</span>
           <span className="ship-system-panel__label">{system.label}</span>
-          <span className="ship-system-panel__value">{system.value}%</span>
+          <span className="ship-system-panel__value">
+            {system.value}
+            <span className="ship-system-panel__unit">{system.unit}</span>
+          </span>
         </button>
       ))}
     </div>

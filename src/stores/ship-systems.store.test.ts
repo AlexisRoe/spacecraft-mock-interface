@@ -23,17 +23,16 @@ describe("useShipSystemsStore", () => {
     expect(useShipSystemsStore.getState().selectedSystem).toBe("shield");
   });
 
-  it("clamps a system's value to the 0-100 range", () => {
-    useShipSystemsStore.getState().setSystemValue("reactor", 150);
-    expect(useShipSystemsStore.getState().systems.find((s) => s.id === "reactor")?.value).toBe(100);
-
-    useShipSystemsStore.getState().setSystemValue("reactor", -20);
-    expect(useShipSystemsStore.getState().systems.find((s) => s.id === "reactor")?.value).toBe(0);
+  it("updates a system's value", () => {
+    useShipSystemsStore.getState().setSystemValue("reactor", "389 MW");
+    expect(useShipSystemsStore.getState().systems.find((s) => s.id === "reactor")?.value).toBe(
+      "389 MW",
+    );
   });
 
   it("leaves other systems' values unchanged", () => {
-    useShipSystemsStore.getState().setSystemValue("reactor", 50);
+    useShipSystemsStore.getState().setSystemValue("reactor", "389 MW");
     const bridge = useShipSystemsStore.getState().systems.find((s) => s.id === "bridge");
-    expect(bridge?.value).toBe(100);
+    expect(bridge?.value).toBe("NOMINAL");
   });
 });

@@ -25,4 +25,12 @@ describe("ShipDiagram", () => {
     const { container } = render(<ShipDiagram highlighted="weapons" />);
     expect(container.querySelectorAll(".ship-diagram__highlight")).toHaveLength(3);
   });
+
+  it("highlights the whole hull when hull is selected", () => {
+    const { container } = render(<ShipDiagram highlighted="hull" />);
+    expect(container.querySelectorAll(".ship-diagram__highlight")).toHaveLength(1);
+    expect(
+      container.querySelector(".ship-diagram__hull-interior > .ship-diagram__highlight"),
+    ).not.toBe(null);
+  });
 });

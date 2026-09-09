@@ -12,9 +12,10 @@ export type ShipSystemId =
   | "reactor"
   | "shield"
   | "shuttle"
-  | "weapons";
+  | "weapons"
+  | "hull";
 
-/** A single ship system's display label and current operational value. */
+/** A single ship system's display label and current operational reading. */
 export interface ShipSystem {
   /** Identifier matching a highlightable region of the {@link ShipDiagram}. */
   id: ShipSystemId;
@@ -22,8 +23,10 @@ export interface ShipSystem {
   callout: string;
   /** Short uppercase label, e.g. "Sensor & Comms Array". */
   label: string;
-  /** Current operational value, as a percentage from 0 to 100. */
-  value: number;
+  /** Current reading, e.g. "98%" or "412 MW" or "SEALED". */
+  value: string;
+  /** Grey descriptor shown after the value, e.g. "SIGNAL" or "OUTPUT". */
+  unit: string;
 }
 
 /** Shape of the ship systems state and the actions available to mutate it. */
@@ -34,26 +37,33 @@ export interface ShipSystemsState {
   selectedSystem: ShipSystemId | null;
   /** Selects `id`, or clears the selection if `id` is already selected. */
   toggleSystem: (id: ShipSystemId) => void;
-  /** Sets a system's value, clamped to the 0-100 range. */
-  setSystemValue: (id: ShipSystemId, value: number) => void;
+  /** Sets a system's displayed value/reading. */
+  setSystemValue: (id: ShipSystemId, value: string) => void;
 }
 
 const INITIAL_SYSTEMS: ShipSystem[] = [
-  { id: "sensors", callout: "01", label: "Sensor & Comms Array", value: 98 },
-  { id: "bridge", callout: "02", label: "Bridge / Command", value: 100 },
-  { id: "crew", callout: "03", label: "Crew Quarters", value: 92 },
-  { id: "cargo", callout: "04", label: "Cargo Holds 1–3", value: 87 },
-  { id: "propulsion", callout: "05", label: "Main Engine & Nacelles", value: 96 },
-  { id: "lifeSupport", callout: "06", label: "Life Support & Water", value: 99 },
-  { id: "airlocks", callout: "07", label: "Airlock (Stbd)", value: 100 },
-  { id: "reactor", callout: "08", label: "Reactor & Power", value: 94 },
-  { id: "shield", callout: "09", label: "Shield Generator", value: 88 },
-  { id: "shuttle", callout: "10", label: "Shuttle, Docked", value: 100 },
-  { id: "weapons", callout: "11", label: "Weapon Pods", value: 76 },
+  { id: "sensors", callout: "01", label: "Sensor & Comms Array", value: "98%", unit: "signal" },
+  { id: "bridge", callout: "02", label: "Bridge / Command", value: "NOMINAL", unit: "status" },
+  { id: "crew", callout: "03", label: "Crew Quarters", value: "6 / 8", unit: "occupied" },
+  { id: "cargo", callout: "04", label: "Cargo Holds 1–3", value: "87%", unit: "capacity" },
+  {
+    id: "propulsion",
+    callout: "05",
+    label: "Main Engine & Nacelles",
+    value: "96%",
+    unit: "thrust",
+  },
+  { id: "lifeSupport", callout: "06", label: "Life Support & Water", value: "99%", unit: "o2 sat" },
+  { id: "airlocks", callout: "07", label: "Airlock (Stbd)", value: "SEALED", unit: "status" },
+  { id: "reactor", callout: "08", label: "Reactor & Power", value: "412 MW", unit: "output" },
+  { id: "shield", callout: "09", label: "Shield Generator", value: "88%", unit: "integrity" },
+  { id: "shuttle", callout: "10", label: "Shuttle, Docked", value: "DOCKED", unit: "status" },
+  { id: "weapons", callout: "11", label: "Weapon Pods", value: "76%", unit: "charge" },
+  { id: "hull", callout: "12", label: "Hull Integrity", value: "100%", unit: "integrity" },
 ];
 
 /**
- * Global store holding the mocked per-system status values shown on the
+ * Global store holding the mocked per-system status readings shown on the
  * ship status overview, and which system (if any) is currently selected.
  */
 export const useShipSystemsStore = create<ShipSystemsState>((set) => ({
@@ -63,8 +73,6 @@ export const useShipSystemsStore = create<ShipSystemsState>((set) => ({
     set((state) => ({ selectedSystem: state.selectedSystem === id ? null : id })),
   setSystemValue: (id, value) =>
     set((state) => ({
-      systems: state.systems.map((system) =>
-        system.id === id ? { ...system, value: Math.min(100, Math.max(0, value)) } : system,
-      ),
+      systems: state.systems.map((system) => (system.id === id ? { ...system, value } : system)),
     })),
 }));

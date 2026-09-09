@@ -227,6 +227,7 @@
 .ship-diagram__hull-interior {
   position: absolute;
   inset: 2px;
+  isolation: isolate;
   background: var(--color-white);
   clip-path: polygon(
     0% 50%,

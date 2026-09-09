@@ -148,6 +148,7 @@ export function ShipDiagram({ highlighted = null }: ShipDiagramProps): JSX.Eleme
 
             {/* spine corridor */}
             <div className="ship-diagram__spine" />
+            <Highlight region="hull" highlighted={highlighted} />
           </div>
         </div>
 
