@@ -16,13 +16,13 @@ describe("ShipStatusView", () => {
     expect(screen.getByText("Reactor Grid View")).toBeInTheDocument();
   });
 
-  it("renders the overview layout in view-state-b", () => {
+  it("renders the systems overview layout in view-state-b", () => {
     act(() => {
       useNavigationStore.setState({ activeView: Views.ShipStatus, viewState: "view-state-b" });
     });
 
     render(<ShipStatusView />);
-    expect(screen.getByText("Overview View")).toBeInTheDocument();
-    expect(screen.getByText("Life Support View")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Ship deck plan" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Reactor & Power/ })).toBeInTheDocument();
   });
 });

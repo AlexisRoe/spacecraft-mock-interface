@@ -35,6 +35,17 @@ function Right({ children }: ConsoleGridRightProps): JSX.Element {
   return <div className="console-grid__right">{children}</div>;
 }
 
+/** Props for {@link ConsoleGrid.Content}. */
+export interface ConsoleGridContentProps {
+  /** Content rendered inside the full-width content area. */
+  children?: ReactNode;
+}
+
+/** Full-width content area of a {@link ConsoleGrid} `"full"` layout. */
+function Content({ children }: ConsoleGridContentProps): JSX.Element {
+  return <div className="console-grid__content">{children}</div>;
+}
+
 /** Props for {@link ConsoleGrid.Primary}. */
 export interface ConsoleGridPrimaryProps {
   /** Content rendered inside the flexible first column. */
@@ -91,8 +102,10 @@ export interface ConsoleGridProps {
    * two-column `Left`/`Right` row. `"manual"` renders a full-width header,
    * a first row of three columns (`1fr auto auto`) via `Primary`/`Secondary`/
    * `Tertiary`, and a full-width `auto` `Footer` row below a 1px solid line.
+   * `"full"` renders a full-width header above a single full-width `Content`
+   * row.
    */
-  variant?: "split" | "manual";
+  variant?: "split" | "manual" | "full";
 }
 
 /**
@@ -100,7 +113,11 @@ export interface ConsoleGridProps {
  * the starting layout for individual console views.
  */
 export function ConsoleGrid({ children, variant = "split" }: ConsoleGridProps): JSX.Element {
-  const className = ["console-grid", variant === "manual" && "console-grid--manual"]
+  const className = [
+    "console-grid",
+    variant === "manual" && "console-grid--manual",
+    variant === "full" && "console-grid--full",
+  ]
     .filter(Boolean)
     .join(" ");
   return <div className={className}>{children}</div>;
@@ -109,6 +126,7 @@ export function ConsoleGrid({ children, variant = "split" }: ConsoleGridProps): 
 ConsoleGrid.Header = Header;
 ConsoleGrid.Left = Left;
 ConsoleGrid.Right = Right;
+ConsoleGrid.Content = Content;
 ConsoleGrid.Primary = Primary;
 ConsoleGrid.Secondary = Secondary;
 ConsoleGrid.Tertiary = Tertiary;
