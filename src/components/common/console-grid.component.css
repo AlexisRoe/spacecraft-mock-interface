@@ -10,6 +10,24 @@
   min-height: 0;
 }
 
+.console-grid--full {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "content";
+}
+
+.console-grid__content {
+  grid-area: content;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-height: 0;
+  overflow: hidden;
+  border-left: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
+}
+
 .console-grid--manual {
   grid-template-columns: 1fr auto auto;
   grid-template-rows: auto 1fr auto;

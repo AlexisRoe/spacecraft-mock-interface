@@ -1,0 +1,70 @@
+.ship-system-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--color-black);
+}
+
+.ship-system-panel__button {
+  border: none;
+  border-right: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.6rem;
+  row-gap: 0.1rem;
+}
+
+.ship-system-panel__button:nth-child(4n) {
+  border-right: none;
+}
+
+/* 11 systems in a 4-column grid: the last row (items 9-11) sits on the
+   panel's outer edge and shouldn't get a row-divider border. */
+.ship-system-panel__button:nth-child(n + 9) {
+  border-bottom: none;
+}
+
+.ship-system-panel__callout {
+  grid-row: 1 / span 2;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  align-self: start;
+}
+
+.ship-system-panel__label {
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.ship-system-panel__value {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.ship-system-panel__unit {
+  margin-left: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-grey-mid);
+}
+
+.ship-system-panel__button--active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.ship-system-panel__button--active .ship-system-panel__unit {
+  color: var(--color-grey-lighter);
+}

@@ -6,6 +6,7 @@ import { ProbeDeploymentPanel } from "../components/science/probe-deployment-pan
 import { SensorField } from "../components/science/sensor-field.component";
 import type { SensorReadoutProps } from "../components/science/sensor-readout.component";
 import { SensorReadoutPanel } from "../components/science/sensor-readout-panel.component";
+import { useSensorTelemetry } from "../hooks/use-sensor-telemetry.hook";
 import { useViewState } from "../hooks/use-view-state.hook";
 
 const SENSOR_READOUTS: SensorReadoutProps[] = [
@@ -20,6 +21,7 @@ const SENSOR_READOUTS: SensorReadoutProps[] = [
 /** Science console view: sensors (view-state-a) and props (view-state-b). */
 export function ScienceView(): JSX.Element {
   const { isStateA } = useViewState();
+  const readouts = useSensorTelemetry(SENSOR_READOUTS);
 
   return (
     <ConsoleGrid>
@@ -31,7 +33,7 @@ export function ScienceView(): JSX.Element {
         />
       </ConsoleGrid.Header>
       <ConsoleGrid.Left>
-        {isStateA ? <SensorReadoutPanel readouts={SENSOR_READOUTS} /> : <ProbeDeploymentPanel />}
+        {isStateA ? <SensorReadoutPanel readouts={readouts} /> : <ProbeDeploymentPanel />}
       </ConsoleGrid.Left>
       <ConsoleGrid.Right>
         {isStateA ? <SensorField /> : <ProbeDeploymentDiagram />}

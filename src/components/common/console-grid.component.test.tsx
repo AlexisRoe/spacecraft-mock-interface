@@ -35,4 +35,17 @@ describe("ConsoleGrid", () => {
     expect(screen.getByText("Tertiary")).toBeInTheDocument();
     expect(screen.getByText("Footer")).toHaveClass("console-grid__footer");
   });
+
+  it("renders header and content in full variant", () => {
+    const { container } = render(
+      <ConsoleGrid variant="full">
+        <ConsoleGrid.Header>Header</ConsoleGrid.Header>
+        <ConsoleGrid.Content>Content</ConsoleGrid.Content>
+      </ConsoleGrid>,
+    );
+
+    expect(container.querySelector(".console-grid--full")).toBeInTheDocument();
+    expect(screen.getByText("Header")).toBeInTheDocument();
+    expect(screen.getByText("Content")).toHaveClass("console-grid__content");
+  });
 });
