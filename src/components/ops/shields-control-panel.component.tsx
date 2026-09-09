@@ -12,19 +12,27 @@ import "./shields-control-panel.component.css";
  * the active quadrants and a button to activate or deactivate its emitter.
  * Deactivating a quadrant hands its share to the remaining active ones, and
  * reactivating re-splits the grid's energy evenly across whichever quadrants
- * are active, via {@link useShieldsStore}. The footer reports the reactor's
- * own allocation to the shield system as a whole (see
- * {@link useEnergyDistributionStore}) — with none, no quadrant can hold a
- * shield once raised, regardless of its internal allocation here.
+ * are active, via {@link useShieldsStore}. Below the grid: a button to
+ * re-split the grid's energy evenly across all active quadrants, and a
+ * status card reporting whether the grid currently has energy to raise (see
+ * {@link useEnergyDistributionStore} — with none allocated to shields, no
+ * quadrant can hold a shield once raised, regardless of its internal
+ * allocation here) and whether it's currently raised.
  */
 export function ShieldsControlPanel(): JSX.Element {
   const quadrants = useShieldsStore((state) => state.quadrants);
+  const raised = useShieldsStore((state) => state.raised);
   const setAllocation = useShieldsStore((state) => state.setAllocation);
   const toggleActive = useShieldsStore((state) => state.toggleActive);
+  const distributeEvenly = useShieldsStore((state) => state.distributeEvenly);
 
   const shieldEnergyPercent =
     useEnergyDistributionStore((state) => state.systems.find((system) => system.id === "shields"))
       ?.percent ?? 0;
+  const isReactorOnline = useEnergyDistributionStore((state) => state.isReactorOnline);
+
+  const hasActiveQuadrant = quadrants.some((quadrant) => quadrant.active);
+  const isAvailable = isReactorOnline && shieldEnergyPercent > 0 && hasActiveQuadrant;
 
   return (
     <div className="shields-control-panel">
@@ -38,9 +46,16 @@ export function ShieldsControlPanel(): JSX.Element {
           />
         ))}
       </div>
-      <div className="shields-control-panel__footer">
-        <span>Reactor Allocation</span>
-        <span>{`${shieldEnergyPercent}%`}</span>
+      <button
+        type="button"
+        className="shields-control-panel__distribute-button"
+        onClick={distributeEvenly}
+      >
+        Distribute Energy Evenly
+      </button>
+      <div className="shields-control-panel__status">
+        <span>Shields {isAvailable ? "Available" : "Unavailable"}</span>
+        <span>{raised ? "Raised" : "Lowered"}</span>
       </div>
     </div>
   );

@@ -71,6 +71,15 @@ describe("useShieldsStore", () => {
     expect(quadrants.every((quadrant) => quadrant.percent === 25)).toBe(true);
   });
 
+  it("re-splits energy evenly across active quadrants on demand", () => {
+    act(() => useShieldsStore.getState().setAllocation("fore", 70));
+    act(() => useShieldsStore.getState().distributeEvenly());
+    expect(useShieldsStore.getState().quadrants.every((quadrant) => quadrant.percent === 25)).toBe(
+      true,
+    );
+    expect(totalPercent()).toBe(100);
+  });
+
   it("raises and lowers the shield grid", () => {
     act(() => useShieldsStore.getState().raiseShields());
     expect(useShieldsStore.getState().raised).toBe(true);

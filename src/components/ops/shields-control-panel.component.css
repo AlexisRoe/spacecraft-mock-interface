@@ -15,10 +15,26 @@
   border-bottom: 1px solid var(--color-black);
 }
 
-.shields-control-panel__footer {
+.shields-control-panel__distribute-button {
+  border: none;
+  border-top: 1px solid var(--color-black);
+  background-color: var(--color-grey-lightest);
+  color: var(--color-black);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem;
+  cursor: pointer;
+}
+
+.shields-control-panel__status {
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 1rem;
+  border-top: 1px solid var(--color-black);
+  background-color: var(--color-grey-lightest);
   font-size: 0.7rem;
   font-weight: bold;
   letter-spacing: 0.04em;

@@ -8,7 +8,7 @@ const INITIAL_QUADRANTS = useShieldsStore.getState().quadrants;
 describe("ShieldsControlPanel", () => {
   afterEach(() => {
     act(() => {
-      useShieldsStore.setState({ quadrants: INITIAL_QUADRANTS });
+      useShieldsStore.setState({ quadrants: INITIAL_QUADRANTS, raised: false });
     });
   });
 
@@ -28,5 +28,24 @@ describe("ShieldsControlPanel", () => {
     const inactiveCount = quadrants.filter((quadrant) => !quadrant.active).length;
     expect(inactiveCount).toBe(1);
     expect(quadrants.reduce((sum, quadrant) => sum + quadrant.percent, 0)).toBe(100);
+  });
+
+  it("distributes energy evenly when the distribute button is clicked", () => {
+    render(<ShieldsControlPanel />);
+    act(() => useShieldsStore.getState().setAllocation("fore", 70));
+
+    act(() => screen.getByRole("button", { name: "Distribute Energy Evenly" }).click());
+
+    expect(useShieldsStore.getState().quadrants.every((quadrant) => quadrant.percent === 25)).toBe(
+      true,
+    );
+  });
+
+  it("reports raised status in the status card", () => {
+    render(<ShieldsControlPanel />);
+    expect(screen.getByText("Lowered")).toBeInTheDocument();
+
+    act(() => useShieldsStore.getState().raiseShields());
+    expect(screen.getByText("Raised")).toBeInTheDocument();
   });
 });

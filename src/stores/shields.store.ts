@@ -38,6 +38,8 @@ export interface ShieldsState {
    * is re-split evenly across whichever quadrants are active afterward.
    */
   toggleActive: (id: ShieldQuadrantId) => void;
+  /** Re-splits the grid's energy evenly across whichever quadrants are currently active. */
+  distributeEvenly: () => void;
   /** Raises the shield grid. */
   raiseShields: () => void;
   /** Lowers the shield grid. */
@@ -73,6 +75,13 @@ function evenSplit(activeIds: ShieldQuadrantId[]): Record<ShieldQuadrantId, numb
     result[id] = share + (index < leftover ? 1 : 0);
   });
   return result;
+}
+
+/** Re-splits 100 evenly across whichever of `quadrants` are active. */
+function distribute(quadrants: ShieldQuadrant[]): ShieldQuadrant[] {
+  const activeIds = quadrants.filter((quadrant) => quadrant.active).map((quadrant) => quadrant.id);
+  const split = evenSplit(activeIds);
+  return quadrants.map((quadrant) => ({ ...quadrant, percent: split[quadrant.id] }));
 }
 
 /**
@@ -131,18 +140,14 @@ export const useShieldsStore = create<ShieldsState>((set) => ({
       return { quadrants: rebalance(state.quadrants, id, percent) };
     }),
   toggleActive: (id) =>
-    set((state) => {
-      const quadrants = state.quadrants.map((quadrant) =>
-        quadrant.id === id ? { ...quadrant, active: !quadrant.active } : quadrant,
-      );
-      const activeIds = quadrants
-        .filter((quadrant) => quadrant.active)
-        .map((quadrant) => quadrant.id);
-      const split = evenSplit(activeIds);
-      return {
-        quadrants: quadrants.map((quadrant) => ({ ...quadrant, percent: split[quadrant.id] })),
-      };
-    }),
+    set((state) => ({
+      quadrants: distribute(
+        state.quadrants.map((quadrant) =>
+          quadrant.id === id ? { ...quadrant, active: !quadrant.active } : quadrant,
+        ),
+      ),
+    })),
+  distributeEvenly: () => set((state) => ({ quadrants: distribute(state.quadrants) })),
   raiseShields: () => set({ raised: true }),
   lowerShields: () => set({ raised: false }),
   regenerateShields: () =>

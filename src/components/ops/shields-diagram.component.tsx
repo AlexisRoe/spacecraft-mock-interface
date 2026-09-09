@@ -5,9 +5,9 @@ import { computeShieldSectorLayers } from "../../utils/compute-shield-sectors.ut
 
 import "./shields-diagram.component.css";
 
-/** Renders one quadrant's three hatched arc bands, scaled to its charge while raised, and blank otherwise. */
+/** Renders one quadrant's three hatched arc bands, scaled to its energy allocation while raised, and blank otherwise. */
 function ShieldQuadrantArcs({ quadrant, raised }: { quadrant: ShieldQuadrant; raised: boolean }) {
-  const strength = quadrant.active && raised ? quadrant.chargePercent : 0;
+  const strength = quadrant.active && raised ? quadrant.percent : 0;
   const layers = computeShieldSectorLayers(quadrant.id, strength);
 
   return (
@@ -27,11 +27,10 @@ function ShieldQuadrantArcs({ quadrant, raised }: { quadrant: ShieldQuadrant; ra
  * Right-hand panel of the Ops console's Defence view: a top-down schematic
  * of the ship with its four shield quadrants (fore, aft, dorsal, ventral)
  * arced around the hull, sourced from {@link useShieldsStore}. Each
- * quadrant's arc hatches in three concentric bands that fill as its charge
+ * quadrant's arc hatches in three concentric bands that fill as its energy
+ * allocation (set from the paired {@link ShieldsControlPanel} on the left)
  * climbs, but only while the grid is raised; an inactive quadrant shows no
- * arc at all. Per-quadrant readouts live in the paired
- * {@link ShieldsControlPanel} on the left. Below the diagram: raise/lower
- * and regenerate controls.
+ * arc at all. Below the diagram: raise/lower and regenerate controls.
  * Raising requires the reactor to have energy allocated to shields (see
  * {@link useEnergyDistributionStore}) and at least one active quadrant.
  */
@@ -65,7 +64,7 @@ export function ShieldsDiagram(): JSX.Element {
       <div className="shields-diagram__svg-wrap">
         <svg
           className="shields-diagram__svg"
-          viewBox="0 -14 1042 375"
+          viewBox="82 -26 878 386"
           role="img"
           aria-label="Shield grid diagram"
         >
@@ -81,7 +80,7 @@ export function ShieldsDiagram(): JSX.Element {
               <rect width="2.2" height="8" fill="var(--color-black)" />
             </pattern>
             {quadrants.flatMap((quadrant) => {
-              const strength = quadrant.active && raised ? quadrant.chargePercent : 0;
+              const strength = quadrant.active && raised ? quadrant.percent : 0;
               return computeShieldSectorLayers(quadrant.id, strength).map((layer) => (
                 <pattern
                   key={layer.id}
