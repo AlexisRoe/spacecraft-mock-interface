@@ -12,9 +12,14 @@ const MAX_FIELD_ARCS = 3;
 const SUBLIGHT_CRUISE_VELOCITY_C = 0.041;
 
 /** Nacelle A's center point, `{x, y}`, in the diagram's viewBox. */
-const NACELLE_A_CENTER = { x: 408, y: 58 };
+const NACELLE_A_CENTER = { x: 392, y: 58 };
 /** Nacelle B's center point, `{x, y}`, in the diagram's viewBox. */
-const NACELLE_B_CENTER = { x: 408, y: 262 };
+const NACELLE_B_CENTER = { x: 392, y: 262 };
+
+/** Width of each nacelle body, extending mostly to the right of its center point. */
+const NACELLE_WIDTH = 92;
+/** Distance from a nacelle's center point to its body's left edge. */
+const NACELLE_LEFT_INSET = 16;
 
 /** Builds an SVG arc path of radius `r` around `{cx, cy}`, from `a0` to `a1` degrees. */
 function arcPath(cx: number, cy: number, r: number, a0: number, a1: number): string {
@@ -44,12 +49,12 @@ function NacelleField({
   return (
     <>
       {Array.from({ length: arcCount }, (_, index) => {
-        const radius = 24 + index * 10;
+        const radius = 34 + index * 16;
         return (
           <path
             key={radius}
             d={arcPath(center.x, center.y, radius, sweepStart, sweepEnd)}
-            strokeWidth={1.2}
+            strokeWidth={2}
             strokeDasharray={dash}
             opacity={0.6 - index * 0.15}
           />
@@ -120,7 +125,7 @@ export function FtlDiagram(): JSX.Element {
     <div className="ftl-diagram">
       <svg
         className="ftl-diagram__svg"
-        viewBox="0 0 460 320"
+        viewBox="0 -14 480 348"
         role="img"
         aria-label="Matter/antimatter intermix and field coil schematic"
       >
@@ -129,7 +134,7 @@ export function FtlDiagram(): JSX.Element {
             <circle cx="1.2" cy="1.2" r="1" fill="var(--color-grey-lightest)" />
           </pattern>
         </defs>
-        <rect x="0" y="0" width="460" height="320" fill="url(#ftl-diagram-dots)" />
+        <rect x="0" y="-14" width="480" height="348" fill="url(#ftl-diagram-dots)" />
 
         <g fill="none" stroke="var(--color-black)" strokeLinecap="round" strokeLinejoin="round">
           {/* matter / antimatter tanks */}
@@ -182,29 +187,37 @@ export function FtlDiagram(): JSX.Element {
 
           {/* core to nacelle manifold */}
           <path
-            d={`M346 148 C368 148 368 ${NACELLE_A_CENTER.y + 4} ${NACELLE_A_CENTER.x - 28} ${NACELLE_A_CENTER.y}`}
+            d={`M346 148 C356 ${(148 + NACELLE_A_CENTER.y) / 2 + 15} 366 ${(148 + NACELLE_A_CENTER.y) / 2 - 15} ${NACELLE_A_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_A_CENTER.y}`}
             strokeWidth={nacelleAWidth}
             opacity={fieldOpacity}
           />
           <path
-            d={`M346 172 C368 172 368 ${NACELLE_B_CENTER.y - 4} ${NACELLE_B_CENTER.x - 28} ${NACELLE_B_CENTER.y}`}
+            d={`M346 172 C356 ${(172 + NACELLE_B_CENTER.y) / 2 - 15} 366 ${(172 + NACELLE_B_CENTER.y) / 2 + 15} ${NACELLE_B_CENTER.x - NACELLE_LEFT_INSET} ${NACELLE_B_CENTER.y}`}
             strokeWidth={nacelleBWidth}
             opacity={fieldOpacity}
           />
 
+          {/* manifold endpoint dots */}
+          <g fill="var(--color-black)" stroke="none" opacity={fieldOpacity}>
+            <circle cx="346" cy="148" r="3" />
+            <circle cx={NACELLE_A_CENTER.x - NACELLE_LEFT_INSET} cy={NACELLE_A_CENTER.y} r="3" />
+            <circle cx="346" cy="172" r="3" />
+            <circle cx={NACELLE_B_CENTER.x - NACELLE_LEFT_INSET} cy={NACELLE_B_CENTER.y} r="3" />
+          </g>
+
           {/* nacelles */}
           <rect
-            x={NACELLE_A_CENTER.x - 28}
+            x={NACELLE_A_CENTER.x - NACELLE_LEFT_INSET}
             y={NACELLE_A_CENTER.y - 17}
-            width="56"
+            width={NACELLE_WIDTH}
             height="34"
             rx="10"
             strokeWidth={2}
           />
           <rect
-            x={NACELLE_B_CENTER.x - 28}
+            x={NACELLE_B_CENTER.x - NACELLE_LEFT_INSET}
             y={NACELLE_B_CENTER.y - 17}
-            width="56"
+            width={NACELLE_WIDTH}
             height="34"
             rx="10"
             strokeWidth={2}
@@ -212,14 +225,20 @@ export function FtlDiagram(): JSX.Element {
 
           <g opacity={fieldOpacity}>
             <NacelleField
-              center={NACELLE_A_CENTER}
+              center={{
+                x: NACELLE_A_CENTER.x - NACELLE_LEFT_INSET + NACELLE_WIDTH / 2,
+                y: NACELLE_A_CENTER.y - 14,
+              }}
               sweepStart={200 - arcSpread}
               sweepEnd={340 + arcSpread}
               arcCount={arcCount}
               dash={arcDash}
             />
             <NacelleField
-              center={NACELLE_B_CENTER}
+              center={{
+                x: NACELLE_B_CENTER.x - NACELLE_LEFT_INSET + NACELLE_WIDTH / 2,
+                y: NACELLE_B_CENTER.y + 14,
+              }}
               sweepStart={20 - arcSpread}
               sweepEnd={160 + arcSpread}
               arcCount={arcCount}
@@ -247,10 +266,16 @@ export function FtlDiagram(): JSX.Element {
           <text x="306" y="124">
             WARP CORE
           </text>
-          <text x={NACELLE_A_CENTER.x} y={NACELLE_A_CENTER.y - 26}>
+          <text
+            x={NACELLE_A_CENTER.x - NACELLE_LEFT_INSET + NACELLE_WIDTH / 2}
+            y={NACELLE_A_CENTER.y + 29}
+          >
             NACELLE A
           </text>
-          <text x={NACELLE_B_CENTER.x} y={NACELLE_B_CENTER.y + 30}>
+          <text
+            x={NACELLE_B_CENTER.x - NACELLE_LEFT_INSET + NACELLE_WIDTH / 2}
+            y={NACELLE_B_CENTER.y - 23}
+          >
             NACELLE B
           </text>
         </g>
