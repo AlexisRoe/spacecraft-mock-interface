@@ -25,7 +25,7 @@ describe("CommunicationsView", () => {
     });
 
     render(<CommunicationsView />);
-    expect(screen.getByText("Channels View")).toBeInTheDocument();
-    expect(screen.getByText("Audio View")).toBeInTheDocument();
+    expect(screen.getByText("Channel Control")).toBeInTheDocument();
+    expect(screen.getByText("Hailing Frequency")).toBeInTheDocument();
   });
 });
