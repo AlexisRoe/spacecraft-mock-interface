@@ -1,6 +1,16 @@
 @font-face {
   font-family: "SpacecraftMono";
-  src: local("Courier New");
+  src: url("/fonts/JetBrainsMono-Variable.ttf") format("truetype-variations");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpacecraftMono";
+  src: url("/fonts/JetBrainsMono-Italic-Variable.ttf") format("truetype-variations");
+  font-weight: 100 800;
+  font-style: italic;
   font-display: swap;
 }
 
