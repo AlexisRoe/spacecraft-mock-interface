@@ -1,5 +1,8 @@
 # Spacecraft Mock Interface
 
+[![Live demo](https://img.shields.io/badge/demo-live-informational.svg)](https://spacecraft-mock-interface.a-roehrling.workers.dev/)
+[![CI](https://github.com/AlexisRoe/spacecraft-mock-interface/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexisRoe/spacecraft-mock-interface/actions/workflows/ci.yml)
+
 A mocked, interactive control interface for a fictional spacecraft. When you dreamed of flying a
 spaceship, here you go.
 
